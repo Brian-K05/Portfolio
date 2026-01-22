@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Admin Panel</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="admin-header">
+            <h1>Portfolio Admin Panel</h1>
+            <div class="header-actions">
+                <button class="btn-refresh" id="refreshRepos">🔄 Refresh Repositories</button>
+                <button class="btn-save" id="saveProjects">💾 Save Changes</button>
+                <button class="btn-settings" id="openSettings" style="background: transparent; color: var(--text-white); border: 1px solid var(--border-gray); padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">⚙️ Settings</button>
+                <a href="index.html" target="_blank" class="btn-view-portfolio">👁️ View Portfolio</a>
+            </div>
+        </header>
+
+        <!-- GitHub Config Section (Hidden after successful fetch) -->
+        <section class="config-section" id="configSection">
+            <h2>GitHub Configuration</h2>
+            <div class="info-note" style="background: rgba(240, 120, 78, 0.1); border: 1px solid rgba(240, 120, 78, 0.3); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; color: var(--text-gray); font-size: 0.85rem;">
+                <strong>Note:</strong> When fetching repositories, you may see 404 errors in the browser console. This is normal - the system checks for tech stack files (package.json, requirements.txt, etc.) that don't always exist. These errors don't affect functionality.
+            </div>
+            <div class="config-form">
+                <div class="form-group">
+                    <label for="githubUsername">GitHub Username</label>
+                    <input type="text" id="githubUsername" placeholder="Brian-K05" value="Brian-K05">
+                </div>
+                <div class="form-group">
+                    <label for="githubToken">GitHub Personal Access Token (Optional)</label>
+                    <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
+                    <small>Get token from: GitHub Settings → Developer settings → Personal access tokens</small>
+                </div>
+                <button class="btn-primary" id="fetchRepos">Fetch My Repositories</button>
+            </div>
+        </section>
+
+        <!-- Projects List Section -->
+        <section class="projects-section">
+            <h2>My Projects</h2>
+            <div class="projects-stats">
+                <span id="totalRepos">Total: 0</span>
+                <span id="showcasedCount">Showcased: 0</span>
+            </div>
+            <div class="projects-list" id="projectsList">
+                <div class="loading-state" id="loadingState">
+                    <p>Click "Fetch My Repositories" to load your projects</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="closeSettingsModal">&times;</button>
+            <h2>Settings</h2>
+            <div class="settings-form">
+                <div class="form-group">
+                    <label for="settingsGithubUsername">GitHub Username</label>
+                    <input type="text" id="settingsGithubUsername" placeholder="Brian-K05">
+                </div>
+                <div class="form-group">
+                    <label for="settingsGithubToken">GitHub Personal Access Token (Optional)</label>
+                    <input type="password" id="settingsGithubToken" placeholder="ghp_xxxxxxxxxxxx">
+                    <small>Get token from: GitHub Settings → Developer settings → Personal access tokens</small>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelSettings">Cancel</button>
+                    <button type="button" class="btn-primary" id="saveSettings">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h2>Edit Project</h2>
+            <form id="editProjectForm">
+                <div class="form-group">
+                    <label for="editName">Project Name</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editDescription">Description</label>
+                    <textarea id="editDescription" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editCategory">Category</label>
+                    <input type="text" id="editCategory" placeholder="e.g., Web Application, Mobile App">
+                </div>
+                <div class="form-group">
+                    <label for="editDeployUrl">Live Demo URL</label>
+                    <input type="url" id="editDeployUrl" placeholder="https://example.com">
+                </div>
+                <div class="form-group">
+                    <label for="editImageUrl">Project Image</label>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div>
+                            <label style="font-size: 0.85rem; color: var(--text-gray); margin-bottom: 0.5rem; display: block;">Option 1: Upload Image File</label>
+                            <input type="file" id="editImageFile" accept="image/*" style="width: 100%; padding: 0.5rem; background: var(--bg-dark); border: 1px solid var(--border-gray); border-radius: 6px; color: var(--text-white);">
+                            <small style="display: block; margin-top: 0.5rem;">Supported: PNG, JPG, WebP (Recommended: 1200x675px)</small>
+                        </div>
+                        <div style="text-align: center; color: var(--text-gray); font-size: 0.9rem;">OR</div>
+                        <div>
+                            <label style="font-size: 0.85rem; color: var(--text-gray); margin-bottom: 0.5rem; display: block;">Option 2: Image URL</label>
+                            <input type="url" id="editImageUrl" placeholder="https://example.com/image.png">
+                        </div>
+                    </div>
+                    <div id="imagePreview" style="margin-top: 1rem; display: none;">
+                        <label style="font-size: 0.85rem; color: var(--text-gray); margin-bottom: 0.5rem; display: block;">Preview:</label>
+                        <img id="imagePreviewImg" src="" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 8px; border: 1px solid var(--border-gray); object-fit: contain;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tech Stack (Auto-detected)</label>
+                    <div class="tech-stack-display" id="editTechStack"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelEdit">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
+
