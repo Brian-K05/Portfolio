@@ -39,15 +39,7 @@ function highlightNavLink() {
 
 window.addEventListener('scroll', highlightNavLink);
 
-// Download CV button functionality
-const downloadCVBtn = document.querySelector('.btn-download-cv');
-if (downloadCVBtn) {
-    downloadCVBtn.addEventListener('click', function() {
-        // You can replace this with actual CV download functionality
-        alert('CV download functionality - Replace with actual CV file link');
-        // Example: window.open('path/to/cv.pdf', '_blank');
-    });
-}
+// CV link is now handled directly via HTML link, no JavaScript needed
 
 // Hire me button functionality
 const hireMeBtn = document.querySelector('.btn-hire-me');
@@ -325,6 +317,7 @@ document.querySelectorAll('.btn-hire-me, .btn-download-cv, .btn-submit, .btn-dow
 // Mobile Menu Toggle
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 const mobileMenu = document.querySelector('.mobile-menu');
+const mobileMenuClose = document.querySelector('.mobile-menu-close');
 const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a, .btn-download-cv-mobile');
 
 if (mobileMenuToggle && mobileMenu) {
@@ -333,19 +326,31 @@ if (mobileMenuToggle && mobileMenu) {
         mobileMenu.classList.toggle('active');
         document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     }
+    
+    function closeMenu() {
+        mobileMenuToggle.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 
     mobileMenuToggle.addEventListener('click', function(e) {
         e.stopPropagation();
         toggleMenu();
     });
+    
+    // Close button functionality
+    if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeMenu();
+        });
+    }
 
     // Close menu when clicking on a link
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', function() {
             setTimeout(() => {
-                mobileMenuToggle.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
+                closeMenu();
             }, 300); // Small delay for smooth transition
         });
     });
@@ -353,7 +358,7 @@ if (mobileMenuToggle && mobileMenu) {
     // Close menu when clicking outside
     mobileMenu.addEventListener('click', function(e) {
         if (e.target === mobileMenu) {
-            toggleMenu();
+            closeMenu();
         }
     });
 }
@@ -361,9 +366,11 @@ if (mobileMenuToggle && mobileMenu) {
 // Prevent body scroll when menu is open
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
-        mobileMenuToggle.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        document.body.style.overflow = '';
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     }
 });
 
@@ -625,6 +632,324 @@ if (projectsList && scrollLeftBtn && scrollRightBtn) {
     window.addEventListener('resize', centerProjectsIfNeeded);
 }
 
+// Set PDF.js worker path
+if (typeof pdfjsLib !== 'undefined') {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+
+// Certificates data - list of PDF and image certificate files
+const certificatesList = [
+    { filename: 'Certificate_of_Participation_DigitalSafety.pdf', title: 'Digital Safety Certificate', type: 'pdf' },
+    { filename: 'IP Orientation_COP_Oct302024.pdf', title: 'IP Orientation Certificate', type: 'pdf' },
+    { filename: 'Certificate - Brian Kyle L. Salor.pdf', title: 'Certificate of Participation', type: 'pdf' },
+    { filename: 'Brian Kyle L. Salor.pdf', title: 'Certificate', type: 'pdf' },
+    { filename: 'Brian Kyle L. Salor E-Certificate.pdf', title: 'E-Certificate', type: 'pdf' },
+    { filename: 'Salor.png', title: 'Certificate', type: 'image' }
+];
+
+// Function to render PDF as image
+async function renderPDFAsImage(pdfUrl, container) {
+    try {
+        // Show loading state
+        container.innerHTML = `
+            <div class="certificate-loading">
+                <div class="loading-spinner"></div>
+                <p>Loading certificate...</p>
+            </div>
+        `;
+
+        // Load the PDF
+        const loadingTask = pdfjsLib.getDocument(pdfUrl);
+        const pdf = await loadingTask.promise;
+        
+        // Get the first page
+        const page = await pdf.getPage(1);
+        
+        // Set up canvas for rendering
+        const viewport = page.getViewport({ scale: 2.0 }); // Higher scale for better quality
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        
+        // Render PDF page to canvas
+        const renderContext = {
+            canvasContext: context,
+            viewport: viewport
+        };
+        
+        await page.render(renderContext).promise;
+        
+        // Convert canvas to image
+        const img = document.createElement('img');
+        img.src = canvas.toDataURL('image/png');
+        img.alt = container.getAttribute('data-title') || 'Certificate';
+        img.className = 'certificate-image';
+        
+        // Replace loading with image
+        container.innerHTML = '';
+        container.appendChild(img);
+        
+        // Make clickable to open PDF
+        container.style.cursor = 'pointer';
+        container.addEventListener('click', function() {
+            window.open(pdfUrl, '_blank');
+        });
+        
+    } catch (error) {
+        console.error('Error rendering PDF:', error);
+        // Show error state
+        container.innerHTML = `
+            <div class="certificate-error">
+                <div class="certificate-icon">📜</div>
+                <p class="certificate-placeholder-text">${container.getAttribute('data-title') || 'Certificate'}</p>
+                <p class="certificate-error-text">Click to view PDF</p>
+            </div>
+        `;
+        container.style.cursor = 'pointer';
+        container.addEventListener('click', function() {
+            window.open(pdfUrl, '_blank');
+        });
+    }
+}
+
+// Function to load image certificate
+function loadImageCertificate(imageUrl, container) {
+    container.innerHTML = `
+        <div class="certificate-loading">
+            <div class="loading-spinner"></div>
+            <p>Loading certificate...</p>
+        </div>
+    `;
+    
+    const img = document.createElement('img');
+    img.src = imageUrl;
+    img.alt = container.getAttribute('data-title') || 'Certificate';
+    img.className = 'certificate-image';
+    
+    img.onload = function() {
+        container.innerHTML = '';
+        container.appendChild(img);
+        container.style.cursor = 'pointer';
+        container.addEventListener('click', function() {
+            window.open(imageUrl, '_blank');
+        });
+    };
+    
+    img.onerror = function() {
+        container.innerHTML = `
+            <div class="certificate-error">
+                <div class="certificate-icon">📜</div>
+                <p class="certificate-placeholder-text">${container.getAttribute('data-title') || 'Certificate'}</p>
+                <p class="certificate-error-text">Click to view</p>
+            </div>
+        `;
+        container.style.cursor = 'pointer';
+        container.addEventListener('click', function() {
+            window.open(imageUrl, '_blank');
+        });
+    };
+}
+
+// Load certificates into grid
+function loadCertificates() {
+    const certificatesCarousel = document.getElementById('certificatesCarousel');
+    if (!certificatesCarousel) return;
+
+    certificatesCarousel.innerHTML = '';
+
+    certificatesList.forEach((cert, index) => {
+        const certItem = document.createElement('div');
+        certItem.className = 'certificate-image-item';
+        certItem.setAttribute('data-filename', cert.filename);
+        
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'certificate-image-container';
+        imageContainer.setAttribute('data-title', cert.title);
+        
+        certItem.appendChild(imageContainer);
+        certificatesCarousel.appendChild(certItem);
+        
+        // Load based on file type
+        const fileType = cert.type || (cert.filename.match(/\.(png|jpg|jpeg|gif|webp)$/i) ? 'image' : 'pdf');
+        
+        if (fileType === 'image') {
+            // Load image directly
+            loadImageCertificate(cert.filename, imageContainer);
+        } else {
+            // Render PDF as image
+            if (typeof pdfjsLib !== 'undefined') {
+                renderPDFAsImage(cert.filename, imageContainer);
+            } else {
+                // Fallback if PDF.js hasn't loaded yet
+                imageContainer.innerHTML = `
+                    <div class="certificate-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading...</p>
+                    </div>
+                `;
+                // Retry after a short delay
+                setTimeout(() => {
+                    if (typeof pdfjsLib !== 'undefined') {
+                        renderPDFAsImage(cert.filename, imageContainer);
+                    }
+                }, 500);
+            }
+        }
+    });
+
+    // All certificates are now visible in grid, no carousel initialization needed
+}
+
+// Certificates single-item carousel functionality
+let currentCertIndex = 0;
+let certScrollLeftBtn, certScrollRightBtn, seeAllBtn, certificatesGalleryModal, certificatesGalleryGrid, certModalClose;
+
+function initializeCertificatesCarousel() {
+    const certificatesCarousel = document.getElementById('certificatesCarousel');
+    certScrollLeftBtn = document.querySelector('.cert-scroll-arrow-left');
+    certScrollRightBtn = document.querySelector('.cert-scroll-arrow-right');
+    seeAllBtn = document.getElementById('seeAllCertificates');
+    certificatesGalleryModal = document.getElementById('certificatesGalleryModal');
+    certificatesGalleryGrid = document.getElementById('certificatesGalleryGrid');
+    certModalClose = certificatesGalleryModal?.querySelector('.modal-close');
+
+    if (certificatesCarousel) {
+        const certItems = certificatesCarousel.querySelectorAll('.certificate-image-item');
+        const totalCerts = certItems.length;
+
+        // Initialize: show first certificate
+        if (certItems.length > 0) {
+            certItems[0].classList.add('active');
+            currentCertIndex = 0;
+        }
+
+        // Function to show certificate at index
+        function showCertificate(index) {
+            certItems.forEach((item, i) => {
+                if (i === index) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+            currentCertIndex = index;
+            updateCertArrows();
+        }
+
+        // Update arrow states
+        function updateCertArrows() {
+            if (certScrollLeftBtn && certScrollRightBtn) {
+                certScrollLeftBtn.disabled = currentCertIndex === 0;
+                certScrollRightBtn.disabled = currentCertIndex === totalCerts - 1;
+            }
+        }
+
+        // Left arrow click
+        if (certScrollLeftBtn) {
+            certScrollLeftBtn.onclick = function() {
+                if (currentCertIndex > 0) {
+                    showCertificate(currentCertIndex - 1);
+                }
+            };
+        }
+
+        // Right arrow click
+        if (certScrollRightBtn) {
+            certScrollRightBtn.onclick = function() {
+                if (currentCertIndex < totalCerts - 1) {
+                    showCertificate(currentCertIndex + 1);
+                }
+            };
+        }
+
+        // Initialize arrows
+        updateCertArrows();
+    }
+}
+
+// Open certificates gallery modal
+function setupCertificatesGallery() {
+    if (seeAllBtn && certificatesGalleryModal && certificatesGalleryGrid) {
+        seeAllBtn.addEventListener('click', function() {
+            // Populate gallery grid with all certificates
+            certificatesGalleryGrid.innerHTML = '';
+            
+            certificatesList.forEach((cert) => {
+                const certItem = document.createElement('div');
+                certItem.className = 'certificate-image-item';
+                certItem.setAttribute('data-pdf', cert.filename);
+                
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'certificate-image-container';
+                imageContainer.setAttribute('data-title', cert.title);
+                
+                certItem.appendChild(imageContainer);
+                
+                certItem.style.position = 'relative';
+                certItem.style.left = 'auto';
+                certItem.style.top = 'auto';
+                certItem.style.transform = 'scale(1)';
+                certItem.style.opacity = '1';
+                certItem.style.pointerEvents = 'auto';
+                
+                certificatesGalleryGrid.appendChild(certItem);
+                
+                // Render PDF as image
+                if (typeof pdfjsLib !== 'undefined') {
+                    renderPDFAsImage(cert.filename, imageContainer);
+                } else {
+                    imageContainer.innerHTML = `
+                        <div class="certificate-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading...</p>
+                        </div>
+                    `;
+                    setTimeout(() => {
+                        if (typeof pdfjsLib !== 'undefined') {
+                            renderPDFAsImage(cert.filename, imageContainer);
+                        }
+                    }, 500);
+                }
+            });
+            
+            // Show modal
+            certificatesGalleryModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+}
+
+// Close certificates gallery modal
+if (certModalClose) {
+    certModalClose.addEventListener('click', function() {
+        certificatesGalleryModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+}
+
+// Close modal when clicking overlay
+if (certificatesGalleryModal) {
+    const overlay = certificatesGalleryModal.querySelector('.modal-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                certificatesGalleryModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && certificatesGalleryModal.classList.contains('active')) {
+            certificatesGalleryModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
 // Load projects dynamically from localStorage
 function loadProjectsFromStorage() {
     const projectsList = document.querySelector('.projects-list');
@@ -799,6 +1124,50 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load projects from storage (will replace static projects if available)
     loadProjectsFromStorage();
     
+    // Load certificates
+    loadCertificates();
+    setupCertificatesGallery();
+    
+    // Setup keyboard navigation for certificates
+    document.addEventListener('keydown', function(e) {
+        if (certificatesGalleryModal && certificatesGalleryModal.classList.contains('active')) {
+            return; // Don't navigate if gallery modal is open
+        }
+        const certificatesCarousel = document.getElementById('certificatesCarousel');
+        if (certificatesCarousel) {
+            const certItems = certificatesCarousel.querySelectorAll('.certificate-image-item');
+            if (e.key === 'ArrowLeft' && currentCertIndex > 0) {
+                const index = currentCertIndex - 1;
+                certItems.forEach((item, i) => {
+                    if (i === index) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+                currentCertIndex = index;
+                if (certScrollLeftBtn && certScrollRightBtn) {
+                    certScrollLeftBtn.disabled = currentCertIndex === 0;
+                    certScrollRightBtn.disabled = currentCertIndex === certItems.length - 1;
+                }
+            } else if (e.key === 'ArrowRight' && currentCertIndex < certItems.length - 1) {
+                const index = currentCertIndex + 1;
+                certItems.forEach((item, i) => {
+                    if (i === index) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+                currentCertIndex = index;
+                if (certScrollLeftBtn && certScrollRightBtn) {
+                    certScrollLeftBtn.disabled = currentCertIndex === 0;
+                    certScrollRightBtn.disabled = currentCertIndex === certItems.length - 1;
+                }
+            }
+        }
+    });
+    
     // Add visible class to hero section immediately
     const heroSection = document.querySelector('.hero');
     if (heroSection) {
@@ -815,4 +1184,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// Featured Certificate Full View Modal
+const featuredCertImage = document.getElementById('featuredCertificateImage');
+const certificateFullViewModal = document.getElementById('certificateFullViewModal');
+const certFullViewClose = certificateFullViewModal?.querySelector('.modal-close');
+
+if (featuredCertImage && certificateFullViewModal) {
+    featuredCertImage.addEventListener('click', function() {
+        certificateFullViewModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+}
+
+// Close certificate full view modal
+if (certFullViewClose) {
+    certFullViewClose.addEventListener('click', function() {
+        certificateFullViewModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+}
+
+// Close modal when clicking overlay
+if (certificateFullViewModal) {
+    const overlay = certificateFullViewModal.querySelector('.modal-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                certificateFullViewModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && certificateFullViewModal.classList.contains('active')) {
+            certificateFullViewModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
 
