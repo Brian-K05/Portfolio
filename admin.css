@@ -5,14 +5,16 @@
 }
 
 :root {
-    --bg-dark: #0a0a0a;
-    --bg-darker: #050505;
-    --bg-card: #1a1a1a;
-    --text-white: #ffffff;
-    --text-gray: #b0b0b0;
-    --text-light-gray: #888888;
-    --accent-orange: #f0784e;
-    --border-gray: #2a2a2a;
+    /* Matches main site: Pitch Black, Dark Coffee, Neon Ice, Pale Sky, Taupe */
+    --bg-dark: #0F1108;
+    --bg-darker: #0a0c06;
+    --bg-card: #2a2115;
+    --text-white: #E8EEF1;
+    --text-gray: #b4c2c9;
+    --text-light-gray: #8f857e;
+    --accent-orange: #00F6ED;
+    --accent-orange-rgb: 0, 246, 237;
+    --border-gray: #3d3630;
     --success-green: #4caf50;
     --error-red: #f44336;
 }
@@ -77,7 +79,7 @@ body {
 }
 
 .btn-refresh:hover {
-    background: #ff8c5a;
+    background: #FFFF00;
     transform: translateY(-2px);
 }
 
@@ -151,7 +153,7 @@ body {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent-orange);
-    box-shadow: 0 0 0 3px rgba(240, 120, 78, 0.1);
+    box-shadow: 0 0 0 3px rgba(255, 136, 17, 0.1);
 }
 
 .form-group small {
@@ -173,7 +175,7 @@ body {
 }
 
 .btn-primary:hover {
-    background: #ff8c5a;
+    background: #FFFF00;
     transform: translateY(-2px);
 }
 
@@ -237,7 +239,7 @@ body {
 .project-card-admin:hover {
     border-color: var(--accent-orange);
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(240, 120, 78, 0.1);
+    box-shadow: 0 8px 24px rgba(255, 136, 17, 0.1);
 }
 
 .project-card-admin.showcased {
@@ -338,7 +340,7 @@ body {
 }
 
 .project-link:hover {
-    color: #ff8c5a;
+    color: #FF8811;
     text-decoration: underline;
 }
 
@@ -367,7 +369,7 @@ body {
 }
 
 .btn-edit:hover {
-    background: #ff8c5a;
+    background: #FFFF00;
 }
 
 .btn-delete {

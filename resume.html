@@ -55,8 +55,9 @@
 
         .resume-content {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
+            grid-template-columns: 1.65fr 1fr;
+            gap: 48px;
+            align-items: start;
             position: relative;
             z-index: 1;
         }
@@ -65,73 +66,82 @@
         .left-column {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 0;
         }
 
         /* Header Section */
         .header-section {
-            margin-bottom: 20px;
+            margin-bottom: 28px;
         }
 
         .name {
-            font-size: 3.5rem;
+            font-size: 2.75rem;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+            margin-bottom: 6px;
+            letter-spacing: 1.5px;
+            line-height: 1.15;
         }
 
         .title {
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             color: #00ff88;
             font-weight: 500;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
         }
 
+        .contact-line {
+            font-size: 0.85rem;
+            color: #b0b0b0;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .summary,
         .about-me {
             color: #b0b0b0;
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-top: 15px;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            margin-top: 0;
+        }
+        .keywords-line {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.5;
+            margin-top: 12px;
         }
 
-        /* Work Experience Section */
+        /* Sections: consistent vertical rhythm */
         .section {
-            margin-top: 30px;
+            margin-top: 32px;
+            padding-top: 0;
         }
 
         .section-title {
-            font-size: 1.5rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 18px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.12em;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .experience-item {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .experience-item:last-child {
+            margin-bottom: 26px;
+            padding-bottom: 24px;
+            padding-left: 16px;
+            border-left: 3px solid rgba(0, 255, 136, 0.4);
             border-bottom: none;
         }
 
-        .experience-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 255, 136, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            flex-shrink: 0;
-            border: 1px solid rgba(0, 255, 136, 0.2);
+        .experience-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .experience-item + .experience-item {
+            border-left-color: rgba(255, 255, 255, 0.08);
         }
 
         .experience-content {
@@ -139,45 +149,67 @@
         }
 
         .job-title {
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             font-weight: 600;
             color: #ffffff;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .job-dates {
             color: #00ff88;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
             font-weight: 500;
         }
 
         .job-description {
             color: #b0b0b0;
-            font-size: 0.95rem;
-            line-height: 1.7;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .job-description ul {
+            margin: 8px 0 0 0;
+            padding-left: 1.2rem;
+            list-style: disc;
+        }
+
+        .job-description li {
+            margin-bottom: 4px;
+        }
+
+        .job-description li:last-child {
+            margin-bottom: 0;
         }
 
         /* Right Column */
         .right-column {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 0;
+        }
+
+        .right-column .section {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            padding: 20px 18px;
+            margin-top: 24px;
         }
 
         .profile-picture {
             width: 100%;
-            aspect-ratio: 3/4;
+            aspect-ratio: 1;
+            max-height: 200px;
             object-fit: cover;
-            border-radius: 15px;
-            border: 2px solid rgba(0, 255, 136, 0.3);
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 200, 255, 0.1));
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 136, 0.25);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.08), rgba(0, 200, 255, 0.08));
             display: flex;
             align-items: center;
             justify-content: center;
             color: #00ff88;
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            margin-bottom: 24px;
         }
 
         .profile-picture img {
@@ -189,10 +221,14 @@
 
         .education-item {
             display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding-left: 10px;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            padding-left: 0;
+        }
+
+        .education-item:last-child {
+            margin-bottom: 0;
         }
 
         .education-bullet {
@@ -218,22 +254,50 @@
             font-size: 0.85rem;
         }
 
+        .training-featured {
+            background: rgba(0, 255, 136, 0.08);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+        }
+        .training-detail {
+            color: #b0b0b0;
+            font-size: 0.78rem;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        .skills-group {
+            margin-bottom: 12px;
+        }
+        .skills-group:last-child {
+            margin-bottom: 0;
+        }
+        .skills-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 6px;
+        }
         .skills-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 6px;
         }
 
         .skill-tag {
             display: inline-block;
-            padding: 8px 16px;
+            padding: 5px 12px;
             background: rgba(0, 255, 136, 0.1);
-            border: 1px solid rgba(0, 255, 136, 0.3);
-            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.25);
+            border-radius: 6px;
             color: #00ff88;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
         .skill-tag:hover {
@@ -245,9 +309,13 @@
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 12px;
             color: #b0b0b0;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
         }
 
         .contact-icon {
@@ -258,7 +326,7 @@
         }
 
         .contact-text {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .contact-text a {
@@ -302,97 +370,84 @@
         <div class="resume-content">
             <!-- Left Column -->
             <div class="left-column">
-                <!-- Header -->
+                <!-- Header (ATS: name, title, contact, and keywords appear first in DOM) -->
                 <div class="header-section">
-                    <h1 class="name">BRIAN KYLE</h1>
+                    <h1 class="name">BRIAN KYLE SALOR</h1>
                     <div class="title">Full Stack Developer</div>
-                    <p class="about-me">
-                        I'm a BSIT student passionate about building software systems from front to back. 
-                        As a freelancer, I've worked with various clients delivering web and mobile solutions. 
-                        Currently serving as Project Lead for our capstone team, I specialize in Laravel, Angular, 
-                        Python, and JavaScript. I also have experience building mobile applications using Kotlin, 
-                        Flutter, and React Native. My love for technology extends to creating custom AI solutions 
-                        that automate workflows and make manual tasks easier. I'm always eager to learn and apply 
-                        new technologies to solve real-world problems.
+                    <p class="contact-line">briankylesalor02@gmail.com | +63 970 540 6985 | Tacloban City, Leyte, Philippines | github.com/Brian-K05</p>
+                    <p class="summary">
+                        Full stack and mobile developer with hands-on experience delivering web and mobile solutions for clients and leading a capstone dev team. Strong in Laravel, Angular, Python, and JavaScript; builds cross-platform apps with Kotlin, Flutter, and React Native. Organized technical webinar on scalable architecture (AWS). Eager to contribute to production systems and learn from industry teams.
                     </p>
+                    <p class="keywords-line">Technical Skills: Languages - PHP, JavaScript, Python, Kotlin, Visual Basic. Frameworks - Laravel, Angular, Flutter, React Native. Cloud and Infra - AWS Lightsail, Supabase, Docker. Databases - MySQL, PostgreSQL, Trino. Dev Tools - GitHub, VS Code, Android Studio, DBeaver, RapidAPI, Roboflow, Cursor. Design - Figma, Framer. Full Stack Development, Mobile Development, Web Development</p>
                 </div>
 
-                <!-- Projects & Experience -->
+                <!-- Work Experience (standard ATS heading) -->
                 <div class="section">
-                    <h2 class="section-title">Projects & Experience</h2>
+                    <h2 class="section-title">Work Experience</h2>
                     
                     <div class="experience-item">
-                        <div class="experience-icon">👨‍💼</div>
                         <div class="experience-content">
-                            <div class="job-title">Project Lead - Capstone Team</div>
+                            <div class="job-title">Project Lead, Capstone Development Team</div>
+                            <div class="job-dates">Since 2025</div>
                             <div class="job-description">
-                                Leading a team of student developers in building our capstone project. 
-                                Coordinating team efforts, managing project timelines, and ensuring high-quality 
-                                deliverables. Overseeing both frontend and backend development using modern 
-                                technologies including Laravel, Angular, and mobile frameworks.
+                                <ul>
+                                    <li>Lead a team of developers through full-cycle delivery of a capstone project using Laravel, Angular, and mobile stacks.</li>
+                                    <li>Coordinate tasks, track timelines, and ensure code quality and timely deliverables.</li>
+                                    <li>Oversee frontend and backend integration and technical decisions.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
                     <div class="experience-item">
-                        <div class="experience-icon">💼</div>
                         <div class="experience-content">
-                            <div class="job-title">Freelance Developer</div>
+                            <div class="job-title">Freelance Full Stack & Mobile Developer</div>
+                            <div class="job-dates">Since 2025</div>
                             <div class="job-description">
-                                Working with various clients to deliver web and mobile development solutions. 
-                                Building custom solutions using Laravel, Angular, React Native, and Flutter. 
-                                Creating responsive web applications, RESTful APIs, and mobile apps. Delivering 
-                                end-to-end solutions from design to deployment.
+                                <ul>
+                                    <li>Deliver web and mobile solutions for multiple clients using Laravel, Angular, React Native, and Flutter.</li>
+                                    <li>Build responsive web apps, RESTful APIs, and cross-platform mobile apps from design to deployment.</li>
+                                    <li>Communicate with clients to gather requirements and iterate on deliverables.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
                     <div class="experience-item">
-                        <div class="experience-icon">🌐</div>
                         <div class="experience-content">
-                            <div class="job-title">Personal Web Development Projects</div>
+                            <div class="job-title">Personal & Academic Web Projects</div>
+                            <div class="job-dates">Since 2022</div>
                             <div class="job-description">
-                                Developing responsive web applications as personal projects using modern frameworks. 
-                                Specializing in frontend development with Angular and backend development with Laravel. 
-                                Created data visualization projects (learned from Zuitt webinar) and integrated 
-                                third-party APIs. Building custom AI solutions to automate business processes.
+                                <ul>
+                                    <li>Develop full stack web applications with Angular and Laravel; integrate third-party APIs and data visualization.</li>
+                                    <li>Build custom automation and AI-assisted tools to streamline workflows.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
                     <div class="experience-item">
-                        <div class="experience-icon">📱</div>
                         <div class="experience-content">
-                            <div class="job-title">Mobile App Development Projects</div>
+                            <div class="job-title">Mobile App Development (Kotlin, Flutter, React Native)</div>
+                            <div class="job-dates">Since 2025</div>
                             <div class="job-description">
-                                Building mobile applications as personal and academic projects using Kotlin, Flutter, 
-                                and React Native. Developed native Android apps and cross-platform solutions. 
-                                Implementing complex features and integrating with backend services. Projects 
-                                include capstone mobile app and other academic requirements.
+                                <ul>
+                                    <li>Ship native Android (Kotlin) and cross-platform apps (Flutter, React Native) for academic and personal projects.</li>
+                                    <li>Implement features and integrate apps with backend services and APIs.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
                     <div class="experience-item">
-                        <div class="experience-icon">🎨</div>
                         <div class="experience-content">
-                            <div class="job-title">UI/UX Design Projects</div>
+                            <div class="job-title">UI/UX Design (Figma)</div>
+                            <div class="job-dates">Since 2023</div>
                             <div class="job-description">
-                                Designing user interfaces and experiences for personal web and mobile projects 
-                                using Figma. Creating wireframes, prototypes, and high-fidelity designs. 
-                                Ensuring responsive design and optimal user experience across all devices.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="experience-item">
-                        <div class="experience-icon">🤖</div>
-                        <div class="experience-content">
-                            <div class="job-title">AI Solutions Development</div>
-                            <div class="job-description">
-                                Building custom AI solutions as personal projects to automate manual work and 
-                                improve efficiency. Developing intelligent systems that help streamline business 
-                                processes. Integrating AI capabilities into web and mobile applications.
+                                <ul>
+                                    <li>Create wireframes, prototypes, and high-fidelity UI for web and mobile projects.</li>
+                                    <li>Apply responsive and accessible design practices across devices.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -409,73 +464,108 @@
                     </div>
                 </div>
 
-                <!-- Education -->
+                <!-- Education (ATS: spell out degree) -->
                 <div class="section">
                     <h2 class="section-title">Education</h2>
                     <div class="education-item">
                         <div class="education-bullet"></div>
                         <div class="education-content">
-                            <div class="education-institution">Leyte Normal University</div>
+                            <div class="education-institution">Bachelor of Science in Information Technology (BSIT)</div>
+                            <div class="education-institution" style="font-weight: 400; color: #b0b0b0;">Leyte Normal University</div>
                             <div class="education-dates">2022 - 2026 (Expected)</div>
-                        </div>
-                    </div>
-                    <div class="education-item">
-                        <div class="education-bullet"></div>
-                        <div class="education-content">
-                            <div class="education-institution">Bachelor of Science in Information Technology</div>
-                            <div class="education-dates">Expected: June/July 2026</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Training & Workshops -->
+                <!-- Certifications and Training (standard ATS heading) -->
                 <div class="section">
-                    <h2 class="section-title">Training & Webinars</h2>
-                    <div class="education-item" style="background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 8px; padding: 12px; margin-bottom: 15px;">
-                        <div class="education-bullet" style="background: #00ff88; box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);"></div>
+                    <h2 class="section-title">Certifications and Training</h2>
+                    <div class="education-item training-featured">
+                        <div class="education-bullet"></div>
                         <div class="education-content">
-                            <div class="education-institution" style="color: #00ff88; font-weight: 600;">Organizer & Host - Scalable Applications with Hexagonal Architecture</div>
-                            <div style="color: #b0b0b0; font-size: 0.85rem; margin-top: 4px;">Building and deploying with AWS</div>
-                            <div style="color: #b0b0b0; font-size: 0.85rem; margin-top: 2px;">Speaker: Senior Software Engineer & Development Lead, Jetstar Airways</div>
-                            <div class="education-dates" style="margin-top: 6px;">November 19, 2025 | 9:00 AM - 12:00 PM</div>
+                            <div class="education-institution">Organizer and Host - Scalable Applications with Hexagonal Architecture</div>
+                            <div class="training-detail">AWS deployment. Speaker: Senior Software Engineer and Dev Lead, Jetstar Airways</div>
+                            <div class="education-dates">November 2025</div>
                         </div>
                     </div>
                     <div class="education-item">
                         <div class="education-bullet"></div>
                         <div class="education-content">
                             <div class="education-institution">Zuitt - Data Visualization Webinar</div>
-                            <div class="education-dates">2023</div>
+                            <div class="education-dates">October 5, 2024</div>
                         </div>
                     </div>
                     <div class="education-item">
                         <div class="education-bullet"></div>
                         <div class="education-content">
-                            <div class="education-institution">10+ Tech Webinars</div>
-                            <div class="education-dates">Various Tech Events - Continuous Learning</div>
+                            <div class="education-institution">10+ tech webinars & workshops</div>
+                            <div class="education-dates">Completed</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Skills -->
+                <!-- Technical Skills (matches portfolio Tech Stack) -->
                 <div class="section">
-                    <h2 class="section-title">Skills</h2>
-                    <div class="skills-container">
-                        <span class="skill-tag">Laravel</span>
-                        <span class="skill-tag">PHP</span>
-                        <span class="skill-tag">Angular</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Kotlin</span>
-                        <span class="skill-tag">Flutter</span>
-                        <span class="skill-tag">React Native</span>
-                        <span class="skill-tag">Visual Basic</span>
-                        <span class="skill-tag">Figma</span>
+                    <h2 class="section-title">Technical Skills</h2>
+                    <div class="skills-group">
+                        <div class="skills-label">Languages</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Kotlin</span>
+                            <span class="skill-tag">Visual Basic</span>
+                        </div>
+                    </div>
+                    <div class="skills-group">
+                        <div class="skills-label">Frameworks</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">Laravel</span>
+                            <span class="skill-tag">Angular</span>
+                            <span class="skill-tag">Flutter</span>
+                            <span class="skill-tag">React Native</span>
+                        </div>
+                    </div>
+                    <div class="skills-group">
+                        <div class="skills-label">Cloud & Infra</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">AWS Lightsail</span>
+                            <span class="skill-tag">Supabase</span>
+                            <span class="skill-tag">Docker</span>
+                        </div>
+                    </div>
+                    <div class="skills-group">
+                        <div class="skills-label">Databases</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">Trino</span>
+                        </div>
+                    </div>
+                    <div class="skills-group">
+                        <div class="skills-label">Dev Tools</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">GitHub</span>
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Android Studio</span>
+                            <span class="skill-tag">DBeaver</span>
+                            <span class="skill-tag">RapidAPI</span>
+                            <span class="skill-tag">Roboflow</span>
+                            <span class="skill-tag">Cursor</span>
+                        </div>
+                    </div>
+                    <div class="skills-group">
+                        <div class="skills-label">Design</div>
+                        <div class="skills-container">
+                            <span class="skill-tag">Figma</span>
+                            <span class="skill-tag">Framer</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Contact Info -->
+                <!-- Contact Information (standard ATS heading) -->
                 <div class="section">
-                    <h2 class="section-title">Contact Info</h2>
+                    <h2 class="section-title">Contact Information</h2>
                     <div class="contact-item">
                         <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
@@ -492,10 +582,10 @@
                     </div>
                     <div class="contact-item">
                         <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                         </svg>
                         <div class="contact-text">
-                            <a href="https://github.com/Brian-K05" target="_blank">github.com/Brian-K05</a>
+                            <a href="https://github.com/Brian-K05" target="_blank" rel="noopener">github.com/Brian-K05</a>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -509,8 +599,8 @@
                             <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
                         </svg>
                         <div class="contact-text">
-                            <a href="#" id="portfolioLink" target="_blank" style="color: #ffffff;">Portfolio Website</a>
-                            <small style="display: block; color: #b0b0b0; font-size: 0.75rem; margin-top: 4px;">(Update after deployment)</small>
+                            <a href="#" id="portfolioLink" target="_blank" style="color: #ffffff;">Portfolio</a>
+                            <small style="display: block; color: #b0b0b0; font-size: 0.75rem; margin-top: 2px;">Link in cover letter or on request</small>
                         </div>
                     </div>
                 </div>

@@ -5,11 +5,13 @@
     border-radius: 16px;
     background: transparent;
     border: none;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+        box-shadow var(--motion-medium) var(--ease-premium),
+        transform var(--motion-medium) var(--ease-premium);
 }
 
 .project-card:hover {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(240, 120, 78, 0.1);
+    box-shadow: 0 20px 44px rgba(15, 20, 25, 0.12), 0 0 36px rgba(var(--accent-orange-rgb), 0.1);
 }
 
 .project-image-wrapper {
@@ -33,7 +35,7 @@
     justify-content: center;
     margin-bottom: 0;
     transform-style: preserve-3d;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--motion-long) var(--ease-premium);
     border: none;
 }
 
@@ -42,7 +44,7 @@
     height: auto;
     min-height: 200px;
     aspect-ratio: 16/9;
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
     border-radius: 16px;
     position: relative;
     display: flex;
@@ -64,7 +66,7 @@
     max-height: none;
     object-fit: contain;
     border-radius: 16px;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--motion-long) var(--ease-premium);
     display: block;
     padding: 0;
     margin: 0;
@@ -81,7 +83,7 @@
     align-items: flex-end;
     padding: 1.5rem;
     opacity: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity var(--motion-medium) var(--ease-premium);
     border-radius: 16px;
 }
 
@@ -90,8 +92,8 @@
 }
 
 .project-overlay-content {
-    transform: translateY(20px);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(12px);
+    transition: transform var(--motion-medium) var(--ease-premium);
 }
 
 .project-card:hover .project-overlay-content {
@@ -138,7 +140,7 @@
     justify-content: center;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity var(--motion-medium) var(--ease-premium);
     pointer-events: none;
 }
 
@@ -154,10 +156,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(20, 22, 28, 0.55);
     backdrop-filter: blur(10px);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--motion-medium) var(--ease-premium);
 }
 
 .project-modal.active .modal-overlay {
@@ -169,12 +171,12 @@
     max-width: 900px;
     width: 90%;
     max-height: 90vh;
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(20, 20, 20, 0.98) 100%);
+    background: linear-gradient(165deg, #ffffff 0%, #f7f6f2 100%);
     border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 50px rgba(240, 120, 78, 0.2);
-    transform: scale(0.8) translateY(50px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-md), 0 0 40px rgba(var(--accent-orange-rgb), 0.08);
+    transform: scale(0.96) translateY(20px);
+    transition: transform var(--motion-long) var(--ease-premium);
     overflow: hidden;
     z-index: 10001;
 }
@@ -189,8 +191,8 @@
     right: 1.5rem;
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--border-subtle);
     border-radius: 50%;
     color: var(--text-white);
     font-size: 1.5rem;
@@ -198,7 +200,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+        background var(--motion-medium) var(--ease-premium),
+        border-color var(--motion-medium) var(--ease-premium),
+        color var(--motion-medium) var(--ease-premium),
+        transform var(--motion-medium) var(--ease-premium);
     z-index: 10002;
     line-height: 1;
     padding: 0;
@@ -207,7 +213,8 @@
 .modal-close:hover {
     background: var(--accent-orange);
     border-color: var(--accent-orange);
-    transform: rotate(90deg) scale(1.1);
+    color: #ffffff;
+    transform: rotate(90deg) scale(1.02);
 }
 
 .modal-body {
@@ -245,7 +252,7 @@
     height: auto;
     min-height: 200px;
     aspect-ratio: 16/9;
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
     border-radius: 16px;
     display: flex;
     align-items: center;
@@ -287,21 +294,26 @@
 }
 
 .modal-tags .tag {
-    background-color: #2A2A2A;
+    background-color: var(--paper-2);
     color: var(--text-white);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 400;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+        background-color var(--motion-medium) var(--ease-premium),
+        border-color var(--motion-medium) var(--ease-premium),
+        transform var(--motion-medium) var(--ease-premium),
+        box-shadow var(--motion-medium) var(--ease-premium);
     display: inline-block;
-    border: 1px solid transparent;
+    border: 1px solid var(--border-subtle);
 }
 
 .modal-tags .tag:hover {
     background-color: var(--accent-orange);
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 5px 15px rgba(240, 120, 78, 0.3);
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 5px 18px rgba(var(--accent-orange-rgb), 0.35);
     border-color: var(--accent-orange);
 }
 
@@ -320,7 +332,12 @@
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+        background var(--motion-medium) var(--ease-premium),
+        color var(--motion-medium) var(--ease-premium),
+        border-color var(--motion-medium) var(--ease-premium),
+        transform var(--motion-medium) var(--ease-premium),
+        box-shadow var(--motion-medium) var(--ease-premium);
     position: relative;
     overflow: hidden;
 }
@@ -335,7 +352,7 @@
     background: transparent;
     color: var(--accent-orange);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(240, 120, 78, 0.3);
+    box-shadow: 0 5px 15px rgba(255, 136, 17, 0.3);
 }
 
 .modal-links .btn-github {
@@ -348,7 +365,7 @@
     background: var(--text-white);
     color: var(--bg-dark);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 18px rgba(15, 20, 25, 0.1);
 }
 
 .modal-links .btn-live-demo.disabled {
@@ -389,10 +406,12 @@
     }
 
     .modal-close {
-        top: 1rem;
-        right: 1rem;
-        width: 35px;
-        height: 35px;
+        top: max(1rem, env(safe-area-inset-top, 0px));
+        right: max(1rem, env(safe-area-inset-right, 0px));
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
         font-size: 1.25rem;
     }
 
@@ -407,13 +426,15 @@
     }
 }
 
+/* Legacy card sizing — do not apply to .project-card-case (fluid grid on mobile) */
 @media (max-width: 768px) {
-    .project-card {
-        min-width: 320px;
-        max-width: 320px;
+    .project-card:not(.project-card-case) {
+        min-width: 0;
+        max-width: min(320px, 100%);
+        width: 100%;
     }
     
-    .project-image {
+    .project-card:not(.project-card-case) .project-image {
         height: auto;
     }
     
@@ -431,13 +452,15 @@
 }
 
 @media (max-width: 480px) {
-    .project-card {
-        min-width: 280px;
-        max-width: 280px;
+    .project-card:not(.project-card-case) {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
     }
     
-    .project-image {
-        height: 280px;
+    .project-card:not(.project-card-case) .project-image {
+        height: auto;
+        min-height: 160px;
     }
     
     .project-title-overlay {
@@ -451,12 +474,16 @@
     .modal-content {
         width: 100%;
         height: 100%;
+        max-height: 100dvh;
         max-height: 100vh;
         border-radius: 0;
+        box-sizing: border-box;
     }
 
     .modal-body {
-        padding: 1rem;
+        padding-top: max(1rem, env(safe-area-inset-top, 0px));
+        padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+        padding-inline: max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px));
     }
 
     .modal-project-image {
