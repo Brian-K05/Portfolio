@@ -66,9 +66,9 @@
 
 ## Important Notes:
 
-1. **Admin Panel Access:**
-   - After deployment, your admin panel will be at: `your-site.com/admin.html`
-   - Example: `https://brian-k05.github.io/portfolio/admin.html`
+1. **Admin Panel:**
+   - Do not deploy `admin.html` to a public site. It has no authentication and can store a GitHub token in the browser.
+   - If it must stay in the repo, `robots.txt` and a `noindex` meta tag keep it out of search results. Still do not share the URL.
 
 2. **LocalStorage:**
    - The admin panel uses localStorage, which works in deployed sites
@@ -95,6 +95,5 @@ Since you already have a GitHub account, GitHub Pages is the easiest option:
 Your portfolio will be accessible at:
 `https://brian-k05.github.io/portfolio/`
 
-Your admin panel will be at:
-`https://brian-k05.github.io/portfolio/admin.html`
+Do not publish or share `admin.html`.
 

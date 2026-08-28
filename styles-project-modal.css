@@ -1,5 +1,5 @@
-/* Image-only Project Cards */
-.project-card {
+/* Image-only Project Cards — not the overlapping .project-row showcase */
+.project-card:not(.project-row) {
     padding: 0 !important;
     overflow: hidden;
     border-radius: 16px;
@@ -10,7 +10,7 @@
         transform var(--motion-medium) var(--ease-premium);
 }
 
-.project-card:hover {
+.project-card:not(.project-row):hover {
     box-shadow: 0 20px 44px rgba(15, 20, 25, 0.12), 0 0 36px rgba(var(--accent-orange-rgb), 0.1);
 }
 
@@ -53,9 +53,13 @@
 }
 
 .image-placeholder::before {
-    content: '📱';
-    font-size: 3rem;
-    opacity: 0.3;
+    content: 'Preview soon';
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0.45;
+    color: var(--text-gray, #6b6b70);
 }
 
 .project-img,
@@ -87,7 +91,7 @@
     border-radius: 16px;
 }
 
-.project-card:hover .project-overlay {
+.project-card:not(.project-row):hover .project-overlay {
     opacity: 1;
 }
 
@@ -96,7 +100,7 @@
     transition: transform var(--motion-medium) var(--ease-premium);
 }
 
-.project-card:hover .project-overlay-content {
+.project-card:not(.project-row):hover .project-overlay-content {
     transform: translateY(0);
 }
 
@@ -118,12 +122,12 @@
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
-.project-card:hover .project-image {
+.project-card:not(.project-row):hover .project-image {
     transform: none;
 }
 
-.project-card:hover .project-img,
-.project-card:hover .project-image img {
+.project-card:not(.project-row):hover .project-img,
+.project-card:not(.project-row):hover .project-image img {
     transform: none;
 }
 
@@ -344,7 +348,7 @@
 
 .modal-links .btn-live-demo {
     background: var(--accent-orange);
-    color: var(--text-white);
+    color: #ffffff;
     border: 1px solid var(--accent-orange);
 }
 
@@ -352,7 +356,7 @@
     background: transparent;
     color: var(--accent-orange);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 136, 17, 0.3);
+    box-shadow: 0 5px 15px rgba(var(--accent-orange-rgb), 0.28);
 }
 
 .modal-links .btn-github {
@@ -428,13 +432,13 @@
 
 /* Legacy card sizing — do not apply to .project-card-case (fluid grid on mobile) */
 @media (max-width: 768px) {
-    .project-card:not(.project-card-case) {
+    .project-card:not(.project-card-case):not(.project-row) {
         min-width: 0;
         max-width: min(320px, 100%);
         width: 100%;
     }
     
-    .project-card:not(.project-card-case) .project-image {
+    .project-card:not(.project-card-case):not(.project-row) .project-image {
         height: auto;
     }
     
@@ -452,13 +456,13 @@
 }
 
 @media (max-width: 480px) {
-    .project-card:not(.project-card-case) {
+    .project-card:not(.project-card-case):not(.project-row) {
         min-width: 0;
         max-width: 100%;
         width: 100%;
     }
     
-    .project-card:not(.project-card-case) .project-image {
+    .project-card:not(.project-card-case):not(.project-row) .project-image {
         height: auto;
         min-height: 160px;
     }
@@ -499,5 +503,57 @@
     .modal-title {
         font-size: 1.5rem;
     }
+}
+
+/* Overlapping showcase — never inherit old image-card chrome */
+.project-row.project-card {
+    overflow: visible !important;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: none;
+    width: 100%;
+    min-width: 0;
+    cursor: default;
+}
+
+.project-row.project-card:hover {
+    box-shadow: none !important;
+    transform: none;
+}
+
+.project-row .project-row-visual.project-image {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+    display: block;
+    overflow: hidden;
+    border-radius: 14px;
+    margin: 0;
+    transform: none;
+    background: #0f172a;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.project-row .project-row-visual img,
+.project-row .project-row-visual .project-card-img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 0;
+    padding: 0;
+}
+
+.modal-project-image .project-mock {
+    min-height: 240px;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: 12px;
 }
 

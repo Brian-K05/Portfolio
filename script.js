@@ -1,11 +1,59 @@
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+function lockPageScroll() {
+    document.body.style.overflow = 'hidden';
+    if (window.__lenis) window.__lenis.stop();
+}
+
+function unlockPageScroll() {
+    document.body.style.overflow = '';
+    if (window.__lenis) window.__lenis.start();
+}
+
+(function setupPreloader() {
+    const el = document.getElementById('preloader');
+    const hero = document.querySelector('.hero');
+    const startHero = () => {
+        document.body.classList.add('is-ready');
+        if (hero) hero.classList.add('is-started');
+        document.dispatchEvent(new Event('portfolio:ready'));
+    };
+    const finish = () => {
+        if (el) {
+            el.classList.add('is-done');
+            document.body.style.overflow = '';
+            window.setTimeout(() => el.remove(), 800);
+        }
+        startHero();
+    };
+    if (!el || prefersReducedMotion) {
+        if (el) el.remove();
+        document.body.style.overflow = '';
+        startHero();
+        return;
+    }
+    document.body.style.overflow = 'hidden';
+    const bar = el.querySelector('.preloader-bar');
+    let done = false;
+    const once = () => {
+        if (done) return;
+        done = true;
+        finish();
+    };
+    if (bar) bar.addEventListener('animationend', once, { once: true });
+    window.setTimeout(once, 1700);
+})();
+
 function getNavOffset() {
     return Math.min(96, Math.round(window.innerHeight * 0.11));
 }
 
 /** Eased scroll (cubic ease-out) — premium feel vs native smooth-scroll only */
 function scrollToY(targetY, duration) {
+    if (window.__lenis) {
+        window.__lenis.scrollTo(targetY, { offset: 0, duration: prefersReducedMotion ? 0 : 1.15 });
+        return;
+    }
     const d = prefersReducedMotion ? 0 : (duration != null ? duration : 820);
     const start = window.pageYOffset;
     const change = targetY - start;
@@ -27,6 +75,10 @@ function scrollToY(targetY, duration) {
 
 function scrollToElement(el, duration) {
     if (!el) return;
+    if (window.__lenis) {
+        window.__lenis.scrollTo(el, { offset: -70, duration: prefersReducedMotion ? 0 : 1.15 });
+        return;
+    }
     const y = el.getBoundingClientRect().top + window.pageYOffset - getNavOffset();
     scrollToY(Math.max(0, y), duration);
 }
@@ -80,13 +132,7 @@ window.addEventListener('scroll', highlightNavLink);
 
 // CV link is now handled directly via HTML link, no JavaScript needed
 
-// Hire me button functionality
-const hireMeBtn = document.querySelector('.btn-hire-me');
-if (hireMeBtn) {
-    hireMeBtn.addEventListener('click', function () {
-        scrollToElement(document.querySelector('#contact'));
-    });
-}
+// Primary hero CTA is an in-page link; hash handler above covers it.
 
 
 // Enhanced scroll indicator with click functionality
@@ -182,7 +228,7 @@ function revealResetVisible() {
     });
     document
         .querySelectorAll(
-            '.project-card, .about-main, .about-stats, .tech-stack-tabs, .certificate-featured-wrap'
+            '.project-row, .about-main, .about-facts, .tech-stack-groups, .certificate-featured-wrap, .experience-list'
         )
         .forEach((el) => {
             el.style.opacity = '1';
@@ -202,7 +248,7 @@ if (prefersReducedMotion) {
         }
     });
 
-    document.querySelectorAll('.project-card').forEach((card, index) => {
+    document.querySelectorAll('.project-row').forEach((card, index) => {
         const delay = index * 0.055;
         card.style.opacity = '0';
         card.style.transform = 'translateY(20px)';
@@ -210,7 +256,7 @@ if (prefersReducedMotion) {
         observer.observe(card);
     });
 
-    document.querySelectorAll('.about-main, .about-stats').forEach((el, index) => {
+    document.querySelectorAll('.about-main, .about-facts').forEach((el, index) => {
         const delay = index * 0.07;
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
@@ -218,13 +264,20 @@ if (prefersReducedMotion) {
         observer.observe(el);
     });
 
-    const techTabs = document.querySelector('.tech-stack-tabs');
-    if (techTabs) {
-        techTabs.style.opacity = '0';
-        techTabs.style.transform = 'translateY(16px)';
-        techTabs.style.transition = `opacity ${revealMs} ${easePremium}, transform ${revealMs} ${easePremium}`;
-        observer.observe(techTabs);
+    const techGroups = document.querySelector('.tech-stack-groups');
+    if (techGroups) {
+        techGroups.style.opacity = '0';
+        techGroups.style.transform = 'translateY(16px)';
+        techGroups.style.transition = `opacity ${revealMs} ${easePremium}, transform ${revealMs} ${easePremium}`;
+        observer.observe(techGroups);
     }
+
+    document.querySelectorAll('.experience-list').forEach((el) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(16px)';
+        el.style.transition = `opacity ${revealMs} ${easePremium}, transform ${revealMs} ${easePremium}`;
+        observer.observe(el);
+    });
 
     document.querySelectorAll('.certificate-featured-wrap').forEach((el, index) => {
         const delay = index * 0.065;
@@ -241,9 +294,13 @@ const statsObserver = new IntersectionObserver(function(entries) {
         if (entry.isIntersecting) {
             const statNumber = entry.target;
             const targetValue = statNumber.textContent;
-            const numericValue = parseInt(targetValue);
+            if (!/^\d+\+?$/.test(targetValue.trim())) {
+                statsObserver.unobserve(statNumber);
+                return;
+            }
+            const numericValue = parseInt(targetValue, 10);
             
-            if (!isNaN(numericValue)) {
+            if (!isNaN(numericValue) && targetValue.includes('+')) {
                 let currentValue = 0;
                 const increment = numericValue / 50;
                 const timer = setInterval(() => {
@@ -310,26 +367,6 @@ function setupTechStackTabs() {
     });
 }
 
-// Mobile menu toggle (for smaller screens)
-function createMobileMenu() {
-    const nav = document.querySelector('.nav-container');
-    const navLinks = document.querySelector('.nav-links');
-    
-    // Check if we're on mobile
-    if (window.innerWidth <= 768) {
-        // Mobile menu functionality can be added here if needed
-    }
-}
-
-// Handle window resize
-let resizeTimer;
-window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() {
-        createMobileMenu();
-    }, 250);
-});
-
 // Subtle hero parallax (container only — avoids fighting card / image CSS transforms)
 window.addEventListener(
     'scroll',
@@ -392,44 +429,14 @@ document.querySelectorAll('.section-title').forEach((title) => {
     }
 });
 
-const footerNewsletterForm = document.getElementById('footer-newsletter-form');
-if (footerNewsletterForm) {
-    footerNewsletterForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const input = document.getElementById('footer-newsletter-email');
-        const raw = input && input.value ? input.value.trim() : '';
-        const to = 'briankylesalor02@gmail.com';
-        const subject = encodeURIComponent('Newsletter signup');
-        const body = encodeURIComponent(
-            raw
-                ? `Please add this email to updates: ${raw}`
-                : 'Please add me to your newsletter list.'
-        );
-        window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-    });
-}
-
-document.querySelectorAll('.project-card').forEach((card) => {
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-    if (isTouchDevice) {
-        card.addEventListener('touchstart', function () {
-            this.classList.add('is-touch-pressing');
-        });
-        card.addEventListener('touchend', function () {
-            const self = this;
-            setTimeout(() => self.classList.remove('is-touch-pressing'), 160);
-        });
-        card.addEventListener('touchcancel', function () {
-            this.classList.remove('is-touch-pressing');
+document.querySelectorAll('.project-row').forEach((card) => {
+    const openBtn = card.querySelector('.js-open-case');
+    if (openBtn) {
+        openBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            openProjectModal(card);
         });
     }
-
-    card.addEventListener('click', function (e) {
-        if (e.target.closest('a')) return;
-        if (e.target.closest('.award-badge') || e.target.closest('.award-ribbon')) return;
-        openProjectModal(card);
-    });
 });
 
 // Add interactive ripple effect on buttons
@@ -485,14 +492,15 @@ if (mobileMenuToggle && mobileMenu) {
         mobileMenuToggle.classList.toggle('active');
         mobileMenu.classList.toggle('active');
         const open = mobileMenu.classList.contains('active');
-        document.body.style.overflow = open ? 'hidden' : '';
+        if (open) lockPageScroll();
+        else unlockPageScroll();
         setMenuOpen(open);
     }
     
-    function closeMenu() {
+    function         closeMenu() {
         mobileMenuToggle.classList.remove('active');
         mobileMenu.classList.remove('active');
-        document.body.style.overflow = '';
+        unlockPageScroll();
         setMenuOpen(false);
     }
 
@@ -534,78 +542,6 @@ if (mobileMenuToggle && mobileMenu) {
     });
 }
 
-// Typing animation for SALOR
-let isTyping = false;
-let typingTimeout = null;
-let lastScrollPosition = 0;
-
-function typeSalor() {
-    const salorText = document.querySelector('.typing-text');
-    const salorElement = document.getElementById('salor-text');
-    if (!salorText || !salorElement || isTyping) return;
-
-    isTyping = true;
-    const text = 'SALOR';
-    let index = 0;
-    salorText.textContent = '';
-    salorElement.classList.remove('typing-complete');
-
-    function type() {
-        if (index < text.length) {
-            salorText.textContent += text[index];
-            index++;
-            typingTimeout = setTimeout(type, 150); // Typing speed
-        } else {
-            // Animation complete
-            setTimeout(() => {
-                salorElement.classList.add('typing-complete');
-                isTyping = false;
-            }, 500);
-        }
-    }
-
-    type();
-}
-
-function resetTyping() {
-    const salorText = document.querySelector('.typing-text');
-    const salorElement = document.getElementById('salor-text');
-    if (salorText && salorElement) {
-        salorText.textContent = '';
-        salorElement.classList.remove('typing-complete');
-        isTyping = false;
-        if (typingTimeout) {
-            clearTimeout(typingTimeout);
-            typingTimeout = null;
-        }
-    }
-}
-
-// Observe hero section for typing animation
-let heroHasBeenVisible = false;
-const heroObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            // Hero section is visible
-            const currentScroll = window.pageYOffset;
-            // Check if scrolling up (back to hero) or first time
-            if (!heroHasBeenVisible || currentScroll < lastScrollPosition) {
-                setTimeout(() => {
-                    resetTyping();
-                    setTimeout(() => {
-                        typeSalor();
-                    }, 100);
-                }, 300);
-            }
-            heroHasBeenVisible = true;
-        } else {
-            // Hero section is not visible
-            resetTyping();
-        }
-        lastScrollPosition = window.pageYOffset;
-    });
-}, { threshold: 0.3 });
-
 // Project Modal Functionality
 const projectModal = document.getElementById('projectModal');
 const modalClose = projectModal ? projectModal.querySelector('.modal-close') : null;
@@ -621,15 +557,9 @@ function openProjectModal(card) {
     const description = details.querySelector('.project-description')?.textContent || '';
     const tags = details.querySelectorAll('.project-tags .tag');
     const links = details.querySelector('.project-links');
-    const image = card.querySelector('.project-image img') || card.querySelector('.project-image .image-placeholder');
-    
-    // Get image source
-    let imageSrc = '';
-    if (image) {
-        if (image.tagName === 'IMG') {
-            imageSrc = image.src;
-        }
-    }
+    const image = card.querySelector('.win-body img') || card.querySelector('.project-row-visual img') || card.querySelector('.project-image img');
+    const win = card.querySelector('.win');
+    const mock = card.querySelector('.project-mock');
 
     // Populate modal
     const modalImage = projectModal.querySelector('.modal-project-image');
@@ -639,11 +569,15 @@ function openProjectModal(card) {
     const modalTags = projectModal.querySelector('.modal-tags');
     const modalLinks = projectModal.querySelector('.modal-links');
 
-    // Set image
-    if (imageSrc) {
-        modalImage.innerHTML = `<img src="${imageSrc}" alt="${title}">`;
+    modalImage.innerHTML = '';
+    if (image && image.tagName === 'IMG' && image.src) {
+        modalImage.innerHTML = `<img src="${image.src}" alt="${title}">`;
+    } else if (win) {
+        modalImage.appendChild(win.cloneNode(true));
+    } else if (mock) {
+        modalImage.appendChild(mock.cloneNode(true));
     } else {
-        modalImage.innerHTML = '<div class="image-placeholder" style="width: 100%; height: auto; min-height: 200px; aspect-ratio: 16/9; background: linear-gradient(135deg, #2a2115 0%, #241909 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center;"></div>';
+        modalImage.innerHTML = '<div class="image-placeholder" style="width: 100%; height: auto; min-height: 200px; aspect-ratio: 16/9; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 16px;"></div>';
     }
 
     modalCategory.textContent = category;
@@ -686,12 +620,12 @@ function openProjectModal(card) {
 
     // Open modal
     projectModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    lockPageScroll();
 }
 
 function closeProjectModal() {
     projectModal.classList.remove('active');
-    document.body.style.overflow = '';
+    unlockPageScroll();
 }
 
 // Close modal events
@@ -719,13 +653,38 @@ if (typeof pdfjsLib !== 'undefined') {
 
 // Certificates data - list of PDF and image certificate files
 const certificatesList = [
-    { filename: 'Certificate_of_Participation_DigitalSafety.pdf', title: 'Digital Safety Certificate', type: 'pdf' },
-    { filename: 'IP Orientation_COP_Oct302024.pdf', title: 'IP Orientation Certificate', type: 'pdf' },
-    { filename: 'Certificate - Brian Kyle L. Salor.pdf', title: 'Certificate of Participation', type: 'pdf' },
-    { filename: 'Brian Kyle L. Salor.pdf', title: 'Certificate', type: 'pdf' },
-    { filename: 'Brian Kyle L. Salor E-Certificate.pdf', title: 'E-Certificate', type: 'pdf' },
-    { filename: 'Salor.png', title: 'Certificate', type: 'image' }
+    { filename: 'Certificate_of_Participation_DigitalSafety.pdf', title: 'Digital Safety', type: 'pdf' },
+    { filename: 'IP Orientation_COP_Oct302024.pdf', title: 'IP Orientation', type: 'pdf' },
+    { filename: 'Certificate - Brian Kyle L. Salor.pdf', title: 'Zuitt Data Visualization', type: 'pdf' }
 ];
+
+function loadPdfJs() {
+    return new Promise((resolve, reject) => {
+        if (typeof pdfjsLib !== 'undefined') {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+            resolve();
+            return;
+        }
+        const existing = document.querySelector('script[data-pdfjs]');
+        if (existing) {
+            existing.addEventListener('load', () => resolve());
+            existing.addEventListener('error', reject);
+            return;
+        }
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+        script.async = true;
+        script.dataset.pdfjs = 'true';
+        script.addEventListener('load', function () {
+            if (typeof pdfjsLib !== 'undefined') {
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+            }
+            resolve();
+        });
+        script.addEventListener('error', reject);
+        document.body.appendChild(script);
+    });
+}
 
 // Function to render PDF as image
 async function renderPDFAsImage(pdfUrl, container) {
@@ -889,18 +848,24 @@ function setupCertificatesGallery() {
     function closeGallery() {
         modal.classList.remove('active');
         modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
+        unlockPageScroll();
         seeAllBtn.focus();
     }
 
     function openGallery() {
-        fillCertificatesContainer(grid);
         modal.classList.add('active');
         modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
+        lockPageScroll();
         requestAnimationFrame(function() {
             certModalClose?.focus();
         });
+        loadPdfJs()
+            .then(function () {
+                fillCertificatesContainer(grid);
+            })
+            .catch(function () {
+                fillCertificatesContainer(grid);
+            });
     }
 
     seeAllBtn.addEventListener('click', openGallery);
@@ -1060,75 +1025,9 @@ function setupProjectsSlider() {
     requestAnimationFrame(updateUi);
 }
 
-// Load projects dynamically from localStorage
+// Public site uses the static project markup. Admin localStorage must not replace it.
 function loadProjectsFromStorage() {
-    const projectsGrid = document.querySelector('.projects-grid');
-    if (!projectsGrid) return;
-
-    try {
-        const saved = localStorage.getItem('portfolioProjects');
-        if (!saved) {
-            // No saved projects, keep existing HTML
-            return;
-        }
-
-        const data = JSON.parse(saved);
-        const showcasedProjects = data.projects
-            .filter(p => p.showcase)
-            .sort((a, b) => a.order - b.order);
-
-        if (showcasedProjects.length === 0) {
-            return;
-        }
-
-        function buildCaseCard(project, index) {
-            const num = String(index + 1).padStart(3, '0');
-            const imgSrc = project.image ? escapeHtml(project.image) : '';
-            const caption = (project.description || project.name || '').slice(0, 60) + ((project.description || '').length > 60 ? '…' : '');
-            const tag = escapeHtml(project.category || 'Project');
-            const deployUrl = project.deployUrl && project.deployUrl !== '#' ? escapeHtml(project.deployUrl) : '#';
-            const modalTags = (project.techStack || []).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
-            const modalLinks = `
-                ${project.deployUrl && project.deployUrl !== '#' ? `<a href="${escapeHtml(project.deployUrl)}" class="btn-live-demo" target="_blank" rel="noopener noreferrer"><span>🌐 View Live</span></a>` : ''}
-                ${project.githubUrl && project.githubUrl !== '#' ? `<a href="${escapeHtml(project.githubUrl)}" class="btn-github" target="_blank" rel="noopener noreferrer"><span>💻 View Code</span></a>` : project.githubUrl === '#' ? '<span class="project-link-disabled">Private Repository (Client Project)</span>' : ''}
-            `;
-            return `
-                <article class="project-card project-card-case" data-project="${escapeHtml(project.id)}" data-deploy-url="${escapeHtml(project.deployUrl || '#')}" data-github-url="${escapeHtml(project.githubUrl || '#')}">
-                    <div class="project-card-header">
-                        <span class="project-index">/${num}</span>
-                        <div class="project-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="project-card-image-wrap project-image">
-                        ${imgSrc ? `<img src="${imgSrc}" alt="${escapeHtml(project.name)}" class="project-card-img">` : '<div class="image-placeholder"></div>'}
-                    </div>
-                    <div class="project-card-footer">
-                        <span class="project-card-caption">${escapeHtml(caption)}</span>
-                        <span class="project-card-tag">${tag}</span>
-                    </div>
-                    <div class="project-details" style="display: none;">
-                        <div class="project-category">${escapeHtml(project.category || 'Project')}</div>
-                        <h3 class="project-title">${escapeHtml(project.name)}</h3>
-                        <p class="project-description">${escapeHtml(project.description || 'No description available.')}</p>
-                        <div class="project-tags">${modalTags}</div>
-                        <div class="project-links">${modalLinks}</div>
-                    </div>
-                </article>
-            `;
-        }
-
-        projectsGrid.innerHTML = showcasedProjects.map(buildCaseCard).join('');
-
-        const projectCards = projectsGrid.querySelectorAll('.project-card');
-        projectCards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                if (!e.target.closest('a')) openProjectModal(this);
-            });
-        });
-
-        setupProjectsSlider();
-    } catch (error) {
-        console.error('Error loading projects from storage:', error);
-    }
+    return;
 }
 
 function escapeHtml(text) {
@@ -1153,30 +1052,13 @@ window.addEventListener('portfolioUpdated', function() {
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', function() {
-    createMobileMenu();
     highlightNavLink();
-    
-    // Load projects from storage (will replace static projects if available)
-    loadProjectsFromStorage();
-    setupProjectsSlider();
-
     setupCertificatesGallery();
     setupTechStackTabs();
 
-    // Add visible class to hero section immediately
     const heroSection = document.querySelector('.hero');
     if (heroSection) {
         heroSection.classList.add('visible');
-        
-        // Observe hero section for typing animation
-        heroObserver.observe(heroSection);
-        
-        // Trigger typing on first load if hero is visible
-        if (window.scrollY < window.innerHeight * 0.7) {
-            setTimeout(() => {
-                typeSalor();
-            }, 800);
-        }
     }
 });
 
@@ -1188,7 +1070,7 @@ const certFullViewClose = certificateFullViewModal?.querySelector('.modal-close'
 if (featuredCertImage && certificateFullViewModal) {
     featuredCertImage.addEventListener('click', function() {
         certificateFullViewModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        lockPageScroll();
     });
 }
 
@@ -1196,7 +1078,7 @@ if (featuredCertImage && certificateFullViewModal) {
 if (certFullViewClose) {
     certFullViewClose.addEventListener('click', function() {
         certificateFullViewModal.classList.remove('active');
-        document.body.style.overflow = '';
+        unlockPageScroll();
     });
 }
 

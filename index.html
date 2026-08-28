@@ -3,31 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="theme-color" content="#ffffff">
-    <title>Brian Kyle Salor - Portfolio</title>
+    <meta name="theme-color" content="#0A0A0B">
+    <title>Brian Kyle Salor — Software Developer · AI Developer · IT Support</title>
+    <meta name="description" content="Brian Kyle Salor is a software developer, AI developer, and IT support specialist. Production insurance automation, RAG assistants, and custom software for businesses.">
+    <meta name="author" content="Brian Kyle Salor">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Brian Kyle Salor — Software Developer · AI Developer · IT Support">
+    <meta property="og:description" content="I build software systems, AI-powered workflows, and the IT support that keeps operations running.">
+    <meta property="og:image" content="profile.JPG">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Brian Kyle Salor — Software Developer · AI Developer · IT Support">
+    <meta name="twitter:description" content="Software developer, AI developer, and IT support specialist. Production systems, RAG assistants, and custom software.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles-project-modal.css">
+    <link rel="stylesheet" href="styles-ink.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body class="portfolio-body">
-    <!-- Navigation -->
+<body class="portfolio-body theme-ink">
+    <a class="skip-link" href="#projects">Skip to work</a>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+
+    <div class="preloader" id="preloader" data-testid="preloader">
+        <div class="preloader-top">
+            <span>Brian Kyle Salor</span>
+            <span>Portfolio · 2026</span>
+        </div>
+        <div class="preloader-mid">
+            <p class="preloader-mark">BK<span>.</span></p>
+            <div class="preloader-track" aria-hidden="true"><div class="preloader-bar"></div></div>
+        </div>
+        <div class="preloader-bot">
+            <span>Software · AI · IT Support</span>
+            <span class="preloader-loc">Available for work</span>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <div class="logo" title="Brian Kyle Salor">BK</div>
-                <span class="logo-tagline">Software developer</span>
+                <a href="#home" class="logo" title="Brian Kyle Salor">BK<span class="logo-dot">.</span></a>
             </div>
             <ul class="nav-links">
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#projects">PROJECTS</a></li>
-                <li><a href="#tech-stack">TECH STACK</a></li>
-                <li><a href="#certifications">CERTIFICATIONS</a></li>
-                <li><a href="#about">ABOUT ME</a></li>
-                <li><a href="#contact">CONTACT</a></li>
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#tech-stack">Skills</a></li>
+                <li><a href="#leadership">Leadership</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-            <a href="Resume - Information Technology Student.pdf" class="btn-download-cv" target="_blank" rel="noopener noreferrer"><span>Download CV</span></a>
+            <a href="Brian-Kyle-Salor-Resume.docx" class="btn-download-cv js-magnetic" download="Brian-Kyle-Salor-Resume.docx"><span>Download CV</span></a>
             <button type="button" class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-mobile-menu">
                 <span></span>
                 <span></span>
@@ -36,375 +64,456 @@
         </div>
     </nav>
 
-    <!-- Full-screen menu lives outside .navbar so overflow-x on the bar cannot clip it -->
     <div class="mobile-menu" id="site-mobile-menu" role="dialog" aria-modal="true" aria-label="Main navigation">
         <button type="button" class="mobile-menu-close" aria-label="Close menu">&times;</button>
         <ul class="mobile-nav-links">
-            <li><a href="#home">HOME</a></li>
-            <li><a href="#projects">PROJECTS</a></li>
-            <li><a href="#tech-stack">TECH STACK</a></li>
-            <li><a href="#certifications">CERTIFICATIONS</a></li>
-            <li><a href="#about">ABOUT ME</a></li>
-            <li><a href="#contact">CONTACT</a></li>
-            <li><a href="Resume - Information Technology Student.pdf" class="btn-download-cv-mobile" target="_blank" rel="noopener noreferrer"><span>Download CV</span></a></li>
+            <li><a href="#projects">Work</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#tech-stack">Skills</a></li>
+            <li><a href="#leadership">Leadership</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="Brian-Kyle-Salor-Resume.docx" class="btn-download-cv-mobile" download="Brian-Kyle-Salor-Resume.docx"><span>Download CV</span></a></li>
         </ul>
     </div>
 
-    <!-- Hero Section -->
     <section class="hero hero-section" id="home">
         <div class="hero-container">
             <div class="hero-content">
-                <div class="job-titles">Full Stack Developer | AI Enthusiast | BSIT Student</div>
+                <p class="job-titles"><span class="job-dot" aria-hidden="true"></span>Software Developer · AI Developer · IT Support</p>
                 <div class="name-section">
-                    <h1 class="name">BRIAN KYLE</h1>
-                    <div class="name-lastname-wrapper">
-                        <h1 class="name-lastname" id="salor-text"><span class="typing-text"></span><span class="typing-cursor">|</span></h1>
-                        <div class="divider"></div>
-                        <p class="tagline">Building solutions for tech problems,<br>one line of code at a time.</p>
-                    </div>
+                    <h1 class="name">
+                        <span class="name-line"><span class="name-mask">Brian Kyle</span></span>
+                        <span class="name-line name-accent"><span class="name-mask">Salor</span></span>
+                    </h1>
+                    <span class="hero-rule" aria-hidden="true"></span>
+                    <p class="tagline">I build software systems, AI assistants, and the IT support that keeps operations running.</p>
+                    <p class="tagline tagline-proof">Shipped a production insurance data and automation system. I also take freelance software work.</p>
                 </div>
+                <ul class="hero-proof">
+                    <li>Node.js</li>
+                    <li>REST APIs</li>
+                    <li>RAG</li>
+                    <li>Supabase</li>
+                    <li>JavaScript</li>
+                </ul>
                 <div class="hero-actions">
-                    <button class="btn-hire-me"><span>Hire me</span></button>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/brian.kyle.salor/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                            </svg>
-                        </a>
-                        <a href="https://github.com/Brian-K05" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="LinkedIn" title="Coming soon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </a>
-                    </div>
+                    <a href="#projects" class="btn-hire-me js-magnetic"><span>View work</span></a>
+                    <a href="mailto:briankylesalor02@gmail.com" class="btn-hire-me btn-hire-me--ghost js-magnetic"><span>Email me</span></a>
+                    <a href="https://github.com/Brian-K05" target="_blank" rel="noopener noreferrer" class="social-link js-magnetic" aria-label="GitHub">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com/in/brian-kyle-salor-786999359" target="_blank" rel="noopener noreferrer" class="social-link js-magnetic" aria-label="LinkedIn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <span class="hero-status"><span class="hero-status-dot" aria-hidden="true"></span>Available for work</span>
                 </div>
             </div>
             <div class="hero-image">
-                <div class="profile-image-placeholder">
-                    <img src="profile.JPG" alt="Brian Kyle Salor" id="profile-img">
-                </div>
+                <figure class="profile-image-placeholder hero-portrait">
+                    <span class="portrait-corner" aria-hidden="true"></span>
+                    <img src="profile.JPG" alt="Portrait of Brian Kyle Salor" id="profile-img" width="760" height="950">
+                    <figcaption>
+                        <span>Software · AI · Support</span>
+                        <span>Available</span>
+                    </figcaption>
+                </figure>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="scroll-indicator-text">Scroll down</div>
-            <div class="scroll-indicator-mouse">
-                <div class="scroll-indicator-wheel"></div>
-            </div>
-        </div>
+        <p class="hero-scroll" aria-hidden="true">Scroll</p>
     </section>
 
-    <!-- About Section -->
-    <section class="about section-alt" id="about">
-        <div class="section-container">
-            <div class="page-number">01</div>
-            <div class="about-content">
-                <div class="about-main">
-                    <h2 class="about-headline">
-                        From curiosity to<br>
-                        code building what<br>
-                        <span class="highlight-orange">matters most</span>
-                    </h2>
-                    <p class="about-text">
-                        Hey! I'm Brian Kyle Salor, a 4th year BSIT student at Leyte Normal University, currently based in Tacloban City. Originally from San Isidro, Northern Samar, I'm passionate about web development, training AI, and building custom AI solutions. What drives me is curiosity—when I see problems in tech, I can't help but explore what's possible to build.
-                    </p>
-                    <p class="about-text-secondary">
-                        My coding journey started with Java in my first year, then Python (which I fell in love with), followed by Visual Basic. I discovered my passion when I shifted to web development, teaching myself the fundamentals, then diving into Laravel, PHP, and Docker in my third year. I'm also deeply interested in AI tools and leverage them to make my work faster and more efficient. As a backend developer and project lead for our capstone mobile app, I've learned the importance of both technical skills and team leadership.
-                    </p>
-                    <blockquote class="quote">
-                        <p>"The best solutions come from asking 'what if?' and having the courage to build it yourself."</p>
-                    </blockquote>
-                </div>
-                <div class="about-stats">
-                    <div class="stats-header">
-                        <div class="stats-line"></div>
-                        <h3>ABOUT</h3>
-                    </div>
-                    <div class="stats-list">
-                        <div class="stat-item">
-                            <div class="stat-number">2+</div>
-                            <div class="stat-label">Years of Coding</div>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat-item">
-                            <div class="stat-number">10+</div>
-                            <div class="stat-label">Project Built</div>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat-item">
-                            <div class="stat-number">10+</div>
-                            <div class="stat-label">Freelance Clients</div>
-                        </div>
-                        <div class="stat-divider"></div>
-                    </div>
-                </div>
-            </div>
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+            <div class="marquee-row">Node.js<span class="mq-dot"></span>REST APIs<span class="mq-dot"></span>RAG<span class="mq-dot"></span>Supabase<span class="mq-dot"></span>JavaScript<span class="mq-dot"></span>Automation<span class="mq-dot"></span>IT Support<span class="mq-dot"></span>Full-stack<span class="mq-dot"></span>Ship<span class="mq-dot"></span></div>
+            <div class="marquee-row">Node.js<span class="mq-dot"></span>REST APIs<span class="mq-dot"></span>RAG<span class="mq-dot"></span>Supabase<span class="mq-dot"></span>JavaScript<span class="mq-dot"></span>Automation<span class="mq-dot"></span>IT Support<span class="mq-dot"></span>Full-stack<span class="mq-dot"></span>Ship<span class="mq-dot"></span></div>
         </div>
-    </section>
+    </div>
 
-    <!-- Projects Section -->
     <section class="projects" id="projects">
         <div class="section-container">
-            <div class="projects-header">
+            <div class="projects-header js-reveal">
                 <div class="projects-header-left">
-                    <div class="page-number">02</div>
-                    <h2 class="section-title">PROJECTS</h2>
+                    <div class="page-number">01</div>
+                    <h2 class="section-title">Work</h2>
                 </div>
-                <p class="projects-subtitle">Selected work — from data tools to full‑stack applications</p>
+                <p class="projects-subtitle">Selected work — production insurance automation, AI support, and client systems</p>
             </div>
-            <div class="projects-slider-wrap">
-                <div
-                    class="projects-slider-viewport"
-                    id="projects-slider"
-                    role="region"
-                    aria-roledescription="carousel"
-                    aria-label="Featured projects"
-                    tabindex="0"
-                >
-                    <div class="projects-grid projects-slider-track">
-                <article class="project-card project-card-case" data-project="data-vis" data-deploy-url="https://brian-k05.github.io/data-vis/" data-github-url="https://github.com/Brian-K05/data-vis">
-                    <div class="project-card-header">
-                        <span class="project-index">/001</span>
-                        <div class="project-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+
+            <ul class="project-grid">
+                <li>
+                    <article class="project-row project-card js-reveal" data-project="insurance-automation" data-deploy-url="#" data-github-url="#">
+                        <button type="button" class="win js-open-case" aria-label="Open case study: Insurance Data Management">
+                            <span class="win-chrome">
+                                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="win-url">insurance-automation</span>
+                            </span>
+                            <span class="win-body">
+                                <span class="mock-dash" aria-hidden="true">
+                                    <span class="mock-dash-side"><span></span><span></span><span></span><span></span></span>
+                                    <span class="mock-dash-main">
+                                        <span class="mock-dash-kpis"><span></span><span></span><span></span></span>
+                                        <span class="mock-dash-table"><span></span><span></span><span></span><span></span></span>
+                                    </span>
+                                </span>
+                            </span>
+                        </button>
+                        <div class="project-win-foot">
+                            <div class="project-win-copy">
+                                <p class="project-win-num">01</p>
+                                <h3 class="project-win-title">Insurance Data Management</h3>
+                                <p class="project-win-blurb">Production insurance system I proposed and helped ship: APIs, auth, automation, reporting, and a secure client portal.</p>
+                                <p class="project-win-stack">Node.js · REST APIs · Supabase · Automation</p>
+                            </div>
+                        </div>
+                        <div class="project-details" hidden>
+                            <div class="project-category">Production system · Machica Firm, Inc.</div>
+                            <h3 class="project-title">Insurance Data Management &amp; Business Process Automation</h3>
+                            <p class="project-description">Proposed and led development of a production insurance management system during a 486-hour internship. Built backend APIs, authentication, automation workflows, reporting, and secure client portal features with Node.js and Supabase. Includes Gmail SMTP notifications, Semaphore SMS, Excel reporting, and document generation. Deployed and still used in daily operations.</p>
+                            <div class="project-tags"><span class="tag">Node.js</span><span class="tag">REST APIs</span><span class="tag">Supabase</span><span class="tag">Automation</span></div>
+                            <div class="project-links"><span class="project-link-disabled">Private production system (client)</span></div>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="project-row project-card js-reveal" data-project="rag-support" data-deploy-url="#" data-github-url="#">
+                        <button type="button" class="win js-open-case" aria-label="Open case study: AI Customer Support Assistant">
+                            <span class="win-chrome">
+                                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="win-url">rag-support</span>
+                            </span>
+                            <span class="win-body">
+                                <span class="mock-chat" aria-hidden="true">
+                                    <span class="mock-chat-bubble mock-chat-bubble--user"></span>
+                                    <span class="mock-chat-bubble mock-chat-bubble--ai"></span>
+                                    <span class="mock-chat-bubble mock-chat-bubble--user mock-chat-bubble--short"></span>
+                                    <span class="mock-chat-bubble mock-chat-bubble--ai mock-chat-bubble--mid"></span>
+                                </span>
+                            </span>
+                        </button>
+                        <div class="project-win-foot">
+                            <div class="project-win-copy">
+                                <p class="project-win-num">02</p>
+                                <h3 class="project-win-title">AI Customer Support Assistant</h3>
+                                <p class="project-win-blurb">RAG assistant with vector search and multiple LLMs so answers stay grounded in the business’s own knowledge.</p>
+                                <p class="project-win-stack">RAG · LLM · Vector search</p>
+                            </div>
+                        </div>
+                        <div class="project-details" hidden>
+                            <div class="project-category">AI application · Retrieval-Augmented Generation</div>
+                            <h3 class="project-title">AI-Powered Customer Support Assistant (RAG)</h3>
+                            <p class="project-description">Built an AI assistant using Retrieval-Augmented Generation so customer support answers stay tied to the client’s own knowledge. Integrated multiple large language models with vector search to improve response relevance and business knowledge retrieval.</p>
+                            <div class="project-tags"><span class="tag">RAG</span><span class="tag">LLM</span><span class="tag">Vector search</span></div>
+                            <div class="project-links"><span class="project-link-disabled">Private client project</span></div>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="project-row project-card js-reveal" data-project="grammar-editing" data-deploy-url="http://18.136.97.234" data-github-url="#">
+                        <button type="button" class="win js-open-case" aria-label="Open case study: Editing Service Platform">
+                            <span class="win-chrome">
+                                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="win-url">18.136.97.234</span>
+                            </span>
+                            <span class="win-body">
+                                <img src="Sir Marvin.png" alt="" class="project-card-img" width="1200" height="750" fetchpriority="high">
+                            </span>
+                        </button>
+                        <div class="project-win-foot">
+                            <div class="project-win-copy">
+                                <p class="project-win-num">03</p>
+                                <h3 class="project-win-title">Editing Service Platform</h3>
+                                <p class="project-win-blurb">Laravel booking system with GCash payments, document intake, and an admin dashboard. Deployed on AWS Lightsail.</p>
+                                <p class="project-win-stack">Laravel 10 · PHP · MySQL · JavaScript · AWS</p>
+                            </div>
+                            <div class="project-win-actions">
+                                <a href="http://18.136.97.234" class="win-icon" target="_blank" rel="noopener noreferrer" aria-label="View live site">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-details" hidden>
+                            <div class="project-category">Freelance · Full-stack web application</div>
+                            <h3 class="project-title">Editing Service Platform</h3>
+                            <p class="project-description">Built and deployed a production web system for a professional editing business. Clients can book services, submit documents, pay via GCash, and track work in a dashboard. I implemented the Laravel 10 backend, MySQL data model, payment recording, admin tools for submissions and payments, and a custom front end. Hosted on AWS Lightsail. Repository is private at the client’s request.</p>
+                            <div class="project-tags"><span class="tag">Laravel 10</span><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">AWS Lightsail</span></div>
+                            <div class="project-links"><a href="http://18.136.97.234" class="btn-live-demo" target="_blank" rel="noopener noreferrer"><span>View live</span></a><span class="project-link-disabled">Private repository (client project)</span></div>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="project-row project-card js-reveal" data-project="a4-word-barcode" data-deploy-url="#" data-github-url="https://github.com/Brian-K05/a4-word-barcode-generator">
+                        <button type="button" class="win js-open-case" aria-label="Open case study: A4 Word Barcode Generator">
+                            <span class="win-chrome">
+                                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="win-url">a4-word-barcode-generator</span>
+                            </span>
+                            <span class="win-body">
+                                <span class="mock-doc" aria-hidden="true">
+                                    <span class="mock-doc-page">
+                                        <span class="mock-doc-bars"></span>
+                                        <span class="mock-doc-code">* BKS 2026 *</span>
+                                        <span class="mock-doc-rule"></span>
+                                    </span>
+                                </span>
+                            </span>
+                        </button>
+                        <div class="project-win-foot">
+                            <div class="project-win-copy">
+                                <p class="project-win-num">04</p>
+                                <h3 class="project-win-title">A4 Word Barcode Generator</h3>
+                                <p class="project-win-blurb">Flask service that generates Code 128 barcodes and embeds them in a print-ready A4 Word document.</p>
+                                <p class="project-win-stack">Python · Flask · python-docx · Gunicorn</p>
+                            </div>
+                            <div class="project-win-actions">
+                                <a href="https://github.com/Brian-K05/a4-word-barcode-generator" class="win-icon" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-details" hidden>
+                            <div class="project-category">Python web app · Document automation</div>
+                            <h3 class="project-title">A4 Word Barcode Generator</h3>
+                            <p class="project-description">A Flask app for labeling and batch document workflows. Enter a value, generate a Code 128 barcode, and download an A4 .docx with the barcode in the footer. Built with python-docx; packaged to run with Gunicorn.</p>
+                            <div class="project-tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">python-docx</span><span class="tag">Gunicorn</span></div>
+                            <div class="project-links"><a href="https://github.com/Brian-K05/a4-word-barcode-generator" class="btn-github" target="_blank" rel="noopener noreferrer"><span>View code</span></a></div>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="project-row project-card js-reveal" data-project="gwa" data-deploy-url="https://brian-k05.github.io/Cumulative-GWA-Calculator-System/" data-github-url="https://github.com/Brian-K05/Cumulative-GWA-Calculator-System">
+                        <button type="button" class="win js-open-case" aria-label="Open case study: Cumulative GWA Calculator">
+                            <span class="win-chrome">
+                                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="win-url">brian-k05.github.io/gwa-calculator</span>
+                            </span>
+                            <span class="win-body">
+                                <span class="mock-gwa" aria-hidden="true">
+                                    <span class="mock-gwa-top"><span>GWA calculator</span><span class="mock-gwa-pill">PDF report</span></span>
+                                    <span class="mock-gwa-row"><span>Programming 2</span><span>1.50</span></span>
+                                    <span class="mock-gwa-row"><span>Data Structures</span><span>1.75</span></span>
+                                    <span class="mock-gwa-row"><span>Web Systems</span><span>1.25</span></span>
+                                    <span class="mock-gwa-foot"><span>Cumulative GWA</span><strong>1.50</strong></span>
+                                </span>
+                            </span>
+                        </button>
+                        <div class="project-win-foot">
+                            <div class="project-win-copy">
+                                <p class="project-win-num">05</p>
+                                <h3 class="project-win-title">Cumulative GWA Calculator</h3>
+                                <p class="project-win-blurb">Student grade calculator with PDF reports and local-only storage so records stay on the device.</p>
+                                <p class="project-win-stack">JavaScript · PDF · Local storage</p>
+                            </div>
+                            <div class="project-win-actions">
+                                <a href="https://brian-k05.github.io/Cumulative-GWA-Calculator-System/" class="win-icon" target="_blank" rel="noopener noreferrer" aria-label="View live site">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                </a>
+                                <a href="https://github.com/Brian-K05/Cumulative-GWA-Calculator-System" class="win-icon" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-details" hidden>
+                            <div class="project-category">Academic tool</div>
+                            <h3 class="project-title">Cumulative GWA Calculator</h3>
+                            <p class="project-description">A browser tool for students who need a running Grade Weighted Average and a printable record. I built the calculation logic, PDF export, and local storage so data never leaves the user’s machine.</p>
+                            <div class="project-tags"><span class="tag">JavaScript</span><span class="tag">PDF</span><span class="tag">Local storage</span></div>
+                            <div class="project-links"><a href="https://brian-k05.github.io/Cumulative-GWA-Calculator-System/" class="btn-live-demo" target="_blank" rel="noopener noreferrer"><span>View live</span></a><a href="https://github.com/Brian-K05/Cumulative-GWA-Calculator-System" class="btn-github" target="_blank" rel="noopener noreferrer"><span>View code</span></a></div>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article class="project-row project-card js-reveal" data-project="data-vis" data-deploy-url="https://brian-k05.github.io/data-vis/" data-github-url="https://github.com/Brian-K05/data-vis">
+                        <button type="button" class="win js-open-case" aria-label="Open case study: Data Visualizer">
+                            <span class="win-chrome">
+                                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="win-url">brian-k05.github.io/data-vis</span>
+                            </span>
+                            <span class="win-body">
+                                <span class="mock-chart" aria-hidden="true">
+                                    <span class="mock-chart-label">Dataset → Chart</span>
+                                    <span class="mock-chart-bars"><i></i><i></i><i></i><i class="is-accent"></i><i></i></span>
+                                </span>
+                            </span>
+                        </button>
+                        <div class="project-win-foot">
+                            <div class="project-win-copy">
+                                <p class="project-win-num">06</p>
+                                <h3 class="project-win-title">Data Visualizer</h3>
+                                <p class="project-win-blurb">JavaScript tool that turns tabular datasets into charts you can inspect in the browser.</p>
+                                <p class="project-win-stack">JavaScript · Charts · Browser</p>
+                            </div>
+                            <div class="project-win-actions">
+                                <a href="https://brian-k05.github.io/data-vis/" class="win-icon" target="_blank" rel="noopener noreferrer" aria-label="View live site">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                </a>
+                                <a href="https://github.com/Brian-K05/data-vis" class="win-icon" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-details" hidden>
+                            <div class="project-category">Data visualization</div>
+                            <h3 class="project-title">Data Visualizer</h3>
+                            <p class="project-description">A front-end project for exploring datasets as charts in the browser. I wrote the JavaScript that maps input data to visual output without a backend.</p>
+                            <div class="project-tags"><span class="tag">JavaScript</span><span class="tag">Charts</span></div>
+                            <div class="project-links"><a href="https://brian-k05.github.io/data-vis/" class="btn-live-demo" target="_blank" rel="noopener noreferrer"><span>View live</span></a><a href="https://github.com/Brian-K05/data-vis" class="btn-github" target="_blank" rel="noopener noreferrer"><span>View code</span></a></div>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="experience section-alt" id="experience">
+        <div class="section-container">
+            <div class="experience-header js-reveal">
+                <div class="page-number">02</div>
+                <h2 class="section-title">Experience</h2>
+            </div>
+            <ol class="experience-list">
+                <li class="experience-item js-reveal">
+                    <p class="experience-dates">Feb 2026 — May 2026</p>
+                    <div class="experience-body">
+                        <h3 class="experience-role">IT Intern (Software Development &amp; Technical Support)</h3>
+                        <p class="experience-org">Machica Firm, Inc.</p>
+                        <ul class="experience-points">
+                            <li>Supported desktops, printers, software, and network issues so daily operations stayed up.</li>
+                            <li>Installed and configured Windows systems and business software; helped deploy, test, and debug production systems.</li>
+                            <li>Proposed an Insurance Data Management &amp; Business Process Automation System that leadership approved and deployed.</li>
+                            <li>Built REST APIs, authentication, database architecture, and automation with Node.js and Supabase — including Gmail SMTP, Semaphore SMS, Excel reporting, and document generation.</li>
+                        </ul>
                     </div>
-                    <div class="project-card-image-wrap project-image">
-                        <img src="Data Visualization.png" alt="Data Visualizer" class="project-card-img">
+                </li>
+                <li class="experience-item js-reveal">
+                    <p class="experience-dates">2024 — Present</p>
+                    <div class="experience-body">
+                        <h3 class="experience-role">Freelance Software Developer</h3>
+                        <p class="experience-org">Self-employed</p>
+                        <ul class="experience-points">
+                            <li>Design and build custom software, business sites, management systems, and workflow automation for students and small businesses.</li>
+                            <li>Ship full-stack apps with authentication, REST APIs, and database integration; RAG assistants with multiple LLMs when the work needs it.</li>
+                            <li>Build mobile apps with React Native or Kotlin when a project calls for it; work with clients from requirements through testing and maintenance.</li>
+                        </ul>
                     </div>
-                    <div class="project-card-footer">
-                        <span class="project-card-caption">Interactive data visualization tool built with JavaScript.</span>
-                        <span class="project-card-tag">Data Visualization</span>
+                </li>
+                <li class="experience-item js-reveal">
+                    <p class="experience-dates">June 2026</p>
+                    <div class="experience-body">
+                        <h3 class="experience-role">ASEAN AI Hackathon 2026</h3>
+                        <p class="experience-org">Represented Leyte Normal University</p>
+                        <ul class="experience-points">
+                            <li>Collaborated with a multidisciplinary team on an AI-powered solution for a real-world challenge at the ASEAN AI Hackathon 2026.</li>
+                        </ul>
                     </div>
-                    <div class="project-details" style="display: none;">
-                        <div class="project-category">Data Visualization</div>
-                        <h3 class="project-title">Data Visualizer</h3>
-                        <p class="project-description">Interactive data visualization tool built with JavaScript. Transform complex datasets into beautiful, understandable visual representations.</p>
-                        <div class="project-tags"><span class="tag">JavaScript</span><span class="tag">Data Visualization</span><span class="tag">Web App</span></div>
-                        <div class="project-links"><a href="https://brian-k05.github.io/data-vis/" class="btn-live-demo" target="_blank" rel="noopener noreferrer"><span>🌐 View Live</span></a><a href="https://github.com/Brian-K05/data-vis" class="btn-github" target="_blank" rel="noopener noreferrer"><span>💻 View Code</span></a></div>
-                    </div>
-                </article>
-                <article class="project-card project-card-case" data-project="gwa" data-deploy-url="https://brian-k05.github.io/Cumulative-GWA-Calculator-System/" data-github-url="https://github.com/Brian-K05/Cumulative-GWA-Calculator-System">
-                    <div class="project-card-header">
-                        <span class="project-index">/002</span>
-                        <div class="project-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="project-card-image-wrap project-image">
-                        <img src="Cumulative GWA.png" alt="Cumulative GWA Calculator" class="project-card-img">
-                    </div>
-                    <div class="project-card-footer">
-                        <span class="project-card-caption">Grade Weighted Average calculator with PDF reports for students.</span>
-                        <span class="project-card-tag">Academic Tool</span>
-                    </div>
-                    <div class="project-details" style="display: none;">
-                        <div class="project-category">Academic Tool</div>
-                        <h3 class="project-title">Cumulative GWA Calculator</h3>
-                        <p class="project-description">A comprehensive Grade Weighted Average calculator system for students. Features PDF report generation and local data storage for privacy.</p>
-                        <div class="project-tags"><span class="tag">JavaScript</span><span class="tag">Calculator</span><span class="tag">Academic Tool</span><span class="tag">PDF Generation</span></div>
-                        <div class="project-links"><a href="https://brian-k05.github.io/Cumulative-GWA-Calculator-System/" class="btn-live-demo" target="_blank" rel="noopener noreferrer"><span>🌐 View Live</span></a><a href="https://github.com/Brian-K05/Cumulative-GWA-Calculator-System" class="btn-github" target="_blank" rel="noopener noreferrer"><span>💻 View Code</span></a></div>
-                    </div>
-                </article>
-                <article class="project-card project-card-case" data-project="grammar-editing" data-deploy-url="http://18.136.97.234" data-github-url="#">
-                    <div class="project-card-header">
-                        <span class="project-index">/003</span>
-                        <div class="project-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="project-card-image-wrap project-image">
-                        <img src="Sir Marvin.png" alt="Professional Grammar & Editing Service" class="project-card-img">
-                    </div>
-                    <div class="project-card-footer">
-                        <span class="project-card-caption">Full-stack Laravel app: bookings, GCash, admin panel. AWS Lightsail.</span>
-                        <span class="project-card-tag">Full-Stack</span>
-                    </div>
-                    <div class="project-details" style="display: none;">
-                        <div class="project-category">Full-Stack Web Application | Freelance Project</div>
-                        <h3 class="project-title">Professional Grammar & Editing Service</h3>
-                        <p class="project-description">A production-ready full-stack web application developed for Sir Marvin Dominic B. Buena's professional editing service business. The platform enables clients to book services, submit documents, make payments via GCash, and track their projects through an intuitive dashboard. Features include a complete admin panel for managing submissions and payments, an interactive chatbot, proof gallery, and a modern, responsive Awwwards-inspired design built with Laravel 10, MySQL, and custom CSS. Deployed on AWS Lightsail.</p>
-                        <div class="project-tags"><span class="tag">Laravel 10</span><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">CSS</span><span class="tag">AWS</span><span class="tag">Full-Stack</span><span class="tag">Payment System</span></div>
-                        <div class="project-links"><a href="http://18.136.97.234" class="btn-live-demo" target="_blank" rel="noopener noreferrer"><span>🌐 View Live</span></a><span class="project-link-disabled">Private Repository (Client Project)</span></div>
-                    </div>
-                </article>
-                <article class="project-card project-card-case" data-project="a4-word-barcode" data-deploy-url="#" data-github-url="https://github.com/Brian-K05/a4-word-barcode-generator">
-                    <div class="project-card-header">
-                        <span class="project-index">/004</span>
-                        <div class="project-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="project-card-image-wrap project-image">
-                        <div class="image-placeholder" role="img" aria-label="A4 Word Barcode Generator preview"></div>
-                    </div>
-                    <div class="project-card-footer">
-                        <span class="project-card-caption">Flask app: Code 128 barcodes embedded into A4 Word documents for download.</span>
-                        <span class="project-card-tag">Python / Automation</span>
-                    </div>
-                    <div class="project-details" style="display: none;">
-                        <div class="project-category">Python Web App | Document Automation</div>
-                        <h3 class="project-title">A4 Word Barcode Generator</h3>
-                        <p class="project-description">A Flask web service that generates Code 128 barcodes and inserts them into the footer of an A4 Microsoft Word (.docx) file. Enter a value, click Generate &amp; Download, and get a print-ready document—useful for labeling, inventory, or batch document workflows. Ready to deploy with Gunicorn on Render, Railway, or similar platforms.</p>
-                        <div class="project-tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">python-docx</span><span class="tag">Barcode</span><span class="tag">Automation</span><span class="tag">Gunicorn</span></div>
-                        <div class="project-links"><a href="https://github.com/Brian-K05/a4-word-barcode-generator" class="btn-github" target="_blank" rel="noopener noreferrer"><span>💻 View Code</span></a></div>
-                    </div>
-                </article>
-                    </div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="page-number">03</div>
+            <div class="about-content">
+                <div class="about-main js-reveal">
+                    <h2 class="about-headline">
+                        I build the systems,<br>
+                        <span class="highlight-orange">then I keep them running.</span>
+                    </h2>
+                    <p class="about-text">
+                        I’m Brian Kyle Salor, a BSIT graduate. I offer software development, AI-powered workflows, and IT support. At Machica Firm I helped ship a production insurance data system and supported desktops, printers, and networks. Freelance, I deliver custom apps for businesses and clients.
+                    </p>
+                    <p class="about-text-secondary">
+                        Backend work is Node.js, REST APIs, Supabase, and database design. AI work is RAG and LLM apps grounded in the client’s own knowledge — not machine-learning research.
+                    </p>
                 </div>
-                <div class="projects-slider-controls">
-                    <button type="button" class="projects-slider-btn projects-slider-btn--prev" aria-controls="projects-slider" aria-label="Previous project">
-                        <span aria-hidden="true">‹</span>
-                    </button>
-                    <div class="projects-slider-dots" id="projects-slider-dots" aria-label="Slide indicators"></div>
-                    <button type="button" class="projects-slider-btn projects-slider-btn--next" aria-controls="projects-slider" aria-label="Next project">
-                        <span aria-hidden="true">›</span>
-                    </button>
-                </div>
+                <aside class="about-facts js-reveal">
+                    <h3 class="about-facts-title">At a glance</h3>
+                    <dl class="about-facts-list">
+                        <div>
+                            <dt>Focus</dt>
+                            <dd>Software, AI, IT support</dd>
+                        </div>
+                        <div>
+                            <dt>Education</dt>
+                            <dd>BSIT, LNU · 2026</dd>
+                        </div>
+                        <div>
+                            <dt>What I offer</dt>
+                            <dd>Systems, automation, support</dd>
+                        </div>
+                        <div>
+                            <dt>Status</dt>
+                            <dd>Available for work</dd>
+                        </div>
+                    </dl>
+                </aside>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack & Tools Section -->
     <section class="tech-stack-section" id="tech-stack">
         <div class="section-container">
             <div class="tech-stack-header-section">
                 <div class="tech-stack-header-left">
-                    <div class="page-number">03</div>
-                    <h2 class="section-title">TECH STACK & TOOLS</h2>
+                    <div class="page-number">04</div>
+                    <h2 class="section-title">Skills</h2>
                 </div>
             </div>
             <div class="tech-stack-content">
                 <p class="tech-stack-intro">
-                    Technologies and tools I use to build solutions and ship products.
+                    What I use to ship software, AI workflows, and IT support.
                 </p>
-                <div class="tech-stack-tabs" data-tech-tabs>
-                    <div class="tech-stack-tablist-wrap">
-                        <div class="tech-stack-tablist" role="tablist" aria-label="Technology categories">
-                            <button type="button" class="tech-stack-tab" role="tab" id="tech-tab-0" aria-selected="true" aria-controls="tech-panel-0" tabindex="0">Languages</button>
-                            <button type="button" class="tech-stack-tab" role="tab" id="tech-tab-1" aria-selected="false" aria-controls="tech-panel-1" tabindex="-1">Frameworks</button>
-                            <button type="button" class="tech-stack-tab" role="tab" id="tech-tab-2" aria-selected="false" aria-controls="tech-panel-2" tabindex="-1">Cloud &amp; Infra</button>
-                            <button type="button" class="tech-stack-tab" role="tab" id="tech-tab-3" aria-selected="false" aria-controls="tech-panel-3" tabindex="-1">Databases</button>
-                            <button type="button" class="tech-stack-tab" role="tab" id="tech-tab-4" aria-selected="false" aria-controls="tech-panel-4" tabindex="-1">Dev Tools</button>
-                            <button type="button" class="tech-stack-tab" role="tab" id="tech-tab-5" aria-selected="false" aria-controls="tech-panel-5" tabindex="-1">Design</button>
+                <div class="tech-stack-groups js-reveal">
+                    <div class="tech-stack-group">
+                        <h3 class="tech-stack-kicker">Software engineering</h3>
+                        <div class="tech-pills">
+                            <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="" class="tech-pill-icon" width="18" height="18"><span>Node.js</span></div>
+                            <div class="tech-pill"><span>REST APIs</span></div>
+                            <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="" class="tech-pill-icon" width="18" height="18"><span>JavaScript</span></div>
+                            <div class="tech-pill"><span>Database design</span></div>
+                            <div class="tech-pill"><span>Full-stack</span></div>
+                            <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" alt="" class="tech-pill-icon" width="18" height="18" onerror="this.remove()"><span>Supabase</span></div>
                         </div>
                     </div>
-                    <div class="tech-stack-panels">
-                        <div class="tech-stack-panel" role="tabpanel" id="tech-panel-0" aria-labelledby="tech-tab-0">
-                            <div class="tech-pills">
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>PHP</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>JavaScript</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>Python</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>Kotlin</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>Visual Basic</span>
-                                </div>
-                            </div>
+                    <div class="tech-stack-group">
+                        <h3 class="tech-stack-kicker">Artificial intelligence</h3>
+                        <div class="tech-pills">
+                            <div class="tech-pill"><span>RAG</span></div>
+                            <div class="tech-pill"><span>LLM integration</span></div>
+                            <div class="tech-pill"><span>AI chatbots</span></div>
                         </div>
-                        <div class="tech-stack-panel" role="tabpanel" id="tech-panel-1" aria-labelledby="tech-tab-1" hidden>
-                            <div class="tech-pills">
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@v9/icons/laravel.svg" alt="" class="tech-pill-icon" width="18" height="18" onerror="this.src='https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-plain.svg'; this.onerror=null;">
-                                    <span>Laravel</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>Angular</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>Flutter</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>React Native</span>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="tech-stack-group">
+                        <h3 class="tech-stack-kicker">Automation</h3>
+                        <div class="tech-pills">
+                            <div class="tech-pill"><span>Business process automation</span></div>
+                            <div class="tech-pill"><span>Email &amp; SMS</span></div>
+                            <div class="tech-pill"><span>Document generation</span></div>
                         </div>
-                        <div class="tech-stack-panel" role="tabpanel" id="tech-panel-2" aria-labelledby="tech-tab-2" hidden>
-                            <div class="tech-pills">
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@v9/icons/amazonaws.svg" alt="" class="tech-pill-icon" width="18" height="18" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg'; this.onerror=null;">
-                                    <span>AWS Lightsail</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.simpleicons.org/supabase/3ECF8E" alt="" class="tech-pill-icon" width="18" height="18" onerror="this.src='https://supabase.com/favicon.ico'; this.onerror=null;">
-                                    <span>Supabase</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>Docker</span>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="tech-stack-group">
+                        <h3 class="tech-stack-kicker">IT technical support</h3>
+                        <div class="tech-pills">
+                            <div class="tech-pill"><span>Windows 10 / 11</span></div>
+                            <div class="tech-pill"><span>Desktop support</span></div>
+                            <div class="tech-pill"><span>Network troubleshooting</span></div>
+                            <div class="tech-pill"><span>Printer support</span></div>
                         </div>
-                        <div class="tech-stack-panel" role="tabpanel" id="tech-panel-3" aria-labelledby="tech-tab-3" hidden>
-                            <div class="tech-pills">
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>MySQL</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>PostgreSQL</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.simpleicons.org/trino/DD00A1" alt="" class="tech-pill-icon" width="18" height="18" onerror="this.src='https://trino.io/img/trino-og.png'; this.onerror=null;">
-                                    <span>Trino</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tech-stack-panel" role="tabpanel" id="tech-panel-4" aria-labelledby="tech-tab-4" hidden>
-                            <div class="tech-pills">
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>GitHub</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>VS Code</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>Android Studio</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.simpleicons.org/dbeaver/FF6B00" alt="" class="tech-pill-icon" width="18" height="18" onerror="this.src='https://dbeaver.com/favicon.ico'; this.onerror=null;">
-                                    <span>DBeaver</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.simpleicons.org/cursor/000000" alt="" class="tech-pill-icon" width="18" height="18" onerror="this.src='https://www.cursor.com/favicon.ico'; this.onerror=null;">
-                                    <span>Cursor AI</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://rapidapi.com/favicon.ico" alt="" class="tech-pill-icon" width="18" height="18" onerror="this.src='https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@v9/icons/rapidapi.svg'; this.onerror=null;">
-                                    <span>RapidAPI</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.simpleicons.org/roboflow/FF6B6B" alt="" class="tech-pill-icon" width="18" height="18" onerror="this.src='https://roboflow.com/favicon.ico'; this.onerror=null;">
-                                    <span>Roboflow</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tech-stack-panel" role="tabpanel" id="tech-panel-5" aria-labelledby="tech-tab-5" hidden>
-                            <div class="tech-pills">
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>Figma</span>
-                                </div>
-                                <div class="tech-pill">
-                                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@v9/icons/framer.svg" alt="" class="tech-pill-icon" width="18" height="18">
-                                    <span>Framer</span>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="tech-stack-group">
+                        <h3 class="tech-stack-kicker">Also used</h3>
+                        <div class="tech-pills">
+                            <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@v9/icons/laravel.svg" alt="" class="tech-pill-icon" width="18" height="18" onerror="this.remove()"><span>Laravel</span></div>
+                            <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="" class="tech-pill-icon" width="18" height="18"><span>PHP</span></div>
+                            <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="" class="tech-pill-icon" width="18" height="18"><span>Python</span></div>
+                            <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="" class="tech-pill-icon" width="18" height="18"><span>React Native</span></div>
+                            <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="" class="tech-pill-icon" width="18" height="18"><span>Kotlin</span></div>
+                            <div class="tech-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="" class="tech-pill-icon" width="18" height="18"><span>Git / GitHub</span></div>
                         </div>
                     </div>
                 </div>
@@ -412,48 +521,43 @@
         </div>
     </section>
 
-    <!-- Certifications Section -->
-    <section class="certifications" id="certifications">
+    <section class="certifications" id="leadership">
         <div class="section-container">
             <div class="certifications-header">
                 <div class="certifications-header-left">
-                    <div class="page-number">04</div>
-                    <h2 class="section-title">CERTIFICATIONS</h2>
+                    <div class="page-number">05</div>
+                    <h2 class="section-title">Leadership</h2>
                 </div>
             </div>
             <div class="certifications-content">
                 <p class="certifications-intro">
-                    Webinars and training I've completed to stay sharp and aligned with industry practices.
+                    I organized a technical session with an industry engineer. Selected certificates are in the gallery.
                 </p>
-                <div class="certificate-featured-wrap">
+                <div class="certificate-featured-wrap js-reveal">
                 <div class="certificate-featured">
-                    <span class="certificate-badge">Featured</span>
+                    <span class="certificate-badge">Hosted</span>
                     <div class="certificate-card featured">
-                        <div class="certificate-image-wrapper" id="featuredCertificateImage" style="cursor: pointer;">
-                            <img src="my cert.png" alt="Scalable Applications with Hexagonal Architecture Certificate" class="certificate-image">
+                        <div class="certificate-image-wrapper" id="featuredCertificateImage">
+                            <img src="my cert.png" alt="Certificate from hosting Scalable Applications with Hexagonal Architecture" class="certificate-image" width="800" height="600" loading="lazy">
                         </div>
                         <div class="certificate-info">
-                            <div class="certificate-type">Organizer & Host</div>
+                            <div class="certificate-type">Organized and hosted</div>
                             <h3 class="certificate-title">Scalable Applications with Hexagonal Architecture</h3>
                             <p class="certificate-description">
-                                Organized and hosted a technical webinar featuring a Senior Software Engineer and Development Lead from Jetstar Airways. The event covered building and deploying scalable applications using Hexagonal Architecture with AWS.
+                                Organized and hosted a technical webinar with a Senior Software Engineer and Development Lead from Jetstar Airways. The session covered building and deploying scalable applications with Hexagonal Architecture on AWS.
                             </p>
                             <div class="certificate-details">
                                 <div class="certificate-detail-item">
-                                    <span class="detail-label">Speaker:</span>
+                                    <span class="detail-label">Speaker</span>
                                     <span class="detail-value">Senior Software Engineer, Jetstar Airways</span>
                                 </div>
                                 <div class="certificate-detail-item">
-                                    <span class="detail-label">Date:</span>
+                                    <span class="detail-label">Date</span>
                                     <span class="detail-value">November 19, 2025</span>
-                                </div>
-                                <div class="certificate-detail-item">
-                                    <span class="detail-label">Time:</span>
-                                    <span class="detail-value">9:00 AM - 12:00 PM</span>
                                 </div>
                             </div>
                             <div class="certificate-featured-footer">
-                                <button type="button" class="btn-see-all" id="seeAllCertificates" aria-haspopup="dialog" aria-controls="certificatesGalleryModal">View all certificates</button>
+                                <button type="button" class="btn-see-all" id="seeAllCertificates" aria-haspopup="dialog" aria-controls="certificatesGalleryModal">View selected certificates</button>
                             </div>
                         </div>
                     </div>
@@ -463,39 +567,34 @@
         </div>
     </section>
 
-    <!-- Featured Certificate Full View Modal -->
-    <div class="certificate-fullview-modal" id="certificateFullViewModal">
+    <div class="certificate-fullview-modal" id="certificateFullViewModal" role="dialog" aria-modal="true" aria-label="Certificate preview">
         <div class="modal-overlay"></div>
         <div class="certificate-fullview-content">
-            <button class="modal-close" aria-label="Close certificate view">&times;</button>
+            <button type="button" class="modal-close" aria-label="Close certificate view">&times;</button>
             <div class="certificate-fullview-image-container">
-                <img src="my cert.png" alt="Scalable Applications with Hexagonal Architecture Certificate" class="certificate-fullview-image">
+                <img src="my cert.png" alt="Certificate from hosting Scalable Applications with Hexagonal Architecture" class="certificate-fullview-image" width="800" height="600">
             </div>
         </div>
     </div>
 
-    <!-- Certificates Gallery Modal -->
     <div class="certificates-gallery-modal" id="certificatesGalleryModal" role="dialog" aria-modal="true" aria-labelledby="certificatesGalleryTitle" aria-hidden="true">
         <div class="modal-overlay"></div>
         <div class="certificates-modal-content">
-            <button class="modal-close" aria-label="Close gallery">&times;</button>
-            <h2 class="certificates-modal-title" id="certificatesGalleryTitle">All Certificates</h2>
-            <div class="certificates-gallery-grid" id="certificatesGalleryGrid">
-                <!-- Certificates will be populated here -->
-            </div>
+            <button type="button" class="modal-close" aria-label="Close gallery">&times;</button>
+            <h2 class="certificates-modal-title" id="certificatesGalleryTitle">Selected certificates</h2>
+            <div class="certificates-gallery-grid" id="certificatesGalleryGrid"></div>
         </div>
     </div>
 
-    <!-- Project Modal -->
-    <div class="project-modal" id="projectModal">
+    <div class="project-modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
         <div class="modal-overlay"></div>
         <div class="modal-content">
-            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <button type="button" class="modal-close" aria-label="Close project details">&times;</button>
             <div class="modal-body">
                 <div class="modal-project-image"></div>
                 <div class="modal-project-info">
                     <div class="modal-category"></div>
-                    <h2 class="modal-title"></h2>
+                    <h2 class="modal-title" id="project-modal-title"></h2>
                     <p class="modal-description"></p>
                     <div class="modal-tags"></div>
                     <div class="modal-links"></div>
@@ -504,35 +603,19 @@
         </div>
     </div>
 
-    <!-- Contact — minimal CTA (no card grid) -->
     <section class="contact contact-cta-band" id="contact">
-        <h2 class="visually-hidden">Contact</h2>
-        <div class="contact-cta-inner">
-            <div class="contact-scribble contact-scribble--left" aria-hidden="true">
-                <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 112c12-28 8-56-4-78m8 86c22-18 38-44 44-72M6 96c28 4 52-10 68-34" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/>
-                    <path d="M24 24c8 12 4 28-6 38m18-52c-6 18 2 36 14 48" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
-                </svg>
+        <div class="contact-cta-inner js-reveal">
+            <p class="contact-cta-eyebrow">06 · Contact</p>
+            <h2 class="contact-cta-title">Let’s work<br>together<span class="name-accent">.</span></h2>
+            <p class="contact-cta-lead">Available for software development, AI, and IT support work.</p>
+            <div class="contact-cta-actions">
+                <a href="mailto:briankylesalor02@gmail.com?subject=Hello%20Brian" class="btn-hire-me js-magnetic"><span>Email me</span></a>
+                <a href="tel:+639705406985" class="btn-hire-me btn-hire-me--ghost js-magnetic"><span>Call</span></a>
+                <a href="Brian-Kyle-Salor-Resume.docx" class="btn-hire-me btn-hire-me--ghost js-magnetic" download="Brian-Kyle-Salor-Resume.docx"><span>Download CV</span></a>
             </div>
-            <div class="contact-scribble contact-scribble--right" aria-hidden="true">
-                <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M102 28c-16 24-40 38-68 42m76-24c-26-8-48 2-62 22M94 108c-20-14-32-36-34-60" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/>
-                    <path d="M88 12c10 14 8 32-2 46m14-58c6 16 18 28 32 34" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
-                </svg>
-            </div>
-            <p class="contact-cta-eyebrow">05 · Get in touch</p>
-            <p class="contact-cta-title">
-                <span class="contact-cta-line">Anything in mind?</span>
-                <span class="contact-cta-line contact-cta-line--accent">Let's talk</span>
-            </p>
-            <a href="mailto:briankylesalor02@gmail.com" class="contact-cta-badge">
-                <span class="contact-cta-badge-text">I'm ready<br />to talk</span>
-                <span class="contact-cta-badge-arrow" aria-hidden="true">↗</span>
-            </a>
         </div>
     </section>
 
-    <!-- Footer — editorial layout + details (replacing contact cards) -->
     <footer class="footer footer-editorial">
         <div class="footer-inner">
             <div class="footer-grid">
@@ -541,8 +624,8 @@
                         <span class="footer-mark" aria-hidden="true">B</span>
                         <span class="footer-name">Brian Kyle Salor</span>
                     </div>
-                    <p class="footer-headline">Full-stack builds, clear communication, shipped with care.</p>
-                    <p class="footer-address">Tacloban City, Leyte · Open to remote<br />BSIT — Leyte Normal University</p>
+                    <p class="footer-headline">Software developer. AI developer. IT support.</p>
+                    <p class="footer-address">BSIT graduate — Leyte Normal University, 2026</p>
                     <p class="footer-contact-line">
                         <a href="mailto:briankylesalor02@gmail.com">briankylesalor02@gmail.com</a>
                         <span class="footer-contact-sep" aria-hidden="true">·</span>
@@ -550,36 +633,49 @@
                     </p>
                 </div>
                 <div class="footer-col footer-col--aside">
-                    <p class="footer-newsletter-label">Join the newsletter</p>
-                    <form class="footer-newsletter" id="footer-newsletter-form" novalidate>
-                        <label class="visually-hidden" for="footer-newsletter-email">Email</label>
-                        <input
-                            type="email"
-                            id="footer-newsletter-email"
-                            name="email"
-                            autocomplete="email"
-                            placeholder="your@email.com"
-                            class="footer-newsletter-input"
-                        />
-                        <button type="submit" class="footer-newsletter-btn" aria-label="Send signup email">→</button>
-                    </form>
+                    <p class="footer-newsletter-label">Elsewhere</p>
                     <div class="footer-social-row" role="list">
-                        <a href="https://www.facebook.com/brian.kyle.salor/" target="_blank" rel="noopener noreferrer" class="footer-social-pill" role="listitem">Fb</a>
-                        <a href="https://github.com/Brian-K05" target="_blank" rel="noopener noreferrer" class="footer-social-pill" role="listitem">Gh</a>
-                        <span class="footer-social-pill footer-social-pill--muted" role="listitem" title="Coming soon" aria-label="LinkedIn (coming soon)">Li</span>
+                        <a href="https://github.com/Brian-K05" target="_blank" rel="noopener noreferrer" class="footer-social-pill" role="listitem">GitHub</a>
+                        <a href="https://linkedin.com/in/brian-kyle-salor-786999359" target="_blank" rel="noopener noreferrer" class="footer-social-pill" role="listitem">LinkedIn</a>
+                        <a href="https://www.facebook.com/brian.kyle.salor/" target="_blank" rel="noopener noreferrer" class="footer-social-pill" role="listitem">Facebook</a>
                     </div>
+                    <a href="Brian-Kyle-Salor-Resume.docx" class="footer-resume-link" download="Brian-Kyle-Salor-Resume.docx">Download CV</a>
                 </div>
             </div>
             <div class="footer-legal">
                 <p>&copy; 2026 Brian Kyle Salor. All rights reserved.</p>
-                <p class="footer-tagline">Full-stack · APIs · Systems</p>
+                <p class="footer-tagline">Software · AI · IT Support</p>
             </div>
         </div>
     </footer>
 
-    <!-- PDF.js library for rendering PDFs as images -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Brian Kyle Salor",
+        "jobTitle": "Software Developer",
+        "email": "mailto:briankylesalor02@gmail.com",
+        "telephone": "+63-970-540-6985",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Taguig City",
+            "addressCountry": "PH"
+        },
+        "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Leyte Normal University"
+        },
+        "url": "https://brian-k05.github.io/Portfolio",
+        "sameAs": [
+            "https://github.com/Brian-K05",
+            "https://linkedin.com/in/brian-kyle-salor-786999359",
+            "https://www.facebook.com/brian.kyle.salor/"
+        ]
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
     <script src="script.js"></script>
+    <script src="motion.js"></script>
 </body>
 </html>
-
