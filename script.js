@@ -1232,6 +1232,9 @@ if (certificateFullViewModal) {
     const next = document.getElementById('feedback-next');
     const template = document.getElementById('feedback-card-template');
     const againBtn = document.getElementById('feedback-again');
+    const openBtn = document.getElementById('feedback-open');
+    const closeBtn = document.getElementById('feedback-close');
+    const cta = document.getElementById('feedback-cta');
 
     if (next && window.location.protocol !== 'file:') {
         const url = new URL(window.location.href);
@@ -1313,18 +1316,48 @@ if (certificateFullViewModal) {
         });
     }
 
-    function showForm() {
-        if (layout) layout.classList.remove('is-sent');
+    function setCtaVisible(show) {
+        if (cta) cta.hidden = !show;
+    }
+
+    function hideComposer() {
+        if (layout) {
+            layout.hidden = true;
+            layout.classList.remove('is-sent');
+        }
         if (form) form.hidden = false;
         if (copy) copy.hidden = false;
         if (sentNote) sentNote.hidden = true;
+        setCtaVisible(true);
+    }
+
+    function showComposer() {
+        if (layout) {
+            layout.hidden = false;
+            layout.classList.remove('is-sent');
+        }
+        if (form) form.hidden = false;
+        if (copy) copy.hidden = false;
+        if (sentNote) sentNote.hidden = true;
+        setCtaVisible(false);
+        window.setTimeout(() => {
+            form?.querySelector('input[name="name"]')?.focus();
+        }, 50);
+    }
+
+    function showForm() {
+        showComposer();
     }
 
     function showThanks(hasCard) {
-        if (layout) layout.classList.add('is-sent');
+        if (layout) {
+            layout.hidden = false;
+            layout.classList.add('is-sent');
+        }
         if (form) form.hidden = true;
         if (copy) copy.hidden = true;
         if (sentNote) sentNote.hidden = false;
+        setCtaVisible(false);
         if (sentLead) {
             sentLead.textContent = hasCard
                 ? 'Your quote is above. I also emailed myself a copy. It stays for everyone after I confirm the LinkedIn.'
@@ -1379,9 +1412,23 @@ if (certificateFullViewModal) {
     if (sent) {
         const published = publishDraft(draft);
         if (draft) showThanks(published);
-        else showForm();
+        else hideComposer();
         sessionStorage.removeItem('bkFeedbackDraft');
         history.replaceState({}, '', window.location.pathname + '#feedback');
+    }
+
+    if (openBtn) {
+        openBtn.addEventListener('click', function () {
+            showComposer();
+            layout?.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+            hideComposer();
+            document.getElementById('feedback')?.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+        });
     }
 
     if (againBtn) {
