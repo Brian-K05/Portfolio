@@ -907,16 +907,21 @@ function setupCertificatesGallery() {
     });
 }
 
-/** Horizontal projects carousel — scroll-snap viewport + prev/next + dots */
-function setupProjectsSlider() {
-    const viewport = document.getElementById('projects-slider');
+/** Horizontal snap carousel — Work and Feedback */
+function setupSnapSlider(viewportId, options) {
+    const opts = options || {};
+    const viewport = document.getElementById(viewportId);
+    const wrap = viewport?.closest('.projects-slider-wrap');
     const track = viewport?.querySelector('.projects-slider-track');
-    const prevBtn = document.querySelector('.projects-slider-btn--prev');
-    const nextBtn = document.querySelector('.projects-slider-btn--next');
-    const dotsRoot = document.getElementById('projects-slider-dots');
-    if (!viewport || !track || !prevBtn || !nextBtn || !dotsRoot) return;
+    const prevBtn = wrap?.querySelector('.projects-slider-btn--prev');
+    const nextBtn = wrap?.querySelector('.projects-slider-btn--next');
+    const dotsRoot = wrap?.querySelector('.projects-slider-dots');
+    const controls = wrap?.querySelector('.projects-slider-controls');
+    if (!viewport || !wrap || !track || !prevBtn || !nextBtn || !dotsRoot) return;
 
     const motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const titleSelector = opts.titleSelector || '';
+    const fallbackLabel = opts.fallbackLabel || 'Go to slide';
 
     function cards() {
         return Array.from(track.children).filter((el) => el.tagName === 'LI');
@@ -986,7 +991,6 @@ function setupProjectsSlider() {
     function buildDots() {
         dotsRoot.innerHTML = '';
         const list = cards();
-        const controls = document.querySelector('.projects-slider-controls');
         if (controls) {
             controls.hidden = list.length <= 1;
         }
@@ -995,12 +999,14 @@ function setupProjectsSlider() {
             return;
         }
         list.forEach((card, i) => {
-            const title = card.querySelector('.project-win-title');
+            const title = titleSelector ? card.querySelector(titleSelector) : null;
             const b = document.createElement('button');
             b.type = 'button';
             b.className = 'projects-slider-dot';
             b.setAttribute('role', 'tab');
-            b.setAttribute('aria-label', title ? title.textContent.trim() : 'Go to project ' + (i + 1));
+            b.setAttribute('aria-label', title && title.textContent.trim()
+                ? title.textContent.trim()
+                : fallbackLabel + ' ' + (i + 1));
             b.addEventListener('click', function () {
                 scrollToCard(card);
             });
@@ -1079,6 +1085,7 @@ function setupProjectsSlider() {
 
         viewport.addEventListener('pointerdown', function (e) {
             if (e.pointerType === 'touch' || e.button !== 0) return;
+            if (e.target.closest('a, input, textarea, select, label, button.feedback-choice')) return;
             dragId = e.pointerId;
             dragStartX = e.clientX;
             dragStartScroll = viewport.scrollLeft;
@@ -1120,6 +1127,20 @@ function setupProjectsSlider() {
     requestAnimationFrame(updateUi);
 }
 
+function setupProjectsSlider() {
+    setupSnapSlider('projects-slider', {
+        titleSelector: '.project-win-title',
+        fallbackLabel: 'Go to project'
+    });
+}
+
+function setupFeedbackSlider() {
+    setupSnapSlider('feedback-slider', {
+        titleSelector: '.feedback-name',
+        fallbackLabel: 'Go to quote'
+    });
+}
+
 // Public site uses the static project markup. Admin localStorage must not replace it.
 function loadProjectsFromStorage() {
     return;
@@ -1151,6 +1172,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupCertificatesGallery();
     setupTechStackTabs();
     setupProjectsSlider();
+    setupFeedbackSlider();
 
     const heroSection = document.querySelector('.hero');
     if (heroSection) {
@@ -1278,6 +1300,10 @@ if (certificateFullViewModal) {
             card.style.transform = 'none';
         }
         grid.appendChild(node);
+        if (grid.children.length === 1) {
+            const first = grid.querySelector('li');
+            if (first) first.classList.add('is-slide-active');
+        }
     }
 
     function alreadyRendered(item) {
@@ -1324,6 +1350,7 @@ if (certificateFullViewModal) {
         if (!allowed(item)) return false;
         saveLocalCard(item);
         if (!alreadyRendered(item)) renderCard(item, 'Received');
+        setupFeedbackSlider();
         return true;
     }
 
@@ -1334,9 +1361,11 @@ if (certificateFullViewModal) {
             readLocalCards().forEach((item) => {
                 if (!alreadyRendered(item)) renderCard(item, 'Received');
             });
+            setupFeedbackSlider();
         })
         .catch(() => {
             readLocalCards().forEach((item) => renderCard(item, 'Received'));
+            setupFeedbackSlider();
         });
 
     let draft = null;

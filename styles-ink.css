@@ -1831,6 +1831,14 @@ html:not(.has-cursor) .mf-cursor {
     display: none;
 }
 
+.feedback-slider-wrap {
+    margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.feedback-slider-wrap:not(:has(.feedback-card)) {
+    display: none;
+}
+
 .feedback-grid {
     list-style: none;
     margin: 0 0 clamp(1.75rem, 4vw, 2.75rem);
@@ -1838,6 +1846,39 @@ html:not(.has-cursor) .mf-cursor {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem 1.5rem;
+}
+
+.theme-ink .feedback-grid.projects-slider-track {
+    display: flex;
+    flex-wrap: nowrap;
+    grid-template-columns: none;
+    gap: 1.35rem;
+    margin: 0 0 0.15rem;
+    width: max-content;
+    min-width: 100%;
+}
+
+.theme-ink .feedback-grid.projects-slider-track > li {
+    flex: 0 0 min(88vw, 24rem);
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.theme-ink .feedback-grid.projects-slider-track > li .feedback-card {
+    height: 100%;
+    min-height: 16.5rem;
+    transform-origin: center bottom;
+    opacity: 0.46;
+    transform: scale(0.93) translateY(10px);
+    transition:
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-ink .feedback-grid.projects-slider-track > li.is-slide-active .feedback-card {
+    opacity: 1;
+    transform: scale(1) translateY(0);
 }
 
 .feedback-grid:empty {
@@ -1944,6 +1985,25 @@ html:not(.has-cursor) .mf-cursor {
     color: var(--paper-ink);
     border-color: rgba(244, 244, 241, 0.4);
     background: rgba(244, 244, 241, 0.04);
+}
+
+@media (min-width: 900px) {
+    .theme-ink .feedback-grid.projects-slider-track {
+        gap: 1.6rem;
+    }
+
+    .theme-ink .feedback-grid.projects-slider-track > li {
+        flex-basis: min(42vw, 28rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-ink .feedback-grid.projects-slider-track > li .feedback-card,
+    .theme-ink .feedback-grid.projects-slider-track > li.is-slide-active .feedback-card {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }
 
 @media (max-width: 1100px) {
