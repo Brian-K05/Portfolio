@@ -600,6 +600,7 @@ body.portfolio-body {
     height: 100%;
     background: rgba(var(--accent-orange-rgb), 0.1);
     transition: left var(--motion-medium) var(--ease-premium);
+    pointer-events: none;
 }
 
 .mobile-nav-links a:hover::before,

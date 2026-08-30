@@ -10,6 +10,37 @@ function unlockPageScroll() {
     if (window.__lenis) window.__lenis.start();
 }
 
+function getMobileMenuEls() {
+    return {
+        toggle: document.querySelector('.mobile-menu-toggle'),
+        menu: document.querySelector('.mobile-menu')
+    };
+}
+
+function isMobileMenuOpen() {
+    const { menu } = getMobileMenuEls();
+    return !!(menu && menu.classList.contains('active'));
+}
+
+function closeMobileMenu() {
+    const { toggle, menu } = getMobileMenuEls();
+    if (toggle) {
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+    }
+    if (menu) menu.classList.remove('active');
+    unlockPageScroll();
+}
+
+function afterMobileMenuClosed(fn) {
+    closeMobileMenu();
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            window.setTimeout(fn, 50);
+        });
+    });
+}
+
 (function setupPreloader() {
     const el = document.getElementById('preloader');
     const hero = document.querySelector('.hero');
@@ -100,7 +131,12 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         const target = document.querySelector(id);
         if (!target) return;
         e.preventDefault();
-        scrollToElement(target);
+        const go = () => scrollToElement(target);
+        if (this.closest('.mobile-menu') && isMobileMenuOpen()) {
+            afterMobileMenuClosed(go);
+            return;
+        }
+        go();
     });
 });
 
@@ -485,11 +521,8 @@ if (mobileMenuToggle && mobileMenu) {
         setMenuOpen(open);
     }
     
-    function         closeMenu() {
-        mobileMenuToggle.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        unlockPageScroll();
-        setMenuOpen(false);
+    function closeMenu() {
+        closeMobileMenu();
     }
 
     setMenuOpen(false);
@@ -507,12 +540,11 @@ if (mobileMenuToggle && mobileMenu) {
         });
     }
 
-    // Close menu when clicking on a link
+    // Hash links close + scroll in the global handler. File downloads close now.
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', function() {
-            setTimeout(() => {
-                closeMenu();
-            }, 300); // Small delay for smooth transition
+            const href = this.getAttribute('href') || '';
+            if (!href.startsWith('#')) closeMenu();
         });
     });
 
@@ -887,12 +919,12 @@ function setupProjectsSlider() {
     const motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function cards() {
-        return Array.from(track.querySelectorAll('.project-card-case'));
+        return Array.from(track.children).filter((el) => el.tagName === 'LI');
     }
 
     function getStep() {
         const list = cards();
-        if (!list.length) return 0;
+        if (!list.length) return viewport.clientWidth * 0.8;
         const st = getComputedStyle(track);
         const gap = parseFloat(st.gap || st.columnGap) || 20;
         return list[0].offsetWidth + gap;
@@ -902,7 +934,7 @@ function setupProjectsSlider() {
         const list = cards();
         if (!list.length) return 0;
         const vr = viewport.getBoundingClientRect();
-        const mid = vr.left + vr.width / 2;
+        const mid = vr.left + Math.min(vr.width, getStep()) / 2;
         let best = 0;
         let bestDist = Infinity;
         list.forEach((c, i) => {
@@ -917,8 +949,23 @@ function setupProjectsSlider() {
         return best;
     }
 
+    function scrollToCard(card) {
+        if (!card) return;
+        const pad = parseFloat(getComputedStyle(viewport).scrollPaddingInlineStart) || 0;
+        viewport.scrollTo({
+            left: Math.max(0, card.offsetLeft - pad),
+            behavior: motionOk ? 'smooth' : 'auto'
+        });
+    }
+
     function updateUi() {
-        if (cards().length <= 1) {
+        const list = cards();
+        const idx = getNearestIndex();
+        list.forEach((li, i) => {
+            li.classList.toggle('is-slide-active', i === idx);
+        });
+
+        if (list.length <= 1) {
             prevBtn.disabled = true;
             nextBtn.disabled = true;
             return;
@@ -928,10 +975,11 @@ function setupProjectsSlider() {
         prevBtn.disabled = left <= 2;
         nextBtn.disabled = left >= max;
 
-        const idx = getNearestIndex();
         dotsRoot.querySelectorAll('.projects-slider-dot').forEach((dot, i) => {
-            dot.classList.toggle('is-active', i === idx);
-            dot.setAttribute('aria-current', i === idx ? 'true' : 'false');
+            const on = i === idx;
+            dot.classList.toggle('is-active', on);
+            dot.setAttribute('aria-selected', on ? 'true' : 'false');
+            dot.setAttribute('tabindex', on ? '0' : '-1');
         });
     }
 
@@ -940,23 +988,21 @@ function setupProjectsSlider() {
         const list = cards();
         const controls = document.querySelector('.projects-slider-controls');
         if (controls) {
-            controls.style.display = list.length <= 1 ? 'none' : '';
+            controls.hidden = list.length <= 1;
         }
         if (list.length <= 1) {
             updateUi();
             return;
         }
         list.forEach((card, i) => {
+            const title = card.querySelector('.project-win-title');
             const b = document.createElement('button');
             b.type = 'button';
             b.className = 'projects-slider-dot';
-            b.setAttribute('aria-label', 'Go to project ' + (i + 1));
+            b.setAttribute('role', 'tab');
+            b.setAttribute('aria-label', title ? title.textContent.trim() : 'Go to project ' + (i + 1));
             b.addEventListener('click', function () {
-                card.scrollIntoView({
-                    behavior: motionOk ? 'smooth' : 'auto',
-                    inline: 'center',
-                    block: 'nearest',
-                });
+                scrollToCard(card);
             });
             dotsRoot.appendChild(b);
         });
@@ -964,11 +1010,14 @@ function setupProjectsSlider() {
     }
 
     function scrollPrev() {
-        viewport.scrollBy({ left: -getStep(), behavior: motionOk ? 'smooth' : 'auto' });
+        const idx = getNearestIndex();
+        scrollToCard(cards()[Math.max(0, idx - 1)]);
     }
 
     function scrollNext() {
-        viewport.scrollBy({ left: getStep(), behavior: motionOk ? 'smooth' : 'auto' });
+        const list = cards();
+        const idx = getNearestIndex();
+        scrollToCard(list[Math.min(list.length - 1, idx + 1)]);
     }
 
     if (viewport.dataset.sliderReady !== '1') {
@@ -1007,6 +1056,64 @@ function setupProjectsSlider() {
                 scrollNext();
             }
         });
+
+        viewport.addEventListener(
+            'wheel',
+            function (e) {
+                if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+                const max = viewport.scrollWidth - viewport.clientWidth;
+                if (max <= 2) return;
+                const atStart = viewport.scrollLeft <= 2;
+                const atEnd = viewport.scrollLeft >= max - 2;
+                if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) return;
+                e.preventDefault();
+                viewport.scrollLeft += e.deltaY;
+            },
+            { passive: false }
+        );
+
+        let dragId = null;
+        let dragStartX = 0;
+        let dragStartScroll = 0;
+        let dragged = false;
+
+        viewport.addEventListener('pointerdown', function (e) {
+            if (e.pointerType === 'touch' || e.button !== 0) return;
+            dragId = e.pointerId;
+            dragStartX = e.clientX;
+            dragStartScroll = viewport.scrollLeft;
+            dragged = false;
+            viewport.classList.add('is-dragging');
+        });
+
+        viewport.addEventListener('pointermove', function (e) {
+            if (dragId !== e.pointerId) return;
+            const dx = e.clientX - dragStartX;
+            if (Math.abs(dx) > 8) dragged = true;
+            if (dragged) {
+                viewport.scrollLeft = dragStartScroll - dx;
+            }
+        });
+
+        function endDrag(e) {
+            if (dragId !== e.pointerId) return;
+            dragId = null;
+            viewport.classList.remove('is-dragging');
+        }
+
+        viewport.addEventListener('pointerup', endDrag);
+        viewport.addEventListener('pointercancel', endDrag);
+
+        viewport.addEventListener(
+            'click',
+            function (e) {
+                if (!dragged) return;
+                e.preventDefault();
+                e.stopPropagation();
+                dragged = false;
+            },
+            true
+        );
     }
 
     buildDots();
@@ -1043,6 +1150,7 @@ document.addEventListener('DOMContentLoaded', function() {
     highlightNavLink();
     setupCertificatesGallery();
     setupTechStackTabs();
+    setupProjectsSlider();
 
     const heroSection = document.querySelector('.hero');
     if (heroSection) {
