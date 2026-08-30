@@ -1721,7 +1721,8 @@ html:not(.has-cursor) .mf-cursor {
 }
 
 .feedback-cta[hidden],
-.feedback-layout[hidden] {
+.feedback-layout[hidden],
+.feedback-slider-wrap[hidden] {
     display: none !important;
 }
 

@@ -3690,6 +3690,9 @@ section.visible {
 }
 
 .footer-resume-link {
+    display: inline-block;
+    margin-top: 0.85rem;
+    margin-right: 1rem;
     font-size: var(--text-caption);
     font-weight: 600;
     color: var(--text-primary);

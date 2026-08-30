@@ -149,10 +149,12 @@ function highlightNavLink() {
     const scrollY = window.pageYOffset;
 
     sections.forEach(section => {
+        const id = section.getAttribute('id');
+        if (id === 'feedback') return;
         const sectionTop = section.offsetTop - 100;
         const sectionHeight = section.clientHeight;
         if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-            current = section.getAttribute('id');
+            current = id;
         }
     });
 
@@ -936,6 +938,12 @@ function setupSnapSlider(viewportId, options) {
     function cards() {
         return Array.from(track.children).filter((el) => el.tagName === 'LI');
     }
+
+    if (cards().length === 0) {
+        wrap.hidden = true;
+        return;
+    }
+    wrap.hidden = false;
 
     function getStep() {
         const list = cards();
