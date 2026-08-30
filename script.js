@@ -822,16 +822,24 @@ function fillCertificatesContainer(container) {
 
     container.innerHTML = '';
 
+    const inGallery = container.id === 'certificatesGalleryGrid';
+
     certificatesList.forEach((cert) => {
         const certItem = document.createElement('div');
-        certItem.className = 'certificate-image-item';
+        certItem.className = inGallery ? 'gallery-cert' : 'certificate-image-item';
         certItem.setAttribute('data-filename', cert.filename);
 
         const imageContainer = document.createElement('div');
-        imageContainer.className = 'certificate-image-container';
+        imageContainer.className = inGallery ? 'gallery-cert-frame' : 'certificate-image-container';
         imageContainer.setAttribute('data-title', cert.title);
 
         certItem.appendChild(imageContainer);
+        if (inGallery) {
+            const label = document.createElement('p');
+            label.className = 'gallery-cert-title';
+            label.textContent = cert.title;
+            certItem.appendChild(label);
+        }
         container.appendChild(certItem);
 
         const fileType = cert.type || (cert.filename.match(/\.(png|jpg|jpeg|gif|webp)$/i) ? 'image' : 'pdf');
@@ -879,13 +887,15 @@ function setupCertificatesGallery() {
         requestAnimationFrame(function() {
             certModalClose?.focus();
         });
-        loadPdfJs()
-            .then(function () {
-                fillCertificatesContainer(grid);
-            })
-            .catch(function () {
-                fillCertificatesContainer(grid);
-            });
+        if (grid.childElementCount === 0) {
+            loadPdfJs()
+                .then(function () {
+                    fillCertificatesContainer(grid);
+                })
+                .catch(function () {
+                    fillCertificatesContainer(grid);
+                });
+        }
     }
 
     seeAllBtn.addEventListener('click', openGallery);
