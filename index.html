@@ -18,14 +18,13 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles-project-modal.css">
     <link rel="stylesheet" href="styles-ink.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mouse-follower@1.1.2/dist/mouse-follower.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body class="portfolio-body theme-ink">
     <a class="skip-link" href="#projects">Skip to work</a>
-    <div class="cursor-dot" aria-hidden="true"></div>
-    <div class="cursor-ring" aria-hidden="true"></div>
 
     <div class="preloader" id="preloader" data-testid="preloader">
         <div class="preloader-top">
@@ -53,9 +52,10 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#tech-stack">Skills</a></li>
                 <li><a href="#leadership">Leadership</a></li>
+                <li><a href="#feedback">Feedback</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <a href="Brian-Kyle-Salor-Resume.docx" class="btn-download-cv js-magnetic" download="Brian-Kyle-Salor-Resume.docx"><span>Download CV</span></a>
+            <a href="Brian-Kyle-Salor-Resume.docx" class="btn-download-cv js-magnetic" download="Brian-Kyle-Salor-Resume.docx" data-cursor="CV"><span>Download CV</span></a>
             <button type="button" class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-mobile-menu">
                 <span></span>
                 <span></span>
@@ -72,6 +72,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#tech-stack">Skills</a></li>
             <li><a href="#leadership">Leadership</a></li>
+            <li><a href="#feedback">Feedback</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="Brian-Kyle-Salor-Resume.docx" class="btn-download-cv-mobile" download="Brian-Kyle-Salor-Resume.docx"><span>Download CV</span></a></li>
         </ul>
@@ -80,7 +81,7 @@
     <section class="hero hero-section" id="home">
         <div class="hero-container">
             <div class="hero-content">
-                <p class="job-titles"><span class="job-dot" aria-hidden="true"></span>Software Developer · AI Developer · IT Support</p>
+                <p class="job-titles"><span class="job-titles-text">Software Developer · AI Developer · IT Support</span></p>
                 <div class="name-section">
                     <h1 class="name">
                         <span class="name-line"><span class="name-mask">Brian Kyle</span></span>
@@ -98,8 +99,8 @@
                     <li>JavaScript</li>
                 </ul>
                 <div class="hero-actions">
-                    <a href="#projects" class="btn-hire-me js-magnetic"><span>View work</span></a>
-                    <a href="mailto:briankylesalor02@gmail.com" class="btn-hire-me btn-hire-me--ghost js-magnetic"><span>Email me</span></a>
+                    <a href="#projects" class="btn-hire-me js-magnetic" data-cursor="Work"><span>View work</span></a>
+                    <a href="mailto:briankylesalor02@gmail.com" class="btn-hire-me btn-hire-me--ghost js-magnetic" data-cursor="Email"><span>Email me</span></a>
                     <a href="https://github.com/Brian-K05" target="_blank" rel="noopener noreferrer" class="social-link js-magnetic" aria-label="GitHub">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -147,7 +148,7 @@
             <ul class="project-grid">
                 <li>
                     <article class="project-row project-card js-reveal" data-project="insurance-automation" data-deploy-url="#" data-github-url="#">
-                        <button type="button" class="win js-open-case" aria-label="Open case study: Insurance Data Management">
+                        <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: Insurance Data Management">
                             <span class="win-chrome">
                                 <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                                 <span class="win-url">insurance-automation</span>
@@ -181,7 +182,7 @@
                 </li>
                 <li>
                     <article class="project-row project-card js-reveal" data-project="rag-support" data-deploy-url="#" data-github-url="#">
-                        <button type="button" class="win js-open-case" aria-label="Open case study: AI Customer Support Assistant">
+                        <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: AI Customer Support Assistant">
                             <span class="win-chrome">
                                 <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                                 <span class="win-url">rag-support</span>
@@ -214,7 +215,7 @@
                 </li>
                 <li>
                     <article class="project-row project-card js-reveal" data-project="grammar-editing" data-deploy-url="http://18.136.97.234" data-github-url="#">
-                        <button type="button" class="win js-open-case" aria-label="Open case study: Editing Service Platform">
+                        <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: Editing Service Platform">
                             <span class="win-chrome">
                                 <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                                 <span class="win-url">18.136.97.234</span>
@@ -247,7 +248,7 @@
                 </li>
                 <li>
                     <article class="project-row project-card js-reveal" data-project="a4-word-barcode" data-deploy-url="#" data-github-url="https://github.com/Brian-K05/a4-word-barcode-generator">
-                        <button type="button" class="win js-open-case" aria-label="Open case study: A4 Word Barcode Generator">
+                        <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: A4 Word Barcode Generator">
                             <span class="win-chrome">
                                 <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                                 <span class="win-url">a4-word-barcode-generator</span>
@@ -286,7 +287,7 @@
                 </li>
                 <li>
                     <article class="project-row project-card js-reveal" data-project="gwa" data-deploy-url="https://brian-k05.github.io/Cumulative-GWA-Calculator-System/" data-github-url="https://github.com/Brian-K05/Cumulative-GWA-Calculator-System">
-                        <button type="button" class="win js-open-case" aria-label="Open case study: Cumulative GWA Calculator">
+                        <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: Cumulative GWA Calculator">
                             <span class="win-chrome">
                                 <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                                 <span class="win-url">brian-k05.github.io/gwa-calculator</span>
@@ -328,7 +329,7 @@
                 </li>
                 <li>
                     <article class="project-row project-card js-reveal" data-project="data-vis" data-deploy-url="https://brian-k05.github.io/data-vis/" data-github-url="https://github.com/Brian-K05/data-vis">
-                        <button type="button" class="win js-open-case" aria-label="Open case study: Data Visualizer">
+                        <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: Data Visualizer">
                             <span class="win-chrome">
                                 <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                                 <span class="win-url">brian-k05.github.io/data-vis</span>
@@ -603,9 +604,116 @@
         </div>
     </div>
 
+    <section class="feedback" id="feedback">
+        <div class="section-container">
+            <div class="feedback-header js-reveal">
+                <div class="feedback-header-left">
+                    <div class="page-number">06</div>
+                    <h2 class="section-title">Feedback</h2>
+                </div>
+                <p class="feedback-subtitle">Confirmed client quotes, with a link to their LinkedIn. New replies are emailed to me first.</p>
+            </div>
+            <ul class="feedback-grid" id="feedback-grid"></ul>
+            <div class="feedback-layout" id="feedback-layout">
+                <aside class="feedback-panel feedback-copy js-reveal">
+                    <div class="win-chrome">
+                        <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span class="win-url">quotes</span>
+                    </div>
+                    <div class="feedback-panel-body">
+                        <p class="feedback-aside-mark" aria-hidden="true">“</p>
+                        <h3 class="feedback-aside-title">Client notes, verified.</h3>
+                        <p class="feedback-empty">Nothing public yet. Send a short note — I check LinkedIn before a quote stays on this page.</p>
+                        <ol class="feedback-steps">
+                            <li><span>01</span> You send 1–3 sentences</li>
+                            <li><span>02</span> I confirm your LinkedIn</li>
+                            <li><span>03</span> If you said yes, it goes live</li>
+                        </ol>
+                    </div>
+                </aside>
+                <form class="feedback-panel feedback-form js-reveal" id="feedback-form" action="https://formsubmit.co/briankylesalor02@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="Portfolio client feedback">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" id="feedback-next" value="https://brian-k05.github.io/Portfolio/index.html?sent=1#feedback">
+                    <input type="text" name="_honey" class="feedback-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <div class="win-chrome">
+                        <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span class="win-url">leave-feedback</span>
+                    </div>
+                    <div class="feedback-panel-body">
+                        <p class="feedback-form-title">Leave feedback</p>
+                        <p class="feedback-form-lead">I read every reply. A quote only stays here after I confirm your LinkedIn.</p>
+                        <div class="feedback-form-row">
+                            <label>
+                                <span>Your name</span>
+                                <input type="text" name="name" required autocomplete="name">
+                            </label>
+                            <label>
+                                <span>Role / company</span>
+                                <input type="text" name="role" required>
+                            </label>
+                        </div>
+                        <div class="feedback-form-row">
+                            <label>
+                                <span>LinkedIn URL (or website)</span>
+                                <input type="text" name="linkedin" required placeholder="https://linkedin.com/in/…" inputmode="url" autocomplete="url">
+                            </label>
+                            <label>
+                                <span>Project <em>(optional)</em></span>
+                                <input type="text" name="project" placeholder="e.g. Editing platform">
+                            </label>
+                        </div>
+                        <label>
+                            <span>Your feedback (1–3 sentences)</span>
+                            <textarea name="quote" rows="4" required></textarea>
+                        </label>
+                        <fieldset>
+                            <legend>You may quote this on my portfolio with a link to your LinkedIn</legend>
+                            <div class="feedback-choices">
+                                <label class="feedback-choice"><input type="radio" name="permission" value="Yes" required> Yes</label>
+                                <label class="feedback-choice"><input type="radio" name="permission" value="No"> No</label>
+                            </div>
+                        </fieldset>
+                        <button type="submit" class="btn-hire-me" id="feedback-submit" data-cursor="Send"><span>Send feedback</span></button>
+                    </div>
+                </form>
+                <div class="feedback-panel feedback-sent" id="feedback-sent" hidden>
+                    <div class="win-chrome">
+                        <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span class="win-url">sent</span>
+                    </div>
+                    <div class="feedback-panel-body">
+                        <p class="feedback-form-title">Thanks — I got it.</p>
+                        <p class="feedback-form-lead" id="feedback-sent-lead">Your note is in my inbox.</p>
+                        <button type="button" class="btn-hire-me btn-hire-me--ghost" id="feedback-again"><span>Write another</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <template id="feedback-card-template">
+            <li>
+                <article class="feedback-card js-reveal">
+                    <p class="feedback-kicker"></p>
+                    <blockquote class="feedback-quote"></blockquote>
+                    <div class="feedback-who">
+                        <p class="feedback-name"></p>
+                        <p class="feedback-role"></p>
+                        <p class="feedback-on"></p>
+                        <p class="feedback-date"></p>
+                    </div>
+                    <div class="feedback-sources">
+                        <a class="feedback-chip feedback-chip--linkedin" href="#" target="_blank" rel="noopener noreferrer">Read on LinkedIn</a>
+                        <a class="feedback-chip feedback-chip--google" href="#" target="_blank" rel="noopener noreferrer">Read on Google</a>
+                    </div>
+                </article>
+            </li>
+        </template>
+    </section>
+
     <section class="contact contact-cta-band" id="contact">
         <div class="contact-cta-inner js-reveal">
-            <p class="contact-cta-eyebrow">06 · Contact</p>
+            <p class="contact-cta-eyebrow">07 · Contact</p>
             <h2 class="contact-cta-title">Let’s work<br>together<span class="name-accent">.</span></h2>
             <p class="contact-cta-lead">Available for software development, AI, and IT support work.</p>
             <div class="contact-cta-actions">
@@ -674,6 +782,8 @@
         ]
     }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mouse-follower@1.1.2/dist/mouse-follower.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
     <script src="script.js"></script>
     <script src="motion.js"></script>

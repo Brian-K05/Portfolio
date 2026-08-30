@@ -228,7 +228,7 @@ function revealResetVisible() {
     });
     document
         .querySelectorAll(
-            '.project-row, .about-main, .about-facts, .tech-stack-groups, .certificate-featured-wrap, .experience-list'
+            '.project-row, .about-main, .about-facts, .tech-stack-groups, .certificate-featured-wrap, .experience-list, .feedback-copy, .feedback-card, .feedback-form'
         )
         .forEach((el) => {
             el.style.opacity = '1';
@@ -367,20 +367,8 @@ function setupTechStackTabs() {
     });
 }
 
-// Subtle hero parallax (container only — avoids fighting card / image CSS transforms)
-window.addEventListener(
-    'scroll',
-    function () {
-        if (prefersReducedMotion) return;
-        const hero = document.querySelector('.hero');
-        if (!hero) return;
-        const scrolled = window.pageYOffset;
-        const h = hero.offsetHeight || 1;
-        const p = Math.min(1, scrolled / h);
-        hero.style.setProperty('--hero-parallax', `${p * 16}px`);
-    },
-    { passive: true }
-);
+// Hero parallax is handled in motion/CSS — skip extra scroll transforms here
+
 
 // Smooth reveal for text blocks (once)
 const textObserver = new IntersectionObserver(
@@ -1102,4 +1090,205 @@ if (certificateFullViewModal) {
         }
     });
 }
+
+(function setupFeedbackForm() {
+    const STORAGE_KEY = 'bkFeedbackCards';
+    const form = document.getElementById('feedback-form');
+    const grid = document.getElementById('feedback-grid');
+    const layout = document.getElementById('feedback-layout');
+    const sentNote = document.getElementById('feedback-sent');
+    const sentLead = document.getElementById('feedback-sent-lead');
+    const copy = document.querySelector('.feedback-copy');
+    const next = document.getElementById('feedback-next');
+    const template = document.getElementById('feedback-card-template');
+    const againBtn = document.getElementById('feedback-again');
+
+    if (next && window.location.protocol !== 'file:') {
+        const url = new URL(window.location.href);
+        url.searchParams.set('sent', '1');
+        url.hash = 'feedback';
+        next.value = url.origin + url.pathname + url.search + url.hash;
+    }
+
+    function withHttps(link) {
+        const value = (link || '').trim();
+        if (!value) return '#';
+        return /^https?:\/\//i.test(value) ? value : 'https://' + value;
+    }
+
+    function allowed(item) {
+        return String(item && item.permission || '').toLowerCase() === 'yes';
+    }
+
+    function cardKey(item) {
+        return ((item && item.name) + '|' + (item && item.quote)).toLowerCase().trim();
+    }
+
+    function readLocalCards() {
+        try {
+            const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            return Array.isArray(raw) ? raw : [];
+        } catch (err) {
+            return [];
+        }
+    }
+
+    function saveLocalCard(item) {
+        if (!item || !allowed(item) || !item.quote || !item.name) return;
+        const existing = readLocalCards();
+        if (existing.some((card) => cardKey(card) === cardKey(item))) return;
+        existing.push(item);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+    }
+
+    function renderCard(item, kicker) {
+        if (!grid || !template || !item || !item.quote) return;
+        const node = template.content.cloneNode(true);
+        const card = node.querySelector('.feedback-card');
+        const kickerEl = node.querySelector('.feedback-kicker');
+        const quoteEl = node.querySelector('.feedback-quote');
+        const nameEl = node.querySelector('.feedback-name');
+        const roleEl = node.querySelector('.feedback-role');
+        const onEl = node.querySelector('.feedback-on');
+        const dateEl = node.querySelector('.feedback-date');
+        const linkedinEl = node.querySelector('.feedback-chip--linkedin');
+        const googleEl = node.querySelector('.feedback-chip--google');
+        if (kickerEl) kickerEl.textContent = kicker || '';
+        if (quoteEl) quoteEl.textContent = item.quote;
+        if (nameEl) nameEl.textContent = item.name || '';
+        if (roleEl) roleEl.textContent = item.role || '';
+        if (onEl) onEl.textContent = item.project ? 'On: ' + item.project : '';
+        if (dateEl) dateEl.textContent = item.date || '';
+        if (linkedinEl) {
+            if (item.linkedin) linkedinEl.href = withHttps(item.linkedin);
+            else linkedinEl.remove();
+        }
+        if (googleEl) googleEl.remove();
+        if (card) {
+            card.classList.add('is-in');
+            card.style.opacity = '1';
+            card.style.transform = 'none';
+        }
+        grid.appendChild(node);
+    }
+
+    function alreadyRendered(item) {
+        if (!grid) return false;
+        return Array.from(grid.querySelectorAll('.feedback-quote')).some((el) => {
+            return el.textContent.trim() === (item.quote || '').trim();
+        });
+    }
+
+    function showForm() {
+        if (layout) layout.classList.remove('is-sent');
+        if (form) form.hidden = false;
+        if (copy) copy.hidden = false;
+        if (sentNote) sentNote.hidden = true;
+    }
+
+    function showThanks(hasCard) {
+        if (layout) layout.classList.add('is-sent');
+        if (form) form.hidden = true;
+        if (copy) copy.hidden = true;
+        if (sentNote) sentNote.hidden = false;
+        if (sentLead) {
+            sentLead.textContent = hasCard
+                ? 'Your quote is above. I also emailed myself a copy. It stays for everyone after I confirm the LinkedIn.'
+                : 'I emailed myself a copy. No quote was added because permission was No, or the message had no saved text. Use Write another to send again.';
+        }
+    }
+
+    function draftFromForm(formEl) {
+        const data = new FormData(formEl);
+        return {
+            name: String(data.get('name') || '').trim(),
+            role: String(data.get('role') || '').trim(),
+            linkedin: String(data.get('linkedin') || '').trim(),
+            project: String(data.get('project') || '').trim(),
+            quote: String(data.get('quote') || '').trim(),
+            permission: String(data.get('permission') || '').trim(),
+            date: new Date().toLocaleString('en-US', { month: 'short', year: 'numeric' })
+        };
+    }
+
+    function publishDraft(item) {
+        if (!item || !item.quote) return false;
+        if (!allowed(item)) return false;
+        saveLocalCard(item);
+        if (!alreadyRendered(item)) renderCard(item, 'Received');
+        return true;
+    }
+
+    fetch('feedback.json')
+        .then((res) => (res.ok ? res.json() : []))
+        .then((official) => {
+            (Array.isArray(official) ? official : []).forEach((item) => renderCard(item, ''));
+            readLocalCards().forEach((item) => {
+                if (!alreadyRendered(item)) renderCard(item, 'Received');
+            });
+        })
+        .catch(() => {
+            readLocalCards().forEach((item) => renderCard(item, 'Received'));
+        });
+
+    let draft = null;
+    try {
+        draft = JSON.parse(sessionStorage.getItem('bkFeedbackDraft') || 'null');
+    } catch (err) {
+        draft = null;
+    }
+
+    const sent = new URLSearchParams(window.location.search).get('sent') === '1';
+    if (sent) {
+        const published = publishDraft(draft);
+        if (draft) showThanks(published);
+        else showForm();
+        sessionStorage.removeItem('bkFeedbackDraft');
+        history.replaceState({}, '', window.location.pathname + '#feedback');
+    }
+
+    if (againBtn) {
+        againBtn.addEventListener('click', function () {
+            showForm();
+            form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+
+    if (!form) return;
+
+    form.addEventListener('submit', function (event) {
+        const draftNow = draftFromForm(form);
+        sessionStorage.setItem('bkFeedbackDraft', JSON.stringify(draftNow));
+        if (window.location.protocol === 'file:') {
+            event.preventDefault();
+            showThanks(publishDraft(draftNow));
+            return;
+        }
+
+        event.preventDefault();
+        const submitBtn = document.getElementById('feedback-submit');
+        if (submitBtn) submitBtn.disabled = true;
+
+        fetch('https://formsubmit.co/ajax/briankylesalor02@gmail.com', {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: new FormData(form)
+        })
+            .then((res) => {
+                if (!res.ok) throw new Error('send failed');
+                return res.json().catch(() => ({}));
+            })
+            .then(() => {
+                showThanks(publishDraft(draftNow));
+                sessionStorage.removeItem('bkFeedbackDraft');
+                document.getElementById('feedback')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            })
+            .catch(() => {
+                form.submit();
+            })
+            .finally(() => {
+                if (submitBtn) submitBtn.disabled = false;
+            });
+    });
+})();
 

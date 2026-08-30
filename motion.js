@@ -1,7 +1,8 @@
-/* Emergent-style motion: Lenis, cursor, magnetic, parallax, reveals */
+/* Smooth scroll (Lenis) + Cuberto mouse-follower cursor */
 (function () {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const finePointer = window.matchMedia('(pointer: fine)').matches;
+    const canHover = window.matchMedia('(hover: hover)').matches;
 
     function lerp(a, b, t) {
         return a + (b - a) * t;
@@ -10,21 +11,19 @@
     function setupLenis() {
         if (reduce || typeof Lenis === 'undefined') return;
         const lenis = new Lenis({
-            lerp: 0.09,
+            lerp: 0.08,
             smoothWheel: true,
-            wheelMultiplier: 0.95
+            wheelMultiplier: 0.86,
+            touchMultiplier: 1.05
         });
         window.__lenis = lenis;
-        document.documentElement.classList.add('lenis');
-        let rafId;
+        document.documentElement.classList.add('lenis', 'lenis-smooth');
+        let rafId = 0;
         const loop = (t) => {
             lenis.raf(t);
             rafId = requestAnimationFrame(loop);
         };
         rafId = requestAnimationFrame(loop);
-        lenis.on('scroll', () => {
-            document.dispatchEvent(new Event('portfolio:scroll'));
-        });
         window.addEventListener('beforeunload', () => {
             cancelAnimationFrame(rafId);
             lenis.destroy();
@@ -33,37 +32,28 @@
     }
 
     function setupCursor() {
-        const dot = document.querySelector('.cursor-dot');
-        const ring = document.querySelector('.cursor-ring');
-        if (!dot || !ring || !finePointer || reduce) return;
+        if (typeof MouseFollower === 'undefined' || typeof gsap === 'undefined') return;
+        if (!finePointer || !canHover || reduce) return;
+
+        document.querySelectorAll('.js-magnetic').forEach((el) => {
+            if (!el.hasAttribute('data-cursor-stick')) {
+                el.setAttribute('data-cursor-stick', '');
+            }
+        });
+
         document.documentElement.classList.add('has-cursor');
-        let x = -80;
-        let y = -80;
-        let rx = -80;
-        let ry = -80;
-        window.addEventListener(
-            'mousemove',
-            (e) => {
-                x = e.clientX;
-                y = e.clientY;
-            },
-            { passive: true }
-        );
-        window.addEventListener(
-            'mouseover',
-            (e) => {
-                ring.classList.toggle('is-hover', !!e.target.closest('a, button, [role="button"], .js-magnetic'));
-            },
-            { passive: true }
-        );
-        const tick = () => {
-            rx = lerp(rx, x, 0.18);
-            ry = lerp(ry, y, 0.18);
-            dot.style.transform = `translate(${x}px, ${y}px)`;
-            ring.style.transform = `translate(${rx}px, ${ry}px)`;
-            requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
+        window.__cursor = new MouseFollower({
+            speed: 0.55,
+            ease: 'expo.out',
+            skewing: 0.8,
+            skewingText: 0,
+            hideOnLeave: true,
+            stateDetection: {
+                '-pointer':
+                    'a,button,[role="button"],.js-magnetic,.tag,.tech-pill,.win-icon,.feedback-choice,.certificate-image-wrapper,.certificate-featured',
+                '-hidden': 'iframe,input,textarea,select'
+            }
+        });
     }
 
     function setupMagnetic() {
@@ -74,7 +64,7 @@
             let cx = 0;
             let cy = 0;
             let raf = 0;
-            const strength = 0.32;
+            const strength = 0.22;
             const tick = () => {
                 cx = lerp(cx, tx, 0.16);
                 cy = lerp(cy, ty, 0.16);
@@ -97,27 +87,6 @@
                 raf = requestAnimationFrame(tick);
             });
         });
-    }
-
-    function setupHeroParallax() {
-        const hero = document.querySelector('.hero');
-        const text = hero && hero.querySelector('.hero-content');
-        const image = hero && hero.querySelector('.hero-image');
-        if (!hero || !text || !image || reduce) return;
-        const update = () => {
-            const r = hero.getBoundingClientRect();
-            const h = hero.offsetHeight || 1;
-            const p = Math.min(1, Math.max(0, -r.top / h));
-            text.style.transform = `translate3d(0, ${p * -70}px, 0)`;
-            image.style.transform = `translate3d(0, ${p * 130}px, 0)`;
-        };
-        update();
-        window.addEventListener('scroll', update, { passive: true });
-        document.addEventListener('portfolio:scroll', update);
-    }
-
-    function setupProjectScroll() {
-        return;
     }
 
     function setupReveals() {
@@ -153,8 +122,6 @@
     setupLenis();
     setupCursor();
     setupMagnetic();
-    setupHeroParallax();
-    setupProjectScroll();
     setupReveals();
     setupMarqueePause();
 })();
