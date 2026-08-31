@@ -1,0 +1,7 @@
+# Local build sprint — plans and agent briefs. Never publish with GitHub Pages.
+/_build-sprint/
+
+# Local Word copies
+*.docx
+Thumbs.db
+.DS_Store
