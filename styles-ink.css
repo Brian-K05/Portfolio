@@ -2779,11 +2779,23 @@ html:not(.has-cursor) .mf-cursor {
 .work-stage {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2.5rem;
+}
+
+.work-stage .project-row {
+    grid-template-columns: minmax(0, 1.2fr) minmax(14rem, 0.9fr);
+    column-gap: clamp(1.75rem, 4.5vw, 3.75rem);
+    align-items: center;
+}
+
+.work-stage .project-win-foot {
+    margin-top: 0;
+    min-width: 0;
+    padding: 0.35rem 0 0.35rem 0.15rem;
 }
 
 .work-featured .win-body {
-    height: clamp(16rem, 42vw, 28rem);
+    height: clamp(14rem, 28vw, 22rem);
     padding: 0;
     align-items: stretch;
 }
@@ -2792,18 +2804,30 @@ html:not(.has-cursor) .mf-cursor {
     border-radius: 0;
 }
 
+.work-featured .project-win-blurb {
+    max-width: 42ch;
+}
+
 .work-pair,
 .work-tools {
     display: grid;
-    gap: 1.15rem;
+    gap: 1.75rem 2rem;
 }
 
 .work-pair {
     grid-template-columns: 1fr 1fr;
 }
 
+.work-pair .project-row {
+    column-gap: clamp(1.15rem, 2.4vw, 2rem);
+}
+
 .work-tools {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.work-tools .project-row {
+    column-gap: 1.25rem;
 }
 
 .work-tools-kicker {
@@ -2826,7 +2850,7 @@ html:not(.has-cursor) .mf-cursor {
 }
 
 .work-tools .project-win-foot {
-    padding-top: 0.85rem;
+    padding: 0;
 }
 
 .work-tools .project-win-blurb {
@@ -2878,7 +2902,19 @@ html:not(.has-cursor) .mf-cursor {
     border-color: rgba(91, 140, 255, 0.45);
 }
 
-@media (max-width: 860px) {
+@media (max-width: 900px) {
+    .work-stage .project-row,
+    .work-pair .project-row,
+    .work-tools .project-row {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+        row-gap: 1.25rem;
+    }
+
+    .work-stage .project-win-foot {
+        padding: 0;
+    }
+
     .work-pair,
     .work-tools {
         grid-template-columns: 1fr;
