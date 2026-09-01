@@ -564,67 +564,60 @@ if (mobileMenuToggle && mobileMenu) {
     });
 }
 
-// Project Modal Functionality
+// Project case drawer
 const projectModal = document.getElementById('projectModal');
-const modalClose = projectModal ? projectModal.querySelector('.modal-close') : null;
-const modalOverlay = projectModal ? projectModal.querySelector('.modal-overlay') : null;
+const casePanel = projectModal ? projectModal.querySelector('.case-drawer-panel') : null;
+const caseKicker = document.getElementById('case-drawer-kicker');
+const caseMedia = document.getElementById('case-drawer-media');
+const caseTitle = document.getElementById('project-modal-title');
+const caseCopy = document.getElementById('case-drawer-copy');
+const caseTags = document.getElementById('case-drawer-tags');
+const caseLinks = document.getElementById('case-drawer-links');
+let caseReturnFocus = null;
+
+function isCaseOpen() {
+    return !!(projectModal && projectModal.classList.contains('is-open'));
+}
 
 function openProjectModal(card) {
     const details = card.querySelector('.project-details');
-    if (!details) return;
+    if (!details || !projectModal) return;
 
-    // Get project data
     const category = details.querySelector('.project-category')?.textContent || '';
     const title = details.querySelector('.project-title')?.textContent || '';
     const description = details.querySelector('.project-description')?.textContent || '';
     const tags = details.querySelectorAll('.project-tags .tag');
     const links = details.querySelector('.project-links');
-    const image = card.querySelector('.win-body img') || card.querySelector('.project-row-visual img') || card.querySelector('.project-image img');
-    const win = card.querySelector('.win');
-    const mock = card.querySelector('.project-mock');
+    const image = card.querySelector('.win-body img');
 
-    // Populate modal
-    const modalImage = projectModal.querySelector('.modal-project-image');
-    const modalCategory = projectModal.querySelector('.modal-category');
-    const modalTitle = projectModal.querySelector('.modal-title');
-    const modalDescription = projectModal.querySelector('.modal-description');
-    const modalTags = projectModal.querySelector('.modal-tags');
-    const modalLinks = projectModal.querySelector('.modal-links');
+    caseKicker.textContent = category;
+    caseTitle.textContent = title;
+    caseCopy.textContent = description;
 
-    modalImage.innerHTML = '';
-    if (image && image.tagName === 'IMG' && image.src) {
-        modalImage.innerHTML = `<img src="${image.src}" alt="${title}">`;
-    } else if (win) {
-        modalImage.appendChild(win.cloneNode(true));
-    } else if (mock) {
-        modalImage.appendChild(mock.cloneNode(true));
+    caseMedia.innerHTML = '';
+    if (image && image.tagName === 'IMG' && image.getAttribute('src')) {
+        const img = document.createElement('img');
+        img.src = image.currentSrc || image.src;
+        img.alt = title;
+        img.width = image.width || 1280;
+        img.height = image.height || 800;
+        caseMedia.appendChild(img);
+        caseMedia.hidden = false;
     } else {
-        modalImage.innerHTML = '<div class="image-placeholder" style="width: 100%; height: auto; min-height: 200px; aspect-ratio: 16/9; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 16px;"></div>';
+        caseMedia.hidden = true;
     }
 
-    modalCategory.textContent = category;
-    modalTitle.textContent = title;
-    modalDescription.textContent = description;
-
-    // Set tags
-    modalTags.innerHTML = '';
-    tags.forEach(tag => {
-        const tagClone = tag.cloneNode(true);
-        modalTags.appendChild(tagClone);
+    caseTags.innerHTML = '';
+    tags.forEach((tag) => {
+        caseTags.appendChild(tag.cloneNode(true));
     });
 
-    // Set links
-    if (links) {
-        modalLinks.innerHTML = links.innerHTML;
-    } else {
-        modalLinks.innerHTML = '';
-    }
+    caseLinks.innerHTML = links ? links.innerHTML : '';
 
-    // Update button states
     const deployUrl = card.getAttribute('data-deploy-url');
     const githubUrl = card.getAttribute('data-github-url');
-    const liveDemoBtn = modalLinks.querySelector('.btn-live-demo');
-    const githubBtn = modalLinks.querySelector('.btn-github');
+    const liveDemoBtn = caseLinks.querySelector('.btn-live-demo');
+    const githubBtn = caseLinks.querySelector('.btn-github');
 
     if (liveDemoBtn) {
         if (deployUrl && deployUrl !== '#') {
@@ -636,32 +629,41 @@ function openProjectModal(card) {
         }
     }
 
-    if (githubBtn && githubUrl) {
+    if (githubBtn && githubUrl && githubUrl !== '#') {
         githubBtn.href = githubUrl;
     }
 
-    // Open modal
-    projectModal.classList.add('active');
+    caseReturnFocus = document.activeElement;
+    projectModal.classList.add('is-open');
+    projectModal.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('case-open');
     lockPageScroll();
+    const closeBtn = projectModal.querySelector('.case-drawer-close');
+    window.requestAnimationFrame(function () {
+        (closeBtn || casePanel).focus();
+    });
 }
 
 function closeProjectModal() {
-    projectModal.classList.remove('active');
+    if (!projectModal || !isCaseOpen()) return;
+    projectModal.classList.remove('is-open');
+    projectModal.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('case-open');
     unlockPageScroll();
+    if (caseReturnFocus && typeof caseReturnFocus.focus === 'function') {
+        caseReturnFocus.focus();
+    }
+    caseReturnFocus = null;
 }
 
-// Close modal events
-if (modalClose) {
-    modalClose.addEventListener('click', closeProjectModal);
+if (projectModal) {
+    projectModal.querySelectorAll('[data-case-close]').forEach((el) => {
+        el.addEventListener('click', closeProjectModal);
+    });
 }
 
-if (modalOverlay) {
-    modalOverlay.addEventListener('click', closeProjectModal);
-}
-
-// Close modal on Escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && projectModal.classList.contains('active')) {
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isCaseOpen()) {
         closeProjectModal();
     }
 });

@@ -596,21 +596,21 @@
         </div>
     </div>
 
-    <div class="project-modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <button type="button" class="modal-close" aria-label="Close project details">&times;</button>
-            <div class="modal-body">
-                <div class="modal-project-image"></div>
-                <div class="modal-project-info">
-                    <div class="modal-category"></div>
-                    <h2 class="modal-title" id="project-modal-title"></h2>
-                    <p class="modal-description"></p>
-                    <div class="modal-tags"></div>
-                    <div class="modal-links"></div>
-                </div>
-            </div>
-        </div>
+    <div class="case-drawer" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" aria-hidden="true">
+        <button type="button" class="case-drawer-scrim" data-case-close aria-label="Close project details"></button>
+        <aside class="case-drawer-panel" tabindex="-1">
+            <header class="case-drawer-head">
+                <p class="case-drawer-kicker" id="case-drawer-kicker"></p>
+                <button type="button" class="case-drawer-close" data-case-close aria-label="Close">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                </button>
+            </header>
+            <figure class="case-drawer-media" id="case-drawer-media" hidden></figure>
+            <h2 class="case-drawer-title" id="project-modal-title"></h2>
+            <p class="case-drawer-copy" id="case-drawer-copy"></p>
+            <div class="case-drawer-tags" id="case-drawer-tags"></div>
+            <div class="case-drawer-links" id="case-drawer-links"></div>
+        </aside>
     </div>
 
     <section class="feedback feedback-dock" id="feedback">
