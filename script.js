@@ -463,6 +463,13 @@ document.querySelectorAll('.project-row').forEach((card) => {
             openProjectModal(card);
         });
     }
+    const foot = card.querySelector('.project-win-foot');
+    if (foot) {
+        foot.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return;
+            openProjectModal(card);
+        });
+    }
 });
 
 // Add interactive ripple effect on buttons
