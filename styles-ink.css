@@ -2870,6 +2870,16 @@ html:not(.has-cursor) .mf-cursor {
     grid-template-columns: 1fr 1fr;
 }
 
+.work-pair--trio {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+    .work-pair--trio {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 .work-pair:has(> .project-row:only-of-type),
 .work-tools:has(> .project-row:only-of-type) {
     grid-template-columns: minmax(0, 36rem);
