@@ -479,7 +479,7 @@
     background: var(--accent);
     transform: scaleX(0);
     transform-origin: left;
-    animation: preloadFill 1.25s ease-in-out forwards;
+    animation: preloadFill 0.35s ease-in-out forwards;
 }
 
 @keyframes preloadFill {
@@ -2953,8 +2953,26 @@ html:not(.has-cursor) .mf-cursor {
     color: var(--mute);
 }
 
+.work-note {
+    margin: 0 0 1.75rem;
+    max-width: 52ch;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--mute);
+}
+
 .project-win-live {
     display: none;
+    text-decoration: none;
+    color: var(--accent);
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
+}
+
+a.project-win-live:hover,
+a.project-win-live:focus-visible {
+    text-decoration: underline;
 }
 
 .work-tools {
@@ -3195,6 +3213,7 @@ html:not(.has-cursor) .mf-cursor {
         letter-spacing: 0.16em;
         text-transform: uppercase;
         color: var(--accent);
+        text-decoration: none;
     }
 
     .work-pair .project-win-title,

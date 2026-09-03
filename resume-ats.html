@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brian Kyle Salor — Software Developer</title>
-    <meta name="description" content="Resume — Brian Kyle L. Salor, software developer. Laravel, Node.js, Python, REST APIs, and IT support.">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Brian Kyle Salor — Junior Software Developer</title>
+    <meta name="description" content="Resume — Brian Kyle L. Salor, junior software developer. Laravel, Node.js, Python, REST APIs, and IT support.">
     <style>
         body { font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt; line-height: 1.35; color: #222; max-width: 800px; margin: 0 auto; padding: 24px; }
         h1 { font-size: 20pt; margin: 0 0 2px 0; }
@@ -23,14 +24,14 @@
 </head>
 <body>
     <h1>Brian Kyle L. Salor</h1>
-    <p class="subtitle">Software Developer</p>
+    <p class="subtitle">Junior Software Developer</p>
     <p class="contact">Taguig City, Philippines | Phone: +63 970 540 6985 | Email: briankylesalor02@gmail.com | Portfolio: brian-k05.github.io/Portfolio | GitHub: github.com/Brian-K05 | LinkedIn: linkedin.com/in/brian-kyle-salor-786999359</p>
 
     <h2>Professional Summary</h2>
-    <p>Software developer who ships web systems and APIs from requirements through a live deploy. During a 486-hour internship at Machica Firm, designed and implemented a production Insurance Data Management and Business Process Automation System (Node.js, REST APIs, Supabase) that is still used in daily operations (no public URL), and provided desktop, printer, software, and network support. Public work includes SlotBook (a public Laravel calendar with a live demo and GitHub), DeskFlow (a public Node.js request desk with a live demo and GitHub), PaperOut (a public Flask certificate press with a live demo and GitHub), and a public Python/Flask barcode tool. Freelance includes a Laravel booking and payment system whose live URL stays with the client. BSIT, Leyte Normal University, 2022–2026.</p>
+    <p>Junior software developer. I ship Laravel, Node.js, and Python web systems from a brief to a live URL. 486-hour internship at Machica Firm: production insurance APIs still in daily use (no public URL). Public demos: SlotBook, DeskFlow, PaperOut. BSIT, Leyte Normal University, 2022–2026.</p>
 
     <h2>Technical Skills</h2>
-    <p class="skills-inline"><strong>Used on shipped work:</strong> Laravel, PHP, Node.js, Express, SQLite, JavaScript, Python, Flask, REST APIs, MySQL, Supabase, Git / GitHub. <strong>Automation:</strong> Business process automation, email and SMS, document generation. <strong>IT Technical Support:</strong> Windows 10/11, desktop support, network troubleshooting, printer support. <strong>Also used:</strong> React, Angular, Flutter, React Native, Kotlin.</p>
+    <p class="skills-inline"><strong>Used on shipped work:</strong> Laravel, PHP, Node.js, Express, SQLite, JavaScript, Python, Flask, python-docx, REST APIs, MySQL, Supabase, Git / GitHub. <strong>Automation:</strong> Business process automation, email and SMS, document generation. <strong>IT Technical Support:</strong> Windows 10/11, desktop support, network troubleshooting, printer support. <strong>Also used:</strong> React, Angular, Flutter, React Native, Kotlin.</p>
 
     <h2>Work Experience</h2>
 
@@ -47,38 +48,27 @@
     <p class="job-dates">Self-Employed | 2024 — Present</p>
     <ul>
         <li>Shipped a Laravel booking and payment system for an editing business (AWS Lightsail). Live URL and repository stay with the client.</li>
-        <li>Built DeskFlow, a public staff/client request desk (Node.js, Express, SQLite) — live demo and GitHub.</li>
-        <li>Built SlotBook, a public booking calendar (Laravel, MySQL) — live demo and GitHub.</li>
-        <li>Built PaperOut, a public CSV-to-certificate press (Python, Flask) — live demo and GitHub.</li>
-        <li>Built a Python/Flask barcode-to-Word service (public repository).</li>
-        <li>Take freelance work from requirements through testing and maintenance.</li>
+        <li>Take freelance work from requirements through testing, deploy, and maintenance.</li>
     </ul>
 
     <h2>Selected Projects</h2>
-    <p class="job-title">DeskFlow</p>
-    <p class="job-dates">Public demo — Node.js, Express, SQLite · deskflow-w1n5.onrender.com · github.com/Brian-K05/Deskflow</p>
-    <ul>
-        <li>Staff/client request desk: shops file concerns, staff work the queue, each client sees only their own rows. Dummy data. Live demo and public repository.</li>
-    </ul>
     <p class="job-title">SlotBook</p>
     <p class="job-dates">Public demo — Laravel, PHP, MySQL · slotbook-production.up.railway.app · github.com/Brian-K05/SlotBook</p>
     <ul>
-        <li>Booking calendar: guests pick a day and an open hour; admin confirms, cancels, or marks paid. Dummy data. Tests cover booking, admin, and the public calendar. Live demo and public repository.</li>
+        <li>Guests pick a day and hour on the calendar; the same slot cannot be booked twice.</li>
+        <li>Admin confirms, cancels, or marks paid (flag only — no payment API). Dummy data. Feature tests in the repo. Live demo.</li>
+    </ul>
+    <p class="job-title">DeskFlow</p>
+    <p class="job-dates">Public demo — Node.js, Express, SQLite · deskflow-w1n5.onrender.com · github.com/Brian-K05/Deskflow</p>
+    <ul>
+        <li>Staff/client roles; clients are scoped to their own rows. Dummy logins on the sign-in page.</li>
+        <li>Status workflow and staff CSV export. Tests cover the visibility rule. Live demo (Render free plan: first load after idle about one minute).</li>
     </ul>
     <p class="job-title">PaperOut</p>
     <p class="job-dates">Public demo — Python, Flask, python-docx · web-production-97c62.up.railway.app · github.com/Brian-K05/PaperOut</p>
     <ul>
-        <li>CSV-to-certificate press: drop a spreadsheet, download a ZIP of filled Word docs, proof the first row on A4. Dummy names. Live demo and public repository.</li>
-    </ul>
-    <p class="job-title">Insurance Data Management and Business Process Automation System</p>
-    <p class="job-dates">Production system — Machica Firm, Inc.</p>
-    <ul>
-        <li>Designed and implemented APIs, authentication, automation, reporting, document generation, and a secure client portal. No public URL; still in daily use.</li>
-    </ul>
-    <p class="job-title">A4 Word Barcode Generator</p>
-    <p class="job-dates">Public repository — Python, Flask, python-docx</p>
-    <ul>
-        <li>Flask service that generates a Code 128 barcode and places it in a print-ready A4 Word document.</li>
+        <li>CSV in, one Word certificate per row in a ZIP; first row proofs on A4. Header validation; sample CSV in the repo.</li>
+        <li>Dummy names — not a live credential. Live demo and public repository.</li>
     </ul>
 
     <h2>Education</h2>

@@ -57,9 +57,24 @@ function afterMobileMenuClosed(fn) {
         }
         startHero();
     };
-    if (!el || prefersReducedMotion) {
+    const seen = (() => {
+        try {
+            return sessionStorage.getItem('portfolio-seen') === '1';
+        } catch (err) {
+            return false;
+        }
+    })();
+    const markSeen = () => {
+        try {
+            sessionStorage.setItem('portfolio-seen', '1');
+        } catch (err) {
+            /* ignore */
+        }
+    };
+    if (!el || prefersReducedMotion || seen) {
         if (el) el.remove();
         document.body.style.overflow = '';
+        markSeen();
         startHero();
         return;
     }
@@ -69,10 +84,11 @@ function afterMobileMenuClosed(fn) {
     const once = () => {
         if (done) return;
         done = true;
+        markSeen();
         finish();
     };
     if (bar) bar.addEventListener('animationend', once, { once: true });
-    window.setTimeout(once, 1700);
+    window.setTimeout(once, 400);
 })();
 
 function getNavOffset() {
@@ -669,9 +685,29 @@ if (projectModal) {
     });
 }
 
+function getCaseFocusables() {
+    if (!casePanel) return [];
+    return Array.from(
+        casePanel.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+    ).filter((el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
+}
+
 document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && isCaseOpen()) {
         closeProjectModal();
+        return;
+    }
+    if (e.key !== 'Tab' || !isCaseOpen()) return;
+    const items = getCaseFocusables();
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
     }
 });
 
@@ -684,6 +720,7 @@ if (typeof pdfjsLib !== 'undefined') {
 
 // Certificates data - list of PDF and image certificate files
 const certificatesList = [
+    { filename: 'Brian Kyle L. Salor E-Certificate.pdf', title: 'Internship completion — Machica Firm', type: 'pdf' },
     { filename: 'Certificate_of_Participation_DigitalSafety.pdf', title: 'Digital Safety', type: 'pdf' },
     { filename: 'IP Orientation_COP_Oct302024.pdf', title: 'IP Orientation', type: 'pdf' },
     { filename: 'Certificate - Brian Kyle L. Salor.pdf', title: 'Zuitt Data Visualization', type: 'pdf' }
@@ -1251,6 +1288,7 @@ if (certificateFullViewModal) {
 (function setupFeedbackForm() {
     const STORAGE_KEY = 'bkFeedbackCards';
     const form = document.getElementById('feedback-form');
+    if (!form) return;
     const grid = document.getElementById('feedback-grid');
     const layout = document.getElementById('feedback-layout');
     const sentNote = document.getElementById('feedback-sent');
