@@ -3766,17 +3766,30 @@ html.case-open .mf-cursor {
     margin: 0 0 1.15rem;
 }
 
-.theme-ink .tech-stack-header-section .section-title::after {
+.theme-ink .tech-stack-header-section .section-title::after,
+.theme-ink .certifications-header .section-title::after {
     display: none;
 }
 
-.theme-ink .tech-stack-intro {
+.theme-ink .tech-stack-intro,
+.theme-ink .certifications-intro {
     text-align: left;
     max-width: 40rem;
     margin: 0 0 2.5rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
     color: var(--mute);
     font-size: 1.02rem;
     line-height: 1.7;
+}
+
+.theme-ink .certifications-header {
+    margin: 0 0 1.15rem;
+}
+
+.theme-ink .certifications-content {
+    margin-top: 0;
 }
 
 .theme-ink .tech-stack-groups {
@@ -3917,7 +3930,8 @@ html.case-open .mf-cursor {
 }
 
 @media (max-width: 430px) {
-    .theme-ink .tech-stack-intro {
+    .theme-ink .tech-stack-intro,
+    .theme-ink .certifications-intro {
         margin-bottom: 2rem;
         font-size: 0.98rem;
     }
