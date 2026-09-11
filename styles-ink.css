@@ -3757,3 +3757,173 @@ html.case-open .mf-cursor {
     }
 }
 
+/* Skills — editorial metadata, not dashboard pills */
+.theme-ink .tech-stack-section::before {
+    display: none;
+}
+
+.theme-ink .tech-stack-header-section {
+    margin: 0 0 1.15rem;
+}
+
+.theme-ink .tech-stack-header-section .section-title::after {
+    display: none;
+}
+
+.theme-ink .tech-stack-intro {
+    text-align: left;
+    max-width: 40rem;
+    margin: 0 0 2.5rem;
+    color: var(--mute);
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+.theme-ink .tech-stack-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    max-width: 46rem;
+    margin: 0;
+}
+
+.theme-ink .tech-stack-kicker {
+    margin: 0 0 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mute);
+}
+
+.theme-ink .tech-stack-group--shipped .tech-stack-kicker {
+    color: var(--paper-ink);
+}
+
+.theme-ink .tech-stack-group--shipped .tech-stack-kicker::after {
+    content: "";
+    display: block;
+    width: 2.25rem;
+    height: 1px;
+    margin-top: 0.55rem;
+    background: var(--accent);
+}
+
+.theme-ink .tech-meta {
+    margin: 0;
+    border-top: 1px solid var(--line);
+}
+
+.theme-ink .tech-meta-row {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 0.65rem 1.35rem;
+    align-items: start;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.theme-ink .tech-meta-row dt {
+    margin: 0;
+    padding-top: 0.22rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mute);
+}
+
+.theme-ink .tech-meta-row dd,
+.theme-ink .tech-meta-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0;
+}
+
+.theme-ink .tech-meta-line {
+    padding-top: 0.1rem;
+}
+
+.theme-ink .tech-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    color: var(--paper-ink);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.theme-ink .tech-meta-item:not(:last-child)::after {
+    content: "·";
+    margin-left: 0.55rem;
+    margin-right: 0.55rem;
+    color: rgba(154, 154, 150, 0.5);
+    font-weight: 400;
+}
+
+.theme-ink .tech-meta-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    object-fit: contain;
+    filter: grayscale(1) brightness(0) invert(0.9);
+    opacity: 0.72;
+}
+
+.theme-ink .tech-stack-group--secondary .tech-stack-kicker {
+    color: rgba(154, 154, 150, 0.85);
+}
+
+.theme-ink .tech-stack-group--secondary .tech-meta-item {
+    color: var(--mute);
+    font-size: 0.88rem;
+    font-weight: 400;
+}
+
+.theme-ink .tech-stack-group--secondary .tech-meta-icon {
+    opacity: 0.5;
+}
+
+.theme-ink .tech-stack-section .tech-pill {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+@media (max-width: 700px) {
+    .theme-ink .tech-stack-groups {
+        gap: 2.1rem;
+    }
+
+    .theme-ink .tech-meta-row {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+        padding: 0.85rem 0;
+    }
+
+    .theme-ink .tech-meta-item {
+        font-size: 0.92rem;
+    }
+
+    .theme-ink .tech-meta-item:not(:last-child)::after {
+        margin-left: 0.42rem;
+        margin-right: 0.42rem;
+    }
+}
+
+@media (max-width: 430px) {
+    .theme-ink .tech-stack-intro {
+        margin-bottom: 2rem;
+        font-size: 0.98rem;
+    }
+
+    .theme-ink .tech-meta-item {
+        font-size: 0.9rem;
+    }
+}
+
