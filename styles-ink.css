@@ -592,7 +592,7 @@
     letter-spacing: -0.05em;
     line-height: 0.92;
     text-align: left;
-    max-width: 12ch;
+    max-width: 11em;
 }
 
 .theme-ink .contact-cta-inner {
@@ -3703,7 +3703,7 @@ html.case-open .mf-cursor {
     }
 
     .theme-ink .contact-cta-title {
-        max-width: 10ch;
+        max-width: 11em;
         font-size: clamp(2.35rem, 12vw, 3.4rem);
         white-space: normal;
     }
