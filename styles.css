@@ -63,10 +63,15 @@ html {
     --text-gray: #3f3f42;
     --text-light-gray: #6b6b70;
     --text-primary: #0a0a0a;
-    --accent-orange: #2563eb;
-    --accent-orange-rgb: 37, 99, 235;
+    --accent: #2563eb;
+    --accent-rgb: 37, 99, 235;
+    --accent-orange: var(--accent);
+    --accent-orange-rgb: var(--accent-rgb);
     --accent-ice-bright: #3b82f6;
-    --accent-orange-soft: rgba(37, 99, 235, 0.12);
+    --accent-orange-soft: rgba(var(--accent-rgb), 0.12);
+    --radius-control: 8px;
+    --radius-card: 16px;
+    --radius-feature: 24px;
     --accent-glow: rgba(37, 99, 235, 0.28);
     /* Paper + airbrush sprays (editorial — bumped for clearer “spray” read) */
     --paper-warm: #eef2f9;
