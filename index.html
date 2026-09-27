@@ -26,6 +26,7 @@
 </head>
 <body class="portfolio-body theme-ink">
     <a class="skip-link" href="#projects">Skip to work</a>
+    <div class="scroll-progress" aria-hidden="true"><i class="scroll-progress-bar"></i></div>
 
     <div class="preloader" id="preloader" data-testid="preloader">
         <div class="preloader-top">
@@ -132,7 +133,7 @@
             <div class="work-stage js-reveal">
                 <div class="work-band">
                 <p class="work-band-kicker">Public demos</p>
-                <div class="work-pair work-pair--open">
+                <div class="work-pair work-pair--open js-stagger">
                 <article class="project-row project-card" data-project="slotbook" data-deploy-url="https://slotbook-production.up.railway.app/" data-github-url="https://github.com/Brian-K05/SlotBook">
                     <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: SlotBook">
                         <span class="win-chrome">
@@ -206,7 +207,7 @@
                 </article>
                 </div>
 
-                <div class="work-pair work-pair--open work-pair--wide">
+                <div class="work-pair work-pair--open work-pair--wide js-stagger">
                 <article class="project-row project-card" data-project="deskflow" data-deploy-url="https://deskflow-w1n5.onrender.com" data-github-url="https://github.com/Brian-K05/Deskflow">
                     <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: DeskFlow">
                         <span class="win-chrome">
@@ -246,7 +247,7 @@
                 </div>
 
                 <p class="work-band-kicker">In production</p>
-                <div class="work-featured">
+                <div class="work-featured js-stagger">
                 <article class="project-row project-card" data-project="insurance-automation" data-deploy-url="#" data-github-url="#">
                     <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: MAXIN Insurance Data Management System">
                         <span class="win-chrome">
@@ -356,7 +357,7 @@
                 <p class="tech-stack-intro">
                     Laravel, Node.js, and Python are on the public demos. Node.js, Supabase, and Edge Functions are on the Machica production system. React, React Native, Angular, Flutter, and Kotlin: coursework / practice — no public project here.
                 </p>
-                <div class="tech-stack-groups skill-board js-reveal">
+                <div class="tech-stack-groups skill-board js-stagger">
                     <article class="skill-sheet skill-sheet--shipped">
                         <header class="sheet-chrome">
                             <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -435,8 +436,8 @@
                 </div>
             </div>
             <div class="certifications-content">
-                <div class="certs-lead js-reveal">
-                    <div class="certs-grid">
+                <div class="certs-lead">
+                    <div class="certs-grid js-stagger">
                         <article class="cert-sheet">
                             <header class="sheet-chrome">
                                 <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -471,11 +472,11 @@
                             </div>
                         </article>
                     </div>
-                    <div class="certs-foot">
+                    <div class="certs-foot js-reveal">
                         <p class="certifications-intro">
                             I organized and hosted a technical webinar in November 2025. I was not the speaker. Selected scans are in the gallery.
                         </p>
-                        <button type="button" class="btn-see-all" id="seeAllCertificates" aria-haspopup="dialog" aria-controls="certificatesGalleryModal">View selected certificates</button>
+                        <button type="button" class="btn-see-all js-magnetic" id="seeAllCertificates" aria-haspopup="dialog" aria-controls="certificatesGalleryModal" data-cursor="Open">View selected certificates</button>
                     </div>
                 </div>
             </div>

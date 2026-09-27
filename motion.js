@@ -3,6 +3,7 @@
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const finePointer = window.matchMedia('(pointer: fine)').matches;
     const canHover = window.matchMedia('(hover: hover)').matches;
+    document.documentElement.classList.add('js-ok');
 
     function lerp(a, b, t) {
         return a + (b - a) * t;
@@ -50,7 +51,8 @@
             hideOnLeave: true,
             stateDetection: {
                 '-pointer':
-                    'a,button,[role="button"],.js-magnetic,.tag,.tech-pill,.win-icon,.feedback-choice,.certificate-image-wrapper',
+                    'a,button,[role="button"],.js-magnetic,.tag,.tech-pill,.win-icon,.feedback-choice,.certificate-image-wrapper,.skill-sheet,.cert-sheet,.tech-meta-item,.win',
+                '-text': '.name,.section-title,.project-win-title,.about-headline,.contact-cta-title,.cert-sheet-title',
                 '-hidden': 'iframe,input,textarea,select'
             }
         });
@@ -90,8 +92,9 @@
     }
 
     function setupReveals() {
+        const targets = document.querySelectorAll('.js-reveal, .js-stagger');
         if (reduce) {
-            document.querySelectorAll('.js-reveal').forEach((el) => el.classList.add('is-in'));
+            targets.forEach((el) => el.classList.add('is-in'));
             return;
         }
         const io = new IntersectionObserver(
@@ -104,7 +107,61 @@
             },
             { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
         );
-        document.querySelectorAll('.js-reveal').forEach((el) => io.observe(el));
+        targets.forEach((el) => io.observe(el));
+    }
+
+    function setupProgress() {
+        const bar = document.querySelector('.scroll-progress-bar');
+        if (!bar) return;
+        const update = () => {
+            const doc = document.documentElement;
+            const max = doc.scrollHeight - window.innerHeight;
+            const p = max > 0 ? window.scrollY / max : 0;
+            bar.style.transform = `scaleX(${p})`;
+        };
+        update();
+        if (window.__lenis) {
+            window.__lenis.on('scroll', update);
+        }
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+    }
+
+    function setupPortraitTilt() {
+        if (reduce || !finePointer || !canHover) return;
+        if (!window.matchMedia('(min-width: 1024px)').matches) return;
+        const frame = document.querySelector('.hero-portrait');
+        const img = frame && frame.querySelector('img');
+        if (!frame || !img) return;
+
+        let raf = 0;
+        let tx = 0;
+        let ty = 0;
+        let cx = 0;
+        let cy = 0;
+
+        const tick = () => {
+            cx = lerp(cx, tx, 0.12);
+            cy = lerp(cy, ty, 0.12);
+            img.style.transform = `rotateX(${cy}deg) rotateY(${cx}deg) scale(1.03)`;
+            if (Math.abs(tx - cx) + Math.abs(ty - cy) > 0.04) {
+                raf = requestAnimationFrame(tick);
+            }
+        };
+
+        frame.addEventListener('mousemove', (e) => {
+            const r = frame.getBoundingClientRect();
+            tx = ((e.clientX - (r.left + r.width / 2)) / r.width) * 10;
+            ty = ((e.clientY - (r.top + r.height / 2)) / r.height) * -8;
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(tick);
+        });
+        frame.addEventListener('mouseleave', () => {
+            tx = 0;
+            ty = 0;
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(tick);
+        });
     }
 
     function setupMarqueePause() {
@@ -123,5 +180,7 @@
     setupCursor();
     setupMagnetic();
     setupReveals();
+    setupProgress();
+    setupPortraitTilt();
     setupMarqueePause();
 })();

@@ -132,7 +132,7 @@
 }
 
 .theme-ink .hero {
-    overflow: visible;
+    overflow-x: clip;
     content-visibility: visible;
     min-height: 100vh !important;
     min-height: 100dvh !important;
@@ -4367,6 +4367,370 @@ html.case-open .mf-cursor {
     .theme-ink .hero-actions .btn-hire-me {
         font-size: 0.68rem;
         letter-spacing: 0.06em;
+    }
+}
+
+/* Phone layout — last so Skills, Certificates, and leftover grids stay readable */
+@media (max-width: 700px) {
+    .theme-ink .section-container,
+    .theme-ink .skill-board,
+    .theme-ink .certs-grid,
+    .theme-ink .skill-sheet,
+    .theme-ink .cert-sheet,
+    .theme-ink .certs-foot,
+    .theme-ink .work-stage,
+    .theme-ink .work-aside,
+    .theme-ink .tech-stack-intro,
+    .theme-ink .footer-inner,
+    .theme-ink .contact-cta-inner {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .theme-ink .skill-board,
+    .theme-ink .tech-stack-groups.skill-board,
+    .theme-ink .certs-grid {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        gap: 0.85rem;
+    }
+
+    .theme-ink .skill-side {
+        gap: 0.85rem;
+    }
+
+    .theme-ink .sheet-chrome {
+        min-height: 2.4rem;
+        padding: 0.45rem 0.85rem;
+    }
+
+    .theme-ink .sheet-chrome-label {
+        letter-spacing: 0.1em;
+        white-space: normal;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+    }
+
+    .theme-ink .tech-meta-row {
+        grid-template-columns: 1fr !important;
+        gap: 0.4rem;
+        padding: 0.75rem 0.85rem;
+    }
+
+    .theme-ink .tech-meta-item {
+        font-size: 0.78rem;
+        padding: 0.28rem 0.5rem;
+        max-width: 100%;
+    }
+
+    .theme-ink .skill-sheet-body {
+        padding: 0.85rem;
+    }
+
+    .theme-ink .cert-sheet-body {
+        display: grid;
+        grid-template-columns: 2.1rem minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        column-gap: 0.75rem;
+        row-gap: 0.15rem;
+        align-items: center;
+        min-height: 0 !important;
+        padding: 0.95rem 1rem;
+    }
+
+    .theme-ink .cert-sheet-index {
+        position: static;
+        grid-row: 1 / -1;
+        width: auto;
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        color: var(--accent);
+    }
+
+    .theme-ink .cert-sheet-title,
+    .theme-ink .cert-sheet-meta {
+        grid-column: 2;
+    }
+
+    .theme-ink .cert-sheet-title {
+        max-width: none;
+        margin: 0;
+        font-size: 1.12rem;
+        overflow-wrap: anywhere;
+    }
+
+    .theme-ink .cert-sheet-meta {
+        letter-spacing: 0.1em;
+    }
+
+    .theme-ink .certs-foot {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.9rem;
+        margin-top: 0.85rem;
+        padding: 1rem;
+    }
+
+    .theme-ink .certs-lead .certifications-intro {
+        font-size: 0.92rem;
+        line-height: 1.55;
+    }
+
+    .theme-ink .certs-lead .btn-see-all {
+        width: 100%;
+        min-height: 48px;
+        padding: 0.75rem 1rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-align: center;
+    }
+
+    .theme-ink .work-aside {
+        overflow-wrap: anywhere;
+    }
+
+    .theme-ink .work-featured .project-win-title,
+    .theme-ink .about-headline,
+    .theme-ink .contact-cta-title {
+        overflow-wrap: anywhere;
+    }
+
+    .theme-ink .footer-address,
+    .theme-ink .footer-headline,
+    .theme-ink .footer-contact-line {
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-ink .tech-stack-intro {
+        margin-bottom: 1.25rem;
+        font-size: 0.92rem;
+    }
+
+    .theme-ink .cert-sheet-body {
+        padding: 0.85rem 0.9rem;
+    }
+
+    .theme-ink .cert-sheet-title {
+        font-size: 1.02rem;
+    }
+
+    .theme-ink .certificates-gallery-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Designer motion pass — keep last */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    z-index: 20050;
+    pointer-events: none;
+    background: transparent;
+}
+
+.scroll-progress-bar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    box-shadow: 0 0 12px rgba(91, 140, 255, 0.45);
+    will-change: transform;
+}
+
+.theme-ink .nav-links a:hover,
+.theme-ink .nav-links a.active {
+    color: var(--paper-ink);
+}
+
+.theme-ink .nav-links a::after {
+    background: var(--accent);
+}
+
+.theme-ink .btn-hire-me {
+    overflow: hidden;
+}
+
+.theme-ink .btn-hire-me::before {
+    display: block;
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 -40%;
+    width: 42%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34), transparent);
+    transform: translateX(-30%);
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.theme-ink .btn-hire-me:hover::before {
+    transform: translateX(280%);
+}
+
+.theme-ink .btn-hire-me span {
+    position: relative;
+    z-index: 2;
+}
+
+.theme-ink .btn-hire-me--ghost::before {
+    background: linear-gradient(90deg, transparent, rgba(91, 140, 255, 0.28), transparent);
+}
+
+.theme-ink .hero-portrait {
+    perspective: 900px;
+}
+
+.theme-ink .hero-portrait img {
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: center center;
+    will-change: transform;
+}
+
+.theme-ink .hero.is-started .hero-scroll {
+    animation: scrollHint 1.8s 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollHint {
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(6px);
+        opacity: 0.55;
+    }
+}
+
+.win-body {
+    overflow: hidden;
+}
+
+.win-body img {
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.win:hover .win-body img,
+.win:focus-visible .win-body img {
+    transform: scale(1.045);
+}
+
+.theme-ink .skill-sheet,
+.theme-ink .cert-sheet {
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.45s ease;
+}
+
+.theme-ink .tech-meta-item {
+    transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.theme-ink .footer-social-pill {
+    transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+.theme-ink .experience-item {
+    transition: border-color 0.35s ease;
+}
+
+.theme-ink .contact-cta-title .name-accent {
+    display: inline-block;
+}
+
+html.js-ok .js-stagger > * {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.js-ok .js-stagger.is-in > * {
+    opacity: 1;
+    transform: none;
+}
+
+html.js-ok .js-stagger.is-in > *:nth-child(1) { transition-delay: 0.04s; }
+html.js-ok .js-stagger.is-in > *:nth-child(2) { transition-delay: 0.12s; }
+html.js-ok .js-stagger.is-in > *:nth-child(3) { transition-delay: 0.2s; }
+html.js-ok .js-stagger.is-in > *:nth-child(4) { transition-delay: 0.28s; }
+
+@media (hover: hover) and (pointer: fine) {
+    .theme-ink .skill-sheet:hover,
+    .theme-ink .cert-sheet:hover {
+        transform: translateY(-5px);
+        border-color: rgba(91, 140, 255, 0.5);
+        box-shadow: 0 22px 48px rgba(0, 0, 0, 0.38);
+    }
+
+    .theme-ink .tech-meta-item:hover {
+        border-color: rgba(91, 140, 255, 0.5);
+        background: rgba(91, 140, 255, 0.12);
+        color: var(--paper-ink);
+        transform: translateY(-1px);
+    }
+
+    .theme-ink .footer-social-pill:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-2px);
+    }
+
+    .theme-ink .experience-item:hover {
+        border-color: rgba(91, 140, 255, 0.28);
+    }
+
+    .theme-ink .contact-cta-title .name-accent {
+        animation: accentPulse 2.8s ease-in-out infinite;
+    }
+}
+
+@keyframes accentPulse {
+    0%,
+    100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(1.08); }
+}
+
+@media (hover: none) {
+    .win:hover .win-body img,
+    .win:focus-visible .win-body img {
+        transform: none;
+    }
+
+    .theme-ink .skill-sheet:hover,
+    .theme-ink .cert-sheet:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-progress,
+    .scroll-progress-bar,
+    .theme-ink .hero.is-started .hero-scroll,
+    .theme-ink .contact-cta-title .name-accent,
+    .theme-ink .btn-hire-me::before,
+    .win-body img,
+    .js-stagger > *,
+    .js-stagger.is-in > * {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    .scroll-progress {
+        display: none;
+    }
+
+    .theme-ink .hero-portrait img {
+        transform: none !important;
+        transition: none !important;
     }
 }
 
