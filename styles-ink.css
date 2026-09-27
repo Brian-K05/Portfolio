@@ -3744,9 +3744,9 @@ html.case-open .mf-cursor {
     .theme-ink .hero-image {
         order: 2;
         width: 100%;
-        max-width: 13rem;
-        margin: 1.35rem 0 0;
-        margin-left: 0;
+        max-width: 16.5rem;
+        margin: 1.35rem auto 0;
+        margin-left: auto;
         margin-right: auto;
     }
 
@@ -3805,7 +3805,9 @@ html.case-open .mf-cursor {
     }
 
     .theme-ink .hero-image {
-        max-width: 11.5rem;
+        max-width: min(18.5rem, 78vw);
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .theme-ink .job-titles {
@@ -4203,10 +4205,15 @@ html.case-open .mf-cursor {
 
     .theme-ink .hero-image {
         order: 2 !important;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
         width: 100%;
-        max-width: 12.5rem;
-        margin: 1.25rem 0 0 !important;
-        margin-left: 0 !important;
+        max-width: none;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 1.5rem auto 0 !important;
+        margin-left: auto !important;
         margin-right: auto !important;
     }
 
@@ -4731,6 +4738,158 @@ html.js-ok .js-stagger.is-in > *:nth-child(4) { transition-delay: 0.28s; }
     .theme-ink .hero-portrait img {
         transform: none !important;
         transition: none !important;
+    }
+}
+
+/* Phone hero — last so leftover left-align / 100vh rules cannot win */
+@media (max-width: 900px) {
+    .theme-ink .hero,
+    .theme-ink .hero-section {
+        display: block !important;
+        min-height: 0 !important;
+        height: auto !important;
+        align-items: flex-start !important;
+        padding-bottom: 1.75rem !important;
+    }
+
+    .theme-ink .hero-container {
+        display: flex !important;
+        flex-direction: column;
+        align-items: stretch;
+        min-height: 0 !important;
+        height: auto !important;
+        gap: 0;
+    }
+
+    .theme-ink .hero-content {
+        order: 1 !important;
+        width: 100%;
+        max-width: 100%;
+        gap: 0 !important;
+    }
+
+    .theme-ink .hero-image {
+        order: 2 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 1.6rem auto 0 !important;
+        pointer-events: auto;
+    }
+
+    .theme-ink .hero-portrait,
+    .theme-ink .hero.is-started .hero-portrait {
+        width: min(16.75rem, 76vw);
+        max-width: min(16.75rem, 76vw);
+        margin: 0 auto;
+        aspect-ratio: 4 / 5;
+        border-radius: 22px;
+        animation: none !important;
+        clip-path: none;
+    }
+
+    .theme-ink .hero-portrait img {
+        object-fit: cover;
+        object-position: 50% 18%;
+        transform: none !important;
+    }
+
+    .theme-ink .hero-portrait figcaption {
+        justify-content: center;
+        letter-spacing: 0.14em;
+        padding: 0.65rem 0.9rem;
+    }
+
+    .theme-ink .hero-actions {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        justify-items: stretch;
+        gap: 0.7rem;
+        width: 100%;
+        margin-top: 0.95rem !important;
+    }
+
+    .theme-ink .hero-actions .btn-hire-me {
+        grid-row: 1 !important;
+        width: 100%;
+    }
+
+    .theme-ink .hero-actions .social-link:nth-child(3) {
+        grid-row: 2 !important;
+        grid-column: 1 !important;
+        justify-self: end;
+        margin-right: 0.15rem;
+    }
+
+    .theme-ink .hero-actions .social-link:nth-child(4) {
+        grid-row: 2 !important;
+        grid-column: 2 !important;
+        justify-self: start;
+        margin-left: 0.15rem;
+    }
+
+    .theme-ink .hero-status {
+        grid-column: 1 / -1 !important;
+        grid-row: 3 !important;
+        width: 100% !important;
+        justify-content: center;
+        text-align: center;
+        white-space: normal !important;
+        letter-spacing: 0.1em;
+        line-height: 1.45;
+    }
+
+    .theme-ink .job-titles {
+        width: fit-content;
+        max-width: 100%;
+        align-self: center;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        text-align: center;
+        white-space: normal !important;
+        letter-spacing: 0.1em;
+    }
+
+    .theme-ink .job-titles-text {
+        white-space: normal !important;
+        text-align: center;
+    }
+
+    .theme-ink .tagline {
+        margin-top: 0.75rem;
+        max-width: 36rem;
+        font-size: 0.95rem;
+        line-height: 1.55;
+    }
+
+    .theme-ink .projects,
+    .theme-ink .experience,
+    .theme-ink .about,
+    .theme-ink .tech-stack-section,
+    .theme-ink .certifications,
+    .theme-ink .contact-cta-band {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    .theme-ink .projects-header,
+    .theme-ink .tech-stack-header-section,
+    .theme-ink .certifications-header,
+    .theme-ink .experience-header {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-ink .hero-portrait,
+    .theme-ink .hero.is-started .hero-portrait {
+        width: min(16.25rem, 82vw);
+        max-width: min(16.25rem, 82vw);
     }
 }
 
