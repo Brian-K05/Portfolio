@@ -282,7 +282,7 @@ function revealResetVisible() {
     });
     document
         .querySelectorAll(
-            '.project-row, .about-main, .about-facts, .tech-stack-groups, .certificate-featured-wrap, .experience-list, .feedback-copy, .feedback-card, .feedback-form'
+            '.project-row, .about-main, .about-facts, .tech-stack-groups, .certs-lead, .experience-list, .feedback-copy, .feedback-card, .feedback-form'
         )
         .forEach((el) => {
             el.style.opacity = '1';
@@ -333,7 +333,7 @@ if (prefersReducedMotion) {
         observer.observe(el);
     });
 
-    document.querySelectorAll('.certificate-featured-wrap').forEach((el, index) => {
+    document.querySelectorAll('.certs-lead').forEach((el, index) => {
         const delay = index * 0.065;
         el.style.opacity = '0';
         el.style.transform = 'translateY(16px)';

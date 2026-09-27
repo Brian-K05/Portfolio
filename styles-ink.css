@@ -3127,6 +3127,25 @@ html:not(.has-cursor) .mf-cursor {
     color: var(--mute);
 }
 
+.work-aside {
+    margin: 1.75rem 0 0;
+    max-width: 52ch;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--mute);
+}
+
+.work-aside a {
+    color: var(--paper-ink);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.work-aside a:hover,
+.work-aside a:focus-visible {
+    color: var(--accent);
+}
+
 .project-win-live {
     display: none;
     text-decoration: none;
@@ -3842,6 +3861,44 @@ html.case-open .mf-cursor {
     margin-top: 0;
 }
 
+.theme-ink .certs-lead {
+    max-width: 40rem;
+}
+
+.theme-ink .certs-list {
+    margin: 0 0 1.15rem;
+    padding: 0;
+    list-style: none;
+}
+
+.theme-ink .certs-list li {
+    position: relative;
+    padding: 0.45rem 0 0.45rem 1.1rem;
+    border-bottom: 1px solid rgba(244, 244, 241, 0.08);
+    color: var(--paper-ink);
+    font-size: 1.02rem;
+    line-height: 1.5;
+}
+
+.theme-ink .certs-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.95rem;
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.theme-ink .certs-lead .certifications-intro {
+    margin-bottom: 1.15rem;
+}
+
+.theme-ink .certs-lead .btn-see-all {
+    margin-top: 0;
+}
+
 .theme-ink .tech-stack-groups {
     display: flex;
     flex-direction: column;
@@ -3988,6 +4045,222 @@ html.case-open .mf-cursor {
 
     .theme-ink .tech-meta-item {
         font-size: 0.9rem;
+    }
+}
+
+/* Mobile / tablet — last so it wins over leftover layout rules */
+@media (max-width: 1024px) {
+    .theme-ink .about-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .theme-ink .experience-item {
+        grid-template-columns: 1fr;
+        gap: 0.45rem;
+    }
+
+    .theme-ink .certificate-card,
+    .theme-ink .certificate-card.featured {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 900px) {
+    html,
+    body.theme-ink {
+        overflow-x: clip;
+        max-width: 100%;
+    }
+
+    .theme-ink .hero,
+    .theme-ink .hero-container {
+        min-height: 0 !important;
+        height: auto !important;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .theme-ink .hero-container {
+        display: flex !important;
+        flex-direction: column;
+    }
+
+    .theme-ink .hero-content {
+        order: 1 !important;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .theme-ink .hero-image {
+        order: 2 !important;
+        width: 100%;
+        max-width: 12.5rem;
+        margin: 1.25rem 0 0 !important;
+        margin-left: 0 !important;
+        margin-right: auto !important;
+    }
+
+    .theme-ink .name {
+        font-size: clamp(2.1rem, 10.5vw, 2.75rem) !important;
+        max-width: 100%;
+        overflow: visible;
+        overflow-wrap: break-word;
+        word-break: normal;
+    }
+
+    .theme-ink .name-line,
+    .theme-ink .name-mask {
+        overflow: visible !important;
+        transform: none !important;
+        width: 100%;
+    }
+
+    .theme-ink .job-titles {
+        white-space: normal !important;
+        max-width: 100%;
+        width: fit-content;
+    }
+
+    .theme-ink .job-titles-text {
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+    }
+
+    .theme-ink .hero-actions {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 1rem !important;
+    }
+
+    .theme-ink .hero-actions .btn-hire-me {
+        grid-column: auto !important;
+        grid-row: 1 !important;
+        width: 100%;
+        min-width: 0;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        padding: 0 0.75rem !important;
+    }
+
+    .theme-ink .hero-actions .social-link {
+        grid-row: 2 !important;
+        grid-column: auto !important;
+    }
+
+    .theme-ink .hero-status {
+        grid-column: 1 / -1 !important;
+        grid-row: 3 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+        letter-spacing: 0.1em;
+        line-height: 1.45;
+        height: auto !important;
+        min-height: 40px;
+    }
+
+    .theme-ink .tagline {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    .theme-ink .section-title,
+    .theme-ink .contact-cta-title,
+    .theme-ink .about-headline,
+    .theme-ink .project-win-title {
+        max-width: 100%;
+        white-space: normal !important;
+        overflow-wrap: break-word;
+    }
+
+    .theme-ink .contact-cta-title {
+        font-size: clamp(1.85rem, 11vw, 2.6rem) !important;
+        max-width: 100% !important;
+    }
+
+    .theme-ink .contact-cta-alt {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.55rem;
+    }
+
+    .theme-ink .contact-cta-alt [aria-hidden="true"] {
+        display: none;
+    }
+
+    .theme-ink .about-facts-list > div {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+
+    .theme-ink .footer-social-row,
+    .theme-ink .footer-contact-line {
+        flex-wrap: wrap;
+        max-width: 100%;
+    }
+
+    .theme-ink .tech-meta-row {
+        grid-template-columns: 1fr;
+    }
+
+    .work-pair .project-win-title,
+    .work-tools .project-win-title {
+        overflow-wrap: anywhere;
+    }
+
+    .theme-ink .js-magnetic {
+        transform: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-ink .hero {
+        padding-left: max(1rem, env(safe-area-inset-left, 0px));
+        padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    }
+
+    .theme-ink .hero-actions {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    .theme-ink .hero-actions .btn-hire-me {
+        grid-column: auto !important;
+        min-height: 48px !important;
+    }
+
+    .theme-ink .hero-actions .social-link {
+        grid-row: 2 !important;
+    }
+
+    .theme-ink .hero-status {
+        grid-column: 1 / -1 !important;
+        grid-row: 3 !important;
+        white-space: normal !important;
+    }
+
+    .theme-ink .hero-image {
+        max-width: 11rem !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .theme-ink .name {
+        font-size: clamp(1.9rem, 11vw, 2.35rem) !important;
+    }
+
+    .theme-ink .hero-actions .btn-hire-me {
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
     }
 }
 

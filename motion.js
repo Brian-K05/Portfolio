@@ -50,7 +50,7 @@
             hideOnLeave: true,
             stateDetection: {
                 '-pointer':
-                    'a,button,[role="button"],.js-magnetic,.tag,.tech-pill,.win-icon,.feedback-choice,.certificate-image-wrapper,.certificate-featured',
+                    'a,button,[role="button"],.js-magnetic,.tag,.tech-pill,.win-icon,.feedback-choice,.certificate-image-wrapper',
                 '-hidden': 'iframe,input,textarea,select'
             }
         });
