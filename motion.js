@@ -3,6 +3,7 @@
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const finePointer = window.matchMedia('(pointer: fine)').matches;
     const canHover = window.matchMedia('(hover: hover)').matches;
+    const desktopMotion = finePointer && canHover && window.matchMedia('(min-width: 1024px)').matches;
     document.documentElement.classList.add('js-ok');
 
     function lerp(a, b, t) {
@@ -34,7 +35,7 @@
 
     function setupCursor() {
         if (typeof MouseFollower === 'undefined' || typeof gsap === 'undefined') return;
-        if (!finePointer || !canHover || reduce) return;
+        if (!desktopMotion || reduce) return;
 
         document.querySelectorAll('.js-magnetic').forEach((el) => {
             if (!el.hasAttribute('data-cursor-stick')) {
@@ -59,7 +60,7 @@
     }
 
     function setupMagnetic() {
-        if (reduce || !finePointer) return;
+        if (reduce || !desktopMotion) return;
         document.querySelectorAll('.js-magnetic').forEach((el) => {
             let tx = 0;
             let ty = 0;
@@ -128,8 +129,7 @@
     }
 
     function setupPortraitTilt() {
-        if (reduce || !finePointer || !canHover) return;
-        if (!window.matchMedia('(min-width: 1024px)').matches) return;
+        if (reduce || !desktopMotion) return;
         const frame = document.querySelector('.hero-portrait');
         const img = frame && frame.querySelector('img');
         if (!frame || !img) return;
@@ -151,8 +151,8 @@
 
         frame.addEventListener('mousemove', (e) => {
             const r = frame.getBoundingClientRect();
-            tx = ((e.clientX - (r.left + r.width / 2)) / r.width) * 10;
-            ty = ((e.clientY - (r.top + r.height / 2)) / r.height) * -8;
+            tx = ((e.clientX - (r.left + r.width / 2)) / r.width) * 5;
+            ty = ((e.clientY - (r.top + r.height / 2)) / r.height) * -4;
             cancelAnimationFrame(raf);
             raf = requestAnimationFrame(tick);
         });
@@ -165,14 +165,82 @@
     }
 
     function setupMarqueePause() {
-        const track = document.querySelector('.marquee-track');
+        const track = document.querySelector('.studio-marquee-track') || document.querySelector('.marquee-track');
         if (!track || reduce) return;
-        const wrap = track.closest('.marquee');
+        const wrap = track.closest('.studio-marquee, .marquee');
+        if (!wrap) return;
         wrap.addEventListener('mouseenter', () => {
             track.style.animationPlayState = 'paused';
         });
         wrap.addEventListener('mouseleave', () => {
             track.style.animationPlayState = 'running';
+        });
+    }
+
+    function setupHeroGlow() {
+        if (reduce || !desktopMotion) return;
+        const hero = document.querySelector('.hero');
+        const glow = document.querySelector('.hero-glow');
+        if (!hero || !glow) return;
+        let raf = 0;
+        hero.addEventListener('mousemove', (e) => {
+            const r = hero.getBoundingClientRect();
+            const x = ((e.clientX - r.left) / r.width) * 100;
+            const y = ((e.clientY - r.top) / r.height) * 100;
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(() => {
+                glow.style.setProperty('--gx', `${x}%`);
+                glow.style.setProperty('--gy', `${y}%`);
+            });
+        });
+    }
+
+    function setupWinTilt() {
+        if (reduce || !desktopMotion) return;
+        document.querySelectorAll('.win').forEach((el) => {
+            el.addEventListener('mousemove', (e) => {
+                const r = el.getBoundingClientRect();
+                const x = ((e.clientX - r.left) / r.width - 0.5) * 5;
+                const y = ((e.clientY - r.top) / r.height - 0.5) * -4;
+                el.style.transform = `perspective(900px) rotateX(${y}deg) rotateY(${x}deg) translateY(-2px)`;
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = '';
+            });
+        });
+    }
+
+    function setupExperienceRail() {
+        const items = document.querySelectorAll('.experience-item--rail');
+        if (!items.length) return;
+        const io = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    entry.target.classList.toggle('is-active', entry.isIntersecting);
+                });
+            },
+            { threshold: 0.35, rootMargin: '-12% 0px -35% 0px' }
+        );
+        items.forEach((el) => io.observe(el));
+    }
+
+    function setupSkillFilter() {
+        const filters = document.querySelectorAll('.skill-filter');
+        const sheets = document.querySelectorAll('.skill-sheet[data-skill]');
+        if (!filters.length || !sheets.length) return;
+        filters.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const next = btn.getAttribute('data-filter');
+                filters.forEach((other) => {
+                    const on = other === btn;
+                    other.classList.toggle('is-on', on);
+                    other.setAttribute('aria-pressed', on ? 'true' : 'false');
+                });
+                sheets.forEach((sheet) => {
+                    const match = next === 'all' || sheet.getAttribute('data-skill') === next;
+                    sheet.classList.toggle('is-dim', !match);
+                });
+            });
         });
     }
 
@@ -182,5 +250,9 @@
     setupReveals();
     setupProgress();
     setupPortraitTilt();
+    setupHeroGlow();
+    setupWinTilt();
+    setupExperienceRail();
+    setupSkillFilter();
     setupMarqueePause();
 })();

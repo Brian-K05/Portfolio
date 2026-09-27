@@ -79,8 +79,13 @@
     </div>
 
     <section class="hero hero-section" id="home">
+        <div class="hero-atmosphere" aria-hidden="true">
+            <div class="hero-grid"></div>
+            <div class="hero-glow"></div>
+        </div>
         <div class="hero-container">
             <div class="hero-content">
+                <p class="hero-kicker">Intro</p>
                 <div class="name-section">
                     <h1 class="name">
                         <span class="name-line"><span class="name-mask">Brian Kyle</span></span>
@@ -88,10 +93,10 @@
                     </h1>
                     <span class="hero-rule" aria-hidden="true"></span>
                 </div>
-                <p class="job-titles"><span class="job-titles-text">Junior Software Developer | Backend Developer</span></p>
+                <p class="job-titles job-titles--stack"><span class="job-titles-text">Junior Software Developer</span><span class="job-titles-text">Backend Developer</span></p>
                 <div class="hero-actions">
                     <a href="mailto:briankylesalor02@gmail.com?subject=Junior%20software%20developer%20role" class="btn-hire-me js-magnetic" data-cursor="Email"><span>Email me</span></a>
-                    <a href="#projects" class="btn-hire-me btn-hire-me--ghost js-magnetic" data-cursor="Work"><span>View work</span></a>
+                    <a href="#projects" class="btn-hire-me btn-hire-me--ghost js-magnetic" data-cursor="VIEW →"><span>View work</span></a>
                     <a href="https://github.com/Brian-K05" target="_blank" rel="noopener noreferrer" class="social-link js-magnetic" aria-label="GitHub">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -119,11 +124,18 @@
         <p class="hero-scroll" aria-hidden="true">Scroll</p>
     </section>
 
+    <div class="studio-marquee" aria-hidden="true">
+        <div class="studio-marquee-track">
+            <span>Backend</span><i></i><span>Software</span><i></i><span>Laravel</span><i></i><span>Node.js</span><i></i><span>Python</span><i></i><span>Automation</span><i></i><span>APIs</span><i></i><span>Databases</span><i></i><span>Systems</span><i></i><span>Tests</span><i></i>
+            <span>Backend</span><i></i><span>Software</span><i></i><span>Laravel</span><i></i><span>Node.js</span><i></i><span>Python</span><i></i><span>Automation</span><i></i><span>APIs</span><i></i><span>Databases</span><i></i><span>Systems</span><i></i><span>Tests</span><i></i>
+        </div>
+    </div>
+
     <section class="projects" id="projects">
         <div class="section-container">
             <div class="projects-header js-reveal">
                 <div class="projects-header-left">
-                    <div class="page-number">01</div>
+                    <div class="page-number">01 / Work</div>
                     <h2 class="section-title">Work</h2>
                 </div>
                 <p class="projects-subtitle">Three public demos, one production internship system.</p>
@@ -133,9 +145,9 @@
             <div class="work-stage js-reveal">
                 <div class="work-band">
                 <p class="work-band-kicker">Public demos</p>
-                <div class="work-pair work-pair--open js-stagger">
-                <article class="project-row project-card" data-project="slotbook" data-deploy-url="https://slotbook-production.up.railway.app/" data-github-url="https://github.com/Brian-K05/SlotBook">
-                    <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: SlotBook">
+                <div class="work-lead js-stagger">
+                <article class="project-row project-card work-card--lead" data-project="slotbook" data-deploy-url="https://slotbook-production.up.railway.app/" data-github-url="https://github.com/Brian-K05/SlotBook">
+                    <button type="button" class="win js-open-case" data-cursor="VIEW →" aria-label="Open case study: SlotBook">
                         <span class="win-chrome">
                             <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                             <span class="win-url">live · slotbook-production.up.railway.app</span>
@@ -149,6 +161,7 @@
                             <p class="project-win-num">01 · Live + GitHub</p>
                             <a class="project-win-live" href="https://slotbook-production.up.railway.app/" target="_blank" rel="noopener noreferrer">Live</a>
                             <h3 class="project-win-title">SlotBook</h3>
+                            <p class="project-win-cat">Booking calendar</p>
                             <p class="project-win-blurb">Unique time slots. Admin can confirm, cancel, or mark paid (flag only). Feature tests. Public demo.</p>
                             <p class="project-win-stack">Laravel · PHP · MySQL · Blade</p>
                         </div>
@@ -169,9 +182,11 @@
                         <div class="project-links"><a href="https://slotbook-production.up.railway.app/" class="btn-live-demo" target="_blank" rel="noopener noreferrer"><span>View live</span></a><a href="https://github.com/Brian-K05/SlotBook" class="btn-github" target="_blank" rel="noopener noreferrer"><span>View code</span></a></div>
                     </div>
                 </article>
+                </div>
 
-                <article class="project-row project-card" data-project="paperout" data-deploy-url="https://web-production-97c62.up.railway.app/" data-github-url="https://github.com/Brian-K05/PaperOut">
-                    <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: PaperOut">
+                <div class="work-split js-stagger">
+                <article class="project-row project-card work-card--split" data-project="paperout" data-deploy-url="https://web-production-97c62.up.railway.app/" data-github-url="https://github.com/Brian-K05/PaperOut">
+                    <button type="button" class="win js-open-case" data-cursor="VIEW →" aria-label="Open case study: PaperOut">
                         <span class="win-chrome">
                             <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                             <span class="win-url">live · railway.app</span>
@@ -185,6 +200,7 @@
                             <p class="project-win-num">02 · Live + GitHub</p>
                             <a class="project-win-live" href="https://web-production-97c62.up.railway.app/" target="_blank" rel="noopener noreferrer">Live</a>
                             <h3 class="project-win-title">PaperOut</h3>
+                            <p class="project-win-cat">Certificate press</p>
                             <p class="project-win-blurb">Validates CSV headers, then builds a ZIP of Word certificates and an A4 proof of the first row. Public demo.</p>
                             <p class="project-win-stack">Python · Flask · python-docx</p>
                         </div>
@@ -209,7 +225,7 @@
 
                 <div class="work-pair work-pair--open work-pair--wide js-stagger">
                 <article class="project-row project-card" data-project="deskflow" data-deploy-url="https://deskflow-w1n5.onrender.com" data-github-url="https://github.com/Brian-K05/Deskflow">
-                    <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: DeskFlow">
+                    <button type="button" class="win js-open-case" data-cursor="VIEW →" aria-label="Open case study: DeskFlow">
                         <span class="win-chrome">
                             <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                             <span class="win-url">live · Render · ~1 min first load</span>
@@ -223,6 +239,7 @@
                             <p class="project-win-num">03 · Live + GitHub</p>
                             <a class="project-win-live" href="https://deskflow-w1n5.onrender.com" target="_blank" rel="noopener noreferrer">Live</a>
                             <h3 class="project-win-title">DeskFlow</h3>
+                            <p class="project-win-cat">Request desk</p>
                             <p class="project-win-blurb">Row-level visibility: staff see every ticket; each client sees only their own. Status workflow, CSV export, tests. Public demo.</p>
                             <p class="project-win-stack">Node.js · Express · SQLite</p>
                         </div>
@@ -248,8 +265,8 @@
 
                 <p class="work-band-kicker">In production</p>
                 <div class="work-featured js-stagger">
-                <article class="project-row project-card" data-project="insurance-automation" data-deploy-url="#" data-github-url="#">
-                    <button type="button" class="win js-open-case" data-cursor="View" aria-label="Open case study: MAXIN Insurance Data Management System">
+                <article class="project-row project-card work-case" data-project="insurance-automation" data-deploy-url="#" data-github-url="#">
+                    <button type="button" class="win js-open-case" data-cursor="VIEW →" aria-label="Open case study: MAXIN Insurance Data Management System">
                         <span class="win-chrome">
                             <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                             <span class="win-url">in production · no public URL</span>
@@ -258,12 +275,41 @@
                             <img src="maxin.png" alt="MAXIN Insurance Data Management System" class="project-card-img" width="1280" height="720" loading="lazy">
                         </span>
                     </button>
-                    <div class="project-win-foot">
+                    <div class="project-win-foot work-case-body">
                         <div class="project-win-copy">
-                            <p class="project-win-num">04 · Production</p>
-                            <h3 class="project-win-title">MAXIN Insurance Data Management System</h3>
-                            <p class="project-win-blurb">Led the intern build at Machica Firm with one co-intern. Backend-heavy: APIs, Edge Functions, email/SMS/spreadsheet automation. Leadership approved the deploy. Three staff were using it when I left.</p>
-                            <p class="project-win-stack">Node.js · REST APIs · Supabase</p>
+                            <p class="project-win-num">04 / Production</p>
+                            <p class="work-case-kicker">Insurance data management &amp; business process automation</p>
+                            <h3 class="project-win-title">MAXIN</h3>
+                            <div class="work-case-block">
+                                <p class="work-case-label">The system</p>
+                                <p class="project-win-blurb">Led the intern build at Machica Firm with one co-intern. Backend-heavy: APIs, Edge Functions, email/SMS/spreadsheet automation. Leadership approved the deploy. Three staff were using it when I left.</p>
+                            </div>
+                            <div class="work-case-block">
+                                <p class="work-case-label">My role</p>
+                                <p class="work-case-copy">Intern lead · one co-intern. Most of the backend. Part of the frontend, including a client portal.</p>
+                            </div>
+                            <div class="work-case-block">
+                                <p class="work-case-label">Stack</p>
+                                <p class="project-win-stack">Node.js · REST APIs · Supabase</p>
+                            </div>
+                            <dl class="case-facts case-facts--strip">
+                                <div>
+                                    <dt>Role</dt>
+                                    <dd>Intern lead</dd>
+                                </div>
+                                <div>
+                                    <dt>Status</dt>
+                                    <dd>Production</dd>
+                                </div>
+                                <div>
+                                    <dt>When I left</dt>
+                                    <dd>3 staff</dd>
+                                </div>
+                                <div>
+                                    <dt>Internship</dt>
+                                    <dd>486 hours</dd>
+                                </div>
+                            </dl>
                         </div>
                     </div>
                     <div class="project-details" hidden>
@@ -284,15 +330,20 @@
     <section class="experience section-alt" id="experience">
         <div class="section-container">
             <div class="experience-header js-reveal">
-                <div class="page-number">02</div>
-                <h2 class="section-title">Experience</h2>
+                    <div class="page-number">02 / Experience</div>
+                    <h2 class="section-title">Experience</h2>
             </div>
             <ol class="experience-list">
-                <li class="experience-item js-reveal">
-                    <p class="experience-dates">Feb 2026 — May 2026</p>
+                <li class="experience-item experience-item--rail js-reveal">
+                    <div class="experience-when">
+                        <p class="experience-year">2026</p>
+                        <p class="experience-dates">Feb 2026 — May 2026</p>
+                    </div>
                     <div class="experience-body">
-                        <h3 class="experience-role">IT Intern (Software Development &amp; Technical Support)</h3>
                         <p class="experience-org">Machica Firm, Inc.</p>
+                        <h3 class="experience-role">IT Intern</h3>
+                        <p class="experience-role-sub">Software Development &amp; Technical Support</p>
+                        <p class="experience-tags"><span>Software development</span><span>Backend</span><span>Database</span><span>Automation</span><span>Technical support</span></p>
                         <ul class="experience-points">
                             <li>Led feature design and development of an Insurance Data Management &amp; Business Process Automation System with one co-intern. Leadership approved the deploy. Three staff were using it when I left. No public URL — the company owns the live system.</li>
                             <li>Built most of the backend: REST APIs, authentication, Supabase data model, a data-management module with CRUD for insurance records, Edge Functions, Gmail SMTP, Semaphore SMS, Excel reporting, and document generation. Also contributed to the frontend.</li>
@@ -306,16 +357,19 @@
 
     <section class="about" id="about">
         <div class="section-container">
-            <div class="page-number">03</div>
+            <div class="page-number">03 / About</div>
             <div class="about-content">
                 <div class="about-main js-reveal">
+                    <p class="about-kicker">How I work</p>
                     <h2 class="about-headline">
                         Junior software.<br>
                         <span class="highlight-orange">Backend-first.</span>
                     </h2>
+                    <p class="about-kicker">What I build</p>
                     <p class="about-text">
-                        I build web systems end to end: APIs, data model, screens, deploy.
+                        I build web systems end to end: <span class="about-mark">APIs</span>, <span class="about-mark">data</span> model, <span class="about-mark">screens</span>, <span class="about-mark">deploy</span>.
                     </p>
+                    <p class="about-kicker">Who I am</p>
                     <p class="about-text-secondary">
                         Based in Taguig City. BSIT, Leyte Normal University, graduated 16 June 2026. Led the Machica Firm internship system (486 hours). Public demos are on Work.
                     </p>
@@ -349,7 +403,7 @@
         <div class="section-container">
             <div class="tech-stack-header-section">
                 <div class="tech-stack-header-left">
-                    <div class="page-number">04</div>
+                    <div class="page-number">04 / Skills</div>
                     <h2 class="section-title">Skills</h2>
                 </div>
             </div>
@@ -357,8 +411,14 @@
                 <p class="tech-stack-intro">
                     Laravel, Node.js, and Python are on the public demos. Node.js, Supabase, and Edge Functions are on the Machica production system. React, React Native, Angular, Flutter, and Kotlin: coursework / practice — no public project here.
                 </p>
+                <div class="skill-filters" role="tablist" aria-label="Skill groups">
+                    <button type="button" class="skill-filter is-on" data-filter="all" aria-pressed="true">All</button>
+                    <button type="button" class="skill-filter" data-filter="shipped" aria-pressed="false">Shipped</button>
+                    <button type="button" class="skill-filter" data-filter="automation" aria-pressed="false">Automation</button>
+                    <button type="button" class="skill-filter" data-filter="also" aria-pressed="false">Also used</button>
+                </div>
                 <div class="tech-stack-groups skill-board js-stagger">
-                    <article class="skill-sheet skill-sheet--shipped">
+                    <article class="skill-sheet skill-sheet--shipped" data-skill="shipped">
                         <header class="sheet-chrome">
                             <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                             <span class="sheet-chrome-label">Used on shipped work</span>
@@ -396,7 +456,7 @@
                         </dl>
                     </article>
                     <div class="skill-side">
-                        <article class="skill-sheet">
+                        <article class="skill-sheet" data-skill="automation">
                             <header class="sheet-chrome">
                                 <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                                 <span class="sheet-chrome-label">Automation</span>
@@ -407,7 +467,7 @@
                                 <span class="tech-meta-item"><span>Document generation</span></span>
                             </p>
                         </article>
-                        <article class="skill-sheet skill-sheet--quiet">
+                        <article class="skill-sheet skill-sheet--quiet" data-skill="also">
                             <header class="sheet-chrome">
                                 <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                                 <span class="sheet-chrome-label">Also used</span>
@@ -431,7 +491,7 @@
         <div class="section-container">
             <div class="certifications-header">
                 <div class="certifications-header-left">
-                    <div class="page-number">05</div>
+                    <div class="page-number">05 / Certificates</div>
                     <h2 class="section-title">Certificates</h2>
                 </div>
             </div>
