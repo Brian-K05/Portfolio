@@ -720,10 +720,10 @@ if (typeof pdfjsLib !== 'undefined') {
 
 // Certificates data - list of PDF and image certificate files
 const certificatesList = [
-    { filename: 'Brian Kyle L. Salor E-Certificate.pdf', title: 'Internship completion — Machica Firm', type: 'pdf' },
-    { filename: 'Certificate_of_Participation_DigitalSafety.pdf', title: 'Digital Safety', type: 'pdf' },
-    { filename: 'IP Orientation_COP_Oct302024.pdf', title: 'IP Orientation', type: 'pdf' },
-    { filename: 'Certificate - Brian Kyle L. Salor.pdf', title: 'Zuitt Data Visualization', type: 'pdf' }
+    { filename: 'Brian Kyle L. Salor E-Certificate.pdf', title: 'DIGITS General Assembly 2022 — Emerging Digital Technologies', type: 'pdf' },
+    { filename: 'Certificate_of_Participation_DigitalSafety.pdf', title: 'Digital Safety with Deepfake and Scam Recognition', type: 'pdf' },
+    { filename: 'IP Orientation_COP_Oct302024.pdf', title: 'Intellectual Property Orientation', type: 'pdf' },
+    { filename: 'Certificate - Brian Kyle L. Salor.pdf', title: 'Digital Defense and No-Code Dev', type: 'pdf' }
 ];
 
 function loadPdfJs() {
