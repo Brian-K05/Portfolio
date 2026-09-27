@@ -356,9 +356,12 @@
                 <p class="tech-stack-intro">
                     Laravel, Node.js, and Python are on the public demos. Node.js, Supabase, and Edge Functions are on the Machica production system. React, React Native, Angular, Flutter, and Kotlin: coursework / practice — no public project here.
                 </p>
-                <div class="tech-stack-groups js-reveal">
-                    <div class="tech-stack-group tech-stack-group--shipped">
-                        <h3 class="tech-stack-kicker">Used on shipped work</h3>
+                <div class="tech-stack-groups skill-board js-reveal">
+                    <article class="skill-sheet skill-sheet--shipped">
+                        <header class="sheet-chrome">
+                            <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="sheet-chrome-label">Used on shipped work</span>
+                        </header>
                         <dl class="tech-meta">
                             <div class="tech-meta-row">
                                 <dt>Backend</dt>
@@ -390,24 +393,32 @@
                                 </dd>
                             </div>
                         </dl>
-                    </div>
-                    <div class="tech-stack-group">
-                        <h3 class="tech-stack-kicker">Automation</h3>
-                        <p class="tech-meta-line">
-                            <span class="tech-meta-item"><span>Business process automation</span></span>
-                            <span class="tech-meta-item"><span>Email &amp; SMS</span></span>
-                            <span class="tech-meta-item"><span>Document generation</span></span>
-                        </p>
-                    </div>
-                    <div class="tech-stack-group tech-stack-group--secondary">
-                        <h3 class="tech-stack-kicker">Also used</h3>
-                        <p class="tech-meta-line">
-                            <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>React</span></span>
-                            <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>React Native</span></span>
-                            <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg" alt="" class="tech-meta-icon" width="14" height="14" onerror="this.remove()"><span>Angular</span></span>
-                            <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="" class="tech-meta-icon" width="14" height="14" onerror="this.remove()"><span>Flutter</span></span>
-                            <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>Kotlin</span></span>
-                        </p>
+                    </article>
+                    <div class="skill-side">
+                        <article class="skill-sheet">
+                            <header class="sheet-chrome">
+                                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="sheet-chrome-label">Automation</span>
+                            </header>
+                            <p class="tech-meta-line skill-sheet-body">
+                                <span class="tech-meta-item"><span>Business process automation</span></span>
+                                <span class="tech-meta-item"><span>Email &amp; SMS</span></span>
+                                <span class="tech-meta-item"><span>Document generation</span></span>
+                            </p>
+                        </article>
+                        <article class="skill-sheet skill-sheet--quiet">
+                            <header class="sheet-chrome">
+                                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="sheet-chrome-label">Also used</span>
+                            </header>
+                            <p class="tech-meta-line skill-sheet-body">
+                                <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>React</span></span>
+                                <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>React Native</span></span>
+                                <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg" alt="" class="tech-meta-icon" width="14" height="14" onerror="this.remove()"><span>Angular</span></span>
+                                <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="" class="tech-meta-icon" width="14" height="14" onerror="this.remove()"><span>Flutter</span></span>
+                                <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>Kotlin</span></span>
+                            </p>
+                        </article>
                     </div>
                 </div>
             </div>
@@ -425,15 +436,47 @@
             </div>
             <div class="certifications-content">
                 <div class="certs-lead js-reveal">
-                    <ul class="certs-list">
-                        <li>Computer Systems Servicing NC II (TESDA)</li>
-                        <li>Internship completion — Machica Firm, Inc. (486 hours)</li>
-                        <li>Competence in Practicum Award</li>
-                    </ul>
-                    <p class="certifications-intro">
-                        I organized and hosted a technical webinar in November 2025. I was not the speaker. Selected scans are in the gallery.
-                    </p>
-                    <button type="button" class="btn-see-all" id="seeAllCertificates" aria-haspopup="dialog" aria-controls="certificatesGalleryModal">View selected certificates</button>
+                    <div class="certs-grid">
+                        <article class="cert-sheet">
+                            <header class="sheet-chrome">
+                                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="sheet-chrome-label">TESDA · NC II</span>
+                            </header>
+                            <div class="cert-sheet-body">
+                                <p class="cert-sheet-index">01</p>
+                                <h3 class="cert-sheet-title">Computer Systems Servicing</h3>
+                                <p class="cert-sheet-meta">National Certificate II</p>
+                            </div>
+                        </article>
+                        <article class="cert-sheet cert-sheet--accent">
+                            <header class="sheet-chrome">
+                                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="sheet-chrome-label">Machica Firm, Inc.</span>
+                            </header>
+                            <div class="cert-sheet-body">
+                                <p class="cert-sheet-index">02</p>
+                                <h3 class="cert-sheet-title">Internship completion</h3>
+                                <p class="cert-sheet-meta">486 hours</p>
+                            </div>
+                        </article>
+                        <article class="cert-sheet">
+                            <header class="sheet-chrome">
+                                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="sheet-chrome-label">Leyte Normal University</span>
+                            </header>
+                            <div class="cert-sheet-body">
+                                <p class="cert-sheet-index">03</p>
+                                <h3 class="cert-sheet-title">Competence in Practicum</h3>
+                                <p class="cert-sheet-meta">Award</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="certs-foot">
+                        <p class="certifications-intro">
+                            I organized and hosted a technical webinar in November 2025. I was not the speaker. Selected scans are in the gallery.
+                        </p>
+                        <button type="button" class="btn-see-all" id="seeAllCertificates" aria-haspopup="dialog" aria-controls="certificatesGalleryModal">View selected certificates</button>
+                    </div>
                 </div>
             </div>
         </div>

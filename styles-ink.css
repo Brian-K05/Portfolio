@@ -3862,91 +3862,105 @@ html.case-open .mf-cursor {
 }
 
 .theme-ink .certs-lead {
-    max-width: 40rem;
+    max-width: none;
 }
 
-.theme-ink .certs-list {
-    margin: 0 0 1.15rem;
-    padding: 0;
-    list-style: none;
+.theme-ink .skill-board {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(15.5rem, 0.82fr);
+    gap: 1.15rem;
+    max-width: 72rem;
+    margin: 0;
+    align-items: stretch;
 }
 
-.theme-ink .certs-list li {
+.theme-ink .skill-side {
+    display: grid;
+    gap: 1.15rem;
+    min-width: 0;
+}
+
+.theme-ink .tech-stack-groups.skill-board {
+    display: grid;
+    max-width: 72rem;
+}
+
+.theme-ink .skill-sheet,
+.theme-ink .cert-sheet {
     position: relative;
-    padding: 0.45rem 0 0.45rem 1.1rem;
-    border-bottom: 1px solid rgba(244, 244, 241, 0.08);
-    color: var(--paper-ink);
-    font-size: 1.02rem;
-    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
 }
 
-.theme-ink .certs-list li::before {
-    content: '';
+.theme-ink .cert-sheet:hover,
+.theme-ink .skill-sheet--shipped:hover {
+    border-color: rgba(91, 140, 255, 0.4);
+}
+
+.theme-ink .skill-sheet--shipped,
+.theme-ink .cert-sheet--accent {
+    border-color: rgba(91, 140, 255, 0.28);
+}
+
+.theme-ink .skill-sheet--shipped::after,
+.theme-ink .cert-sheet--accent::after {
+    content: "";
     position: absolute;
     left: 0;
-    top: 0.95rem;
-    width: 0.35rem;
-    height: 0.35rem;
-    border-radius: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
     background: var(--accent);
 }
 
-.theme-ink .certs-lead .certifications-intro {
-    margin-bottom: 1.15rem;
-}
-
-.theme-ink .certs-lead .btn-see-all {
-    margin-top: 0;
-}
-
-.theme-ink .tech-stack-groups {
+.theme-ink .sheet-chrome {
     display: flex;
-    flex-direction: column;
-    gap: 2.4rem;
-    max-width: 46rem;
-    margin: 0;
+    align-items: center;
+    gap: 0.7rem;
+    min-height: 2.65rem;
+    padding: 0 1rem;
+    border-bottom: 1px solid var(--line);
+    background: rgba(244, 244, 241, 0.03);
 }
 
-.theme-ink .tech-stack-kicker {
-    margin: 0 0 0.85rem;
+.theme-ink .sheet-chrome-label {
     font-family: var(--font-mono);
-    font-size: 0.64rem;
+    font-size: 0.62rem;
     font-weight: 500;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--mute);
 }
 
-.theme-ink .tech-stack-group--shipped .tech-stack-kicker {
-    color: var(--paper-ink);
-}
-
-.theme-ink .tech-stack-group--shipped .tech-stack-kicker::after {
-    content: "";
-    display: block;
-    width: 2.25rem;
-    height: 1px;
-    margin-top: 0.55rem;
-    background: var(--accent);
+.theme-ink .skill-sheet-body {
+    padding: 1.05rem 1.1rem 1.15rem;
 }
 
 .theme-ink .tech-meta {
     margin: 0;
-    border-top: 1px solid var(--line);
 }
 
 .theme-ink .tech-meta-row {
     display: grid;
-    grid-template-columns: 7.5rem minmax(0, 1fr);
-    gap: 0.65rem 1.35rem;
+    grid-template-columns: 7.25rem minmax(0, 1fr);
+    gap: 0.7rem 1.1rem;
     align-items: start;
-    padding: 0.95rem 0;
+    padding: 0.95rem 1.15rem;
     border-bottom: 1px solid var(--line);
+}
+
+.theme-ink .tech-meta-row:last-child {
+    border-bottom: 0;
 }
 
 .theme-ink .tech-meta-row dt {
     margin: 0;
-    padding-top: 0.22rem;
+    padding-top: 0.38rem;
     font-family: var(--font-mono);
     font-size: 0.6rem;
     font-weight: 500;
@@ -3960,53 +3974,129 @@ html.case-open .mf-cursor {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    gap: 0.45rem;
     margin: 0;
-}
-
-.theme-ink .tech-meta-line {
-    padding-top: 0.1rem;
 }
 
 .theme-ink .tech-meta-item {
     display: inline-flex;
     align-items: center;
     gap: 0.38rem;
+    padding: 0.32rem 0.62rem;
+    border: 1px solid rgba(244, 244, 241, 0.1);
+    border-radius: 999px;
+    background: rgba(244, 244, 241, 0.03);
     color: var(--paper-ink);
     font-family: var(--font-body);
-    font-size: 0.95rem;
+    font-size: 0.86rem;
     font-weight: 500;
-    line-height: 1.45;
+    line-height: 1.3;
 }
 
 .theme-ink .tech-meta-item:not(:last-child)::after {
-    content: "·";
-    margin-left: 0.55rem;
-    margin-right: 0.55rem;
-    color: rgba(154, 154, 150, 0.5);
-    font-weight: 400;
+    content: none;
 }
 
 .theme-ink .tech-meta-icon {
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
     flex-shrink: 0;
     object-fit: contain;
     filter: grayscale(1) brightness(0) invert(0.9);
-    opacity: 0.72;
+    opacity: 0.78;
 }
 
-.theme-ink .tech-stack-group--secondary .tech-stack-kicker {
-    color: rgba(154, 154, 150, 0.85);
-}
-
-.theme-ink .tech-stack-group--secondary .tech-meta-item {
+.theme-ink .skill-sheet--quiet .tech-meta-item {
     color: var(--mute);
-    font-size: 0.88rem;
     font-weight: 400;
+    background: transparent;
 }
 
-.theme-ink .tech-stack-group--secondary .tech-meta-icon {
-    opacity: 0.5;
+.theme-ink .skill-sheet--quiet .tech-meta-icon {
+    opacity: 0.48;
+}
+
+.theme-ink .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.15rem;
+}
+
+.theme-ink .cert-sheet-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 13.5rem;
+    padding: 1.35rem 1.2rem 1.3rem;
+}
+
+.theme-ink .cert-sheet-index {
+    position: absolute;
+    top: 0.85rem;
+    right: 1rem;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    color: rgba(244, 244, 241, 0.08);
+}
+
+.theme-ink .cert-sheet-title {
+    margin: 0 0 0.4rem;
+    max-width: 12ch;
+    color: var(--paper-ink);
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.12;
+}
+
+.theme-ink .cert-sheet-meta {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.theme-ink .certs-foot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem 2rem;
+    margin-top: 1.35rem;
+    padding: 1.15rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+}
+
+.theme-ink .certs-lead .certifications-intro {
+    margin: 0;
+    max-width: 38rem;
+}
+
+.theme-ink .certs-lead .btn-see-all {
+    flex-shrink: 0;
+    margin-top: 0;
+    background: transparent;
+    color: var(--paper-ink);
+    border: 1px solid rgba(244, 244, 241, 0.16);
+    border-radius: 999px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.theme-ink .certs-lead .btn-see-all:hover,
+.theme-ink .certs-lead .btn-see-all:focus-visible {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: none;
 }
 
 .theme-ink .tech-stack-section .tech-pill {
@@ -4015,24 +4105,40 @@ html.case-open .mf-cursor {
     box-shadow: none;
 }
 
+@media (max-width: 1024px) {
+    .theme-ink .skill-board,
+    .theme-ink .certs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .theme-ink .cert-sheet-body {
+        min-height: 11rem;
+    }
+
+    .theme-ink .certs-foot {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
 @media (max-width: 700px) {
-    .theme-ink .tech-stack-groups {
-        gap: 2.1rem;
+    .theme-ink .skill-board,
+    .theme-ink .skill-side {
+        gap: 1rem;
     }
 
     .theme-ink .tech-meta-row {
         grid-template-columns: 1fr;
-        gap: 0.4rem;
-        padding: 0.85rem 0;
+        gap: 0.45rem;
+        padding: 0.85rem 1rem;
     }
 
     .theme-ink .tech-meta-item {
-        font-size: 0.92rem;
+        font-size: 0.82rem;
     }
 
-    .theme-ink .tech-meta-item:not(:last-child)::after {
-        margin-left: 0.42rem;
-        margin-right: 0.42rem;
+    .theme-ink .cert-sheet-title {
+        max-width: none;
     }
 }
 
