@@ -27,6 +27,12 @@
 <body class="portfolio-body theme-ink">
     <a class="skip-link" href="#projects">Skip to work</a>
     <div class="scroll-progress" aria-hidden="true"><i class="scroll-progress-bar"></i></div>
+    <div class="site-life" aria-hidden="true">
+        <i class="life-orb life-orb--a"></i>
+        <i class="life-orb life-orb--b"></i>
+        <i class="life-orb life-orb--c"></i>
+        <span class="life-grid"></span>
+    </div>
 
     <div class="preloader" id="preloader" data-testid="preloader">
         <div class="preloader-top">
@@ -51,77 +57,90 @@
             <ul class="nav-links">
                 <li><a href="#projects">Work</a></li>
                 <li><a href="#experience">Experience</a></li>
-                <li><a href="#tech-stack">Skills</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#tech-stack">Skills</a></li>
                 <li><a href="#certificates">Certificates</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-            <a href="Brian-Kyle-Salor-Resume.pdf" class="btn-download-cv js-magnetic" download="Brian-Kyle-Salor-Resume.pdf" data-cursor="CV"><span>Download CV</span></a>
-            <button type="button" class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
+            <a href="Brian-Kyle-Salor-Resume.pdf" class="btn-download-cv js-magnetic" download="Brian-Kyle-Salor-Resume.pdf" data-cursor="CV"><span>CV</span></a>
+            <button type="button" class="mobile-menu-toggle" aria-label="Open index" aria-expanded="false" aria-controls="site-mobile-menu">
+                <span class="mobile-menu-toggle-text">Index</span>
+                <span class="mobile-menu-bars" aria-hidden="true"><i></i><i></i></span>
             </button>
         </div>
     </nav>
 
-    <div class="mobile-menu" id="site-mobile-menu" role="dialog" aria-modal="true" aria-label="Main navigation">
-        <button type="button" class="mobile-menu-close" aria-label="Close menu">&times;</button>
+    <div class="mobile-menu" id="site-mobile-menu" role="dialog" aria-modal="true" aria-label="Site index">
+        <div class="mobile-menu-top">
+            <p class="mobile-menu-kicker">Index</p>
+            <button type="button" class="mobile-menu-close">Close</button>
+        </div>
         <ul class="mobile-nav-links">
-            <li><a href="#projects">Work</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#tech-stack">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="Brian-Kyle-Salor-Resume.pdf" class="btn-download-cv-mobile" download="Brian-Kyle-Salor-Resume.pdf"><span>Download CV</span></a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#projects"><span>01</span><b>Work</b></a></li>
+            <li><a href="#experience"><span>02</span><b>Experience</b></a></li>
+            <li><a href="#about"><span>03</span><b>About</b></a></li>
+            <li><a href="#tech-stack"><span>04</span><b>Skills</b></a></li>
+            <li><a href="#certificates"><span>05</span><b>Certificates</b></a></li>
+            <li><a href="#contact"><span>06</span><b>Contact</b></a></li>
         </ul>
+        <div class="mobile-menu-foot">
+            <p class="mobile-menu-loc">Taguig City</p>
+            <p class="mobile-menu-note">Open to junior software and backend roles</p>
+            <a href="Brian-Kyle-Salor-Resume.pdf" class="btn-download-cv-mobile" download="Brian-Kyle-Salor-Resume.pdf"><span>Download CV</span></a>
+        </div>
     </div>
 
-    <section class="hero hero-section" id="home">
+    <section class="hero hero-section hero--spread" id="home">
         <div class="hero-atmosphere" aria-hidden="true">
             <div class="hero-grid"></div>
             <div class="hero-glow"></div>
+            <span class="hero-scan"></span>
         </div>
-        <div class="hero-container">
-            <div class="hero-content">
-                <p class="hero-kicker">Intro</p>
-                <div class="name-section">
-                    <h1 class="name">
-                        <span class="name-line"><span class="name-mask">Brian Kyle</span></span>
-                        <span class="name-line name-accent"><span class="name-mask">Salor</span></span>
-                    </h1>
-                    <span class="hero-rule" aria-hidden="true"></span>
-                </div>
-                <p class="job-titles job-titles--stack"><span class="job-titles-text">Junior Software Developer</span><span class="job-titles-text">Backend Developer</span></p>
-                <div class="hero-actions">
-                    <a href="mailto:briankylesalor02@gmail.com?subject=Junior%20software%20developer%20role" class="btn-hire-me js-magnetic" data-cursor="Email"><span>Email me</span></a>
-                    <a href="#projects" class="btn-hire-me btn-hire-me--ghost js-magnetic" data-cursor="VIEW →"><span>View work</span></a>
-                    <a href="https://github.com/Brian-K05" target="_blank" rel="noopener noreferrer" class="social-link js-magnetic" aria-label="GitHub">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/briankylesalor" target="_blank" rel="noopener noreferrer" class="social-link js-magnetic" aria-label="LinkedIn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                    </a>
-                    <span class="hero-status"><span class="hero-status-dot" aria-hidden="true"></span>Open to junior software and backend roles</span>
-                </div>
-                <p class="tagline">Junior software developer and backend developer. Led a production insurance system in a 486-hour internship. Public Laravel, Node.js, and Python demos with tests.</p>
-            </div>
-            <div class="hero-image">
+        <div class="hero-spread">
+            <div class="hero-plate">
                 <figure class="profile-image-placeholder hero-portrait">
-                    <span class="portrait-corner" aria-hidden="true"></span>
                     <img src="profile.JPG" alt="Portrait of Brian Kyle Salor" id="profile-img" width="760" height="950">
-                    <figcaption>
-                        <span>Taguig City</span>
-                    </figcaption>
+                    <figcaption class="hero-plate-cap">Taguig City</figcaption>
                 </figure>
             </div>
+            <div class="hero-content">
+                <div class="hero-lead">
+                <p class="hero-kicker">01 / Intro</p>
+                <p class="hero-meta" aria-hidden="true"><span>System / Portfolio</span><span>Mode / Engineering</span></p>
+                <div class="name-section">
+                    <h1 class="name name--spread">
+                        <span class="name-line"><span class="name-mask">Brian</span></span>
+                        <span class="name-line"><span class="name-mask">Kyle</span></span>
+                        <span class="name-line name-accent"><span class="name-mask">Salor</span></span>
+                    </h1>
+                </div>
+                <p class="job-titles job-titles--run"><span class="job-titles-text">Junior Software Developer</span><span class="job-titles-sep" aria-hidden="true">/</span><span class="job-titles-text">Backend Developer</span></p>
+                </div>
+                <div class="hero-follow">
+                <p class="tagline">Junior software developer and backend developer. Led a production insurance system in a 486-hour internship. Public Laravel, Node.js, and Python demos with tests.</p>
+                <div class="hero-actions">
+                    <div class="hero-cta-row">
+                        <a href="#projects" class="btn-hire-me js-magnetic" data-cursor="VIEW →"><span>View work</span></a>
+                        <a href="Brian-Kyle-Salor-Resume.pdf" class="btn-hire-me btn-hire-me--ghost js-magnetic" download="Brian-Kyle-Salor-Resume.pdf" data-cursor="CV"><span>Download CV</span></a>
+                    </div>
+                    <div class="hero-connect">
+                        <a href="mailto:briankylesalor02@gmail.com?subject=Junior%20software%20developer%20role" class="hero-mail js-magnetic" data-cursor="Email">Email me</a>
+                        <a href="https://github.com/Brian-K05" target="_blank" rel="noopener noreferrer" class="social-link js-magnetic" aria-label="GitHub">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/briankylesalor" target="_blank" rel="noopener noreferrer" class="social-link js-magnetic" aria-label="LinkedIn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <span class="hero-status"><span class="hero-status-dot" aria-hidden="true"></span>Open to junior software and backend roles</span>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
-        <p class="hero-scroll" aria-hidden="true">Scroll</p>
     </section>
 
     <div class="studio-marquee" aria-hidden="true">
@@ -131,22 +150,45 @@
         </div>
     </div>
 
-    <section class="projects" id="projects">
+    <section class="projects has-life" id="projects">
+        <span class="section-watermark" aria-hidden="true">Work</span>
         <div class="section-container">
             <div class="projects-header js-reveal">
                 <div class="projects-header-left">
                     <div class="page-number">01 / Work</div>
                     <h2 class="section-title">Work</h2>
                 </div>
-                <p class="projects-subtitle">Three public demos, one production internship system.</p>
+                <p class="projects-subtitle">One production internship system, three public demos.</p>
             </div>
             <p class="work-note js-reveal">DeskFlow runs on Render’s free plan; the first open after idle can take about a minute. SlotBook and PaperOut on Railway usually open right away.</p>
 
             <div class="work-stage js-reveal">
                 <div class="work-band">
                 <p class="work-band-kicker">Public demos</p>
-                <div class="work-lead js-stagger">
-                <article class="project-row project-card work-card--lead" data-project="slotbook" data-deploy-url="https://slotbook-production.up.railway.app/" data-github-url="https://github.com/Brian-K05/SlotBook">
+                <div class="work-index">
+                <aside class="work-index-stage" aria-hidden="true">
+                    <div class="win work-index-frame">
+                        <span class="win-chrome">
+                            <span class="win-dots"><i></i><i></i><i></i></span>
+                            <span class="win-url" id="work-index-url">live · slotbook-production.up.railway.app</span>
+                        </span>
+                        <span class="win-body">
+                            <img src="slotbook.png" alt="" id="work-index-img" width="1280" height="800">
+                        </span>
+                    </div>
+                </aside>
+                <div class="work-rail">
+                <div class="work-rail-head">
+                    <p class="work-rail-count" aria-live="polite"><span data-work-now>01</span> / 03</p>
+                    <p class="work-rail-hint">Swipe</p>
+                    <div class="work-rail-nav">
+                        <button type="button" class="work-rail-btn" data-work-prev>Prev</button>
+                        <button type="button" class="work-rail-btn" data-work-next>Next</button>
+                    </div>
+                </div>
+                <div class="work-rail-progress" aria-hidden="true"><i data-work-progress></i></div>
+                <div class="work-index-list" data-lenis-prevent>
+                <article class="project-row project-card work-card--lead is-on" data-project="slotbook" data-deploy-url="https://slotbook-production.up.railway.app/" data-github-url="https://github.com/Brian-K05/SlotBook">
                     <button type="button" class="win js-open-case" data-cursor="VIEW →" aria-label="Open case study: SlotBook">
                         <span class="win-chrome">
                             <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -166,12 +208,8 @@
                             <p class="project-win-stack">Laravel · PHP · MySQL · Blade</p>
                         </div>
                         <div class="project-win-actions">
-                            <a href="https://slotbook-production.up.railway.app/" class="win-icon" target="_blank" rel="noopener noreferrer" aria-label="View live demo">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                            <a href="https://github.com/Brian-K05/SlotBook" class="win-icon" target="_blank" rel="noopener noreferrer" aria-label="View GitHub repository">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                            </a>
+                            <a href="https://slotbook-production.up.railway.app/" class="work-text-link" target="_blank" rel="noopener noreferrer">Live</a>
+                            <a href="https://github.com/Brian-K05/SlotBook" class="work-text-link" target="_blank" rel="noopener noreferrer">Source</a>
                         </div>
                     </div>
                     <div class="project-details" hidden>
@@ -182,9 +220,7 @@
                         <div class="project-links"><a href="https://slotbook-production.up.railway.app/" class="btn-live-demo" target="_blank" rel="noopener noreferrer"><span>View live</span></a><a href="https://github.com/Brian-K05/SlotBook" class="btn-github" target="_blank" rel="noopener noreferrer"><span>View code</span></a></div>
                     </div>
                 </article>
-                </div>
 
-                <div class="work-split js-stagger">
                 <article class="project-row project-card work-card--split" data-project="paperout" data-deploy-url="https://web-production-97c62.up.railway.app/" data-github-url="https://github.com/Brian-K05/PaperOut">
                     <button type="button" class="win js-open-case" data-cursor="VIEW →" aria-label="Open case study: PaperOut">
                         <span class="win-chrome">
@@ -205,12 +241,8 @@
                             <p class="project-win-stack">Python · Flask · python-docx</p>
                         </div>
                         <div class="project-win-actions">
-                            <a href="https://web-production-97c62.up.railway.app/" class="win-icon" target="_blank" rel="noopener noreferrer" aria-label="View live demo">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                            <a href="https://github.com/Brian-K05/PaperOut" class="win-icon" target="_blank" rel="noopener noreferrer" aria-label="View GitHub repository">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                            </a>
+                            <a href="https://web-production-97c62.up.railway.app/" class="work-text-link" target="_blank" rel="noopener noreferrer">Live</a>
+                            <a href="https://github.com/Brian-K05/PaperOut" class="work-text-link" target="_blank" rel="noopener noreferrer">Source</a>
                         </div>
                     </div>
                     <div class="project-details" hidden>
@@ -221,9 +253,7 @@
                         <div class="project-links"><a href="https://web-production-97c62.up.railway.app/" class="btn-live-demo" target="_blank" rel="noopener noreferrer"><span>View live</span></a><a href="https://github.com/Brian-K05/PaperOut" class="btn-github" target="_blank" rel="noopener noreferrer"><span>View code</span></a></div>
                     </div>
                 </article>
-                </div>
 
-                <div class="work-pair work-pair--open work-pair--wide js-stagger">
                 <article class="project-row project-card" data-project="deskflow" data-deploy-url="https://deskflow-w1n5.onrender.com" data-github-url="https://github.com/Brian-K05/Deskflow">
                     <button type="button" class="win js-open-case" data-cursor="VIEW →" aria-label="Open case study: DeskFlow">
                         <span class="win-chrome">
@@ -244,12 +274,8 @@
                             <p class="project-win-stack">Node.js · Express · SQLite</p>
                         </div>
                         <div class="project-win-actions">
-                            <a href="https://deskflow-w1n5.onrender.com" class="win-icon" target="_blank" rel="noopener noreferrer" aria-label="View live demo">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                            <a href="https://github.com/Brian-K05/Deskflow" class="win-icon" target="_blank" rel="noopener noreferrer" aria-label="View GitHub repository">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                            </a>
+                            <a href="https://deskflow-w1n5.onrender.com" class="work-text-link" target="_blank" rel="noopener noreferrer">Live</a>
+                            <a href="https://github.com/Brian-K05/Deskflow" class="work-text-link" target="_blank" rel="noopener noreferrer">Source</a>
                         </div>
                     </div>
                     <div class="project-details" hidden>
@@ -262,24 +288,29 @@
                 </article>
                 </div>
                 </div>
+                </div>
+                </div>
 
                 <p class="work-band-kicker">In production</p>
-                <div class="work-featured js-stagger">
-                <article class="project-row project-card work-case" data-project="insurance-automation" data-deploy-url="#" data-github-url="#">
-                    <button type="button" class="win js-open-case" data-cursor="VIEW →" aria-label="Open case study: MAXIN Insurance Data Management System">
-                        <span class="win-chrome">
-                            <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                            <span class="win-url">in production · no public URL</span>
-                        </span>
-                        <span class="win-body win-body--logo">
-                            <img src="maxin.png" alt="MAXIN Insurance Data Management System" class="project-card-img" width="1280" height="720" loading="lazy">
-                        </span>
-                    </button>
-                    <div class="project-win-foot work-case-body">
-                        <div class="project-win-copy">
-                            <p class="project-win-num">04 / Production</p>
-                            <p class="work-case-kicker">Insurance data management &amp; business process automation</p>
-                            <h3 class="project-win-title">MAXIN</h3>
+                <article class="project-row project-card work-case work-case--editorial js-stagger" data-project="insurance-automation" data-deploy-url="#" data-github-url="#">
+                    <header class="work-case-mast">
+                        <p class="project-win-num">04 / Production</p>
+                        <p class="work-case-kicker">Insurance data management &amp; business process automation</p>
+                        <h3 class="project-win-title">MAXIN</h3>
+                        <p class="work-case-flags"><span>Backend</span><span>Automation</span><span>Production</span></p>
+                    </header>
+                    <div class="work-case-layout">
+                        <button type="button" class="win js-open-case work-case-visual" data-cursor="VIEW →" aria-label="Open case study: MAXIN Insurance Data Management System">
+                            <span class="win-chrome">
+                                <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                                <span class="win-url">in production · no public URL</span>
+                            </span>
+                            <span class="win-body win-body--logo">
+                                <img src="maxin.png" alt="MAXIN Insurance Data Management System" class="project-card-img" width="1280" height="720" loading="lazy">
+                            </span>
+                        </button>
+                        <div class="work-case-body">
+                            <button type="button" class="work-case-cta js-open-case" data-cursor="VIEW →">Explore case study →</button>
                             <div class="work-case-block">
                                 <p class="work-case-label">The system</p>
                                 <p class="project-win-blurb">Led the intern build at Machica Firm with one co-intern. Backend-heavy: APIs, Edge Functions, email/SMS/spreadsheet automation. Leadership approved the deploy. Three staff were using it when I left.</p>
@@ -292,26 +323,26 @@
                                 <p class="work-case-label">Stack</p>
                                 <p class="project-win-stack">Node.js · REST APIs · Supabase</p>
                             </div>
-                            <dl class="case-facts case-facts--strip">
-                                <div>
-                                    <dt>Role</dt>
-                                    <dd>Intern lead</dd>
-                                </div>
-                                <div>
-                                    <dt>Status</dt>
-                                    <dd>Production</dd>
-                                </div>
-                                <div>
-                                    <dt>When I left</dt>
-                                    <dd>3 staff</dd>
-                                </div>
-                                <div>
-                                    <dt>Internship</dt>
-                                    <dd>486 hours</dd>
-                                </div>
-                            </dl>
                         </div>
                     </div>
+                    <dl class="case-facts case-facts--strip">
+                        <div>
+                            <dt>Role</dt>
+                            <dd>Intern lead</dd>
+                        </div>
+                        <div>
+                            <dt>Status</dt>
+                            <dd>Production</dd>
+                        </div>
+                        <div>
+                            <dt>When I left</dt>
+                            <dd>3 staff</dd>
+                        </div>
+                        <div>
+                            <dt>Internship</dt>
+                            <dd>486 hours</dd>
+                        </div>
+                    </dl>
                     <div class="project-details" hidden>
                         <div class="project-category">Production system · Machica Firm, Inc. · 486-hour internship</div>
                         <h3 class="project-title">MAXIN Insurance Data Management System</h3>
@@ -320,14 +351,25 @@
                         <div class="project-links"><span class="project-link-disabled">No public URL — company owns the live system</span></div>
                     </div>
                 </article>
-                </div>
 
-                <p class="work-aside">Also on GitHub: <a href="https://github.com/Brian-K05/a4-word-barcode-generator" target="_blank" rel="noopener noreferrer">A4 Word Barcode Generator</a> (Python · Flask) — a small labeling tool, not a product demo.</p>
+                <div class="work-archive">
+                    <p class="work-band-kicker">Also on GitHub</p>
+                    <a class="work-archive-row" href="https://github.com/Brian-K05/a4-word-barcode-generator" target="_blank" rel="noopener noreferrer" data-cursor="SRC →">
+                        <span class="work-archive-num">05</span>
+                        <span class="work-archive-copy">
+                            <span class="work-archive-title">A4 Word Barcode Generator</span>
+                            <span class="work-archive-meta">Python · Flask</span>
+                            <span class="work-archive-note">A small labeling tool, not a product demo.</span>
+                        </span>
+                        <span class="work-archive-go">Source</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="experience section-alt" id="experience">
+    <section class="experience section-alt has-life" id="experience">
+        <span class="section-watermark" aria-hidden="true">Exp</span>
         <div class="section-container">
             <div class="experience-header js-reveal">
                     <div class="page-number">02 / Experience</div>
@@ -343,6 +385,7 @@
                         <p class="experience-org">Machica Firm, Inc.</p>
                         <h3 class="experience-role">IT Intern</h3>
                         <p class="experience-role-sub">Software Development &amp; Technical Support</p>
+                        <p class="experience-hours">486 hours</p>
                         <p class="experience-tags"><span>Software development</span><span>Backend</span><span>Database</span><span>Automation</span><span>Technical support</span></p>
                         <ul class="experience-points">
                             <li>Led feature design and development of an Insurance Data Management &amp; Business Process Automation System with one co-intern. Leadership approved the deploy. Three staff were using it when I left. No public URL — the company owns the live system.</li>
@@ -355,9 +398,10 @@
         </div>
     </section>
 
-    <section class="about" id="about">
+    <section class="about has-life" id="about">
+        <span class="section-watermark" aria-hidden="true">About</span>
         <div class="section-container">
-            <div class="page-number">03 / About</div>
+            <div class="page-number js-reveal">03 / About</div>
             <div class="about-content">
                 <div class="about-main js-reveal">
                     <p class="about-kicker">How I work</p>
@@ -399,21 +443,31 @@
         </div>
     </section>
 
-    <section class="tech-stack-section" id="tech-stack">
+    <div class="studio-marquee studio-marquee--rev" aria-hidden="true">
+        <div class="studio-marquee-track">
+            <span>Backend</span><i></i><span>Software</span><i></i><span>Laravel</span><i></i><span>Node.js</span><i></i><span>Python</span><i></i><span>Automation</span><i></i><span>APIs</span><i></i><span>Databases</span><i></i><span>Systems</span><i></i><span>Tests</span><i></i>
+            <span>Backend</span><i></i><span>Software</span><i></i><span>Laravel</span><i></i><span>Node.js</span><i></i><span>Python</span><i></i><span>Automation</span><i></i><span>APIs</span><i></i><span>Databases</span><i></i><span>Systems</span><i></i><span>Tests</span><i></i>
+        </div>
+    </div>
+
+    <section class="tech-stack-section has-life" id="tech-stack">
+        <span class="section-watermark" aria-hidden="true">Skills</span>
         <div class="section-container">
-            <div class="tech-stack-header-section">
+            <div class="tech-stack-header-section js-reveal">
                 <div class="tech-stack-header-left">
                     <div class="page-number">04 / Skills</div>
                     <h2 class="section-title">Skills</h2>
                 </div>
             </div>
             <div class="tech-stack-content">
-                <p class="tech-stack-intro">
+                <p class="tech-stack-intro js-reveal">
                     Laravel, Node.js, and Python are on the public demos. Node.js, Supabase, and Edge Functions are on the Machica production system. React, React Native, Angular, Flutter, and Kotlin: coursework / practice — no public project here.
                 </p>
                 <div class="skill-filters" role="tablist" aria-label="Skill groups">
                     <button type="button" class="skill-filter is-on" data-filter="all" aria-pressed="true">All</button>
                     <button type="button" class="skill-filter" data-filter="shipped" aria-pressed="false">Shipped</button>
+                    <button type="button" class="skill-filter" data-filter="backend" aria-pressed="false">Backend</button>
+                    <button type="button" class="skill-filter" data-filter="database" aria-pressed="false">Database</button>
                     <button type="button" class="skill-filter" data-filter="automation" aria-pressed="false">Automation</button>
                     <button type="button" class="skill-filter" data-filter="also" aria-pressed="false">Also used</button>
                 </div>
@@ -424,33 +478,33 @@
                             <span class="sheet-chrome-label">Used on shipped work</span>
                         </header>
                         <dl class="tech-meta">
-                            <div class="tech-meta-row">
+                            <div class="tech-meta-row" data-group="backend">
                                 <dt>Backend</dt>
                                 <dd>
-                                    <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@v9/icons/laravel.svg" alt="" class="tech-meta-icon" width="14" height="14" onerror="this.remove()"><span>Laravel</span></span>
-                                    <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>PHP</span></span>
-                                    <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>Node.js</span></span>
-                                    <span class="tech-meta-item"><span>Express</span></span>
-                                    <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>Python</span></span>
-                                    <span class="tech-meta-item"><span>Flask</span></span>
-                                    <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>JavaScript</span></span>
-                                    <span class="tech-meta-item"><span>python-docx</span></span>
+                                    <span class="tech-meta-item" title="Used in SlotBook">Laravel</span>
+                                    <span class="tech-meta-item" title="Used in SlotBook">PHP</span>
+                                    <span class="tech-meta-item" title="Used in MAXIN and DeskFlow">Node.js</span>
+                                    <span class="tech-meta-item" title="Used in DeskFlow">Express</span>
+                                    <span class="tech-meta-item" title="Used in PaperOut">Python</span>
+                                    <span class="tech-meta-item" title="Used in PaperOut">Flask</span>
+                                    <span class="tech-meta-item" title="Used on shipped work">JavaScript</span>
+                                    <span class="tech-meta-item" title="Used in PaperOut">python-docx</span>
                                 </dd>
                             </div>
-                            <div class="tech-meta-row">
+                            <div class="tech-meta-row" data-group="database">
                                 <dt>Database</dt>
                                 <dd>
-                                    <span class="tech-meta-item"><span>MySQL</span></span>
-                                    <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="" class="tech-meta-icon" width="14" height="14" onerror="this.remove()"><span>SQLite</span></span>
-                                    <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" alt="" class="tech-meta-icon" width="14" height="14" onerror="this.remove()"><span>Supabase</span></span>
+                                    <span class="tech-meta-item" title="Used in SlotBook">MySQL</span>
+                                    <span class="tech-meta-item" title="Used in DeskFlow">SQLite</span>
+                                    <span class="tech-meta-item" title="Used in MAXIN">Supabase</span>
                                 </dd>
                             </div>
-                            <div class="tech-meta-row">
+                            <div class="tech-meta-row" data-group="engineering">
                                 <dt>Engineering</dt>
                                 <dd>
-                                    <span class="tech-meta-item"><span>REST APIs</span></span>
-                                    <span class="tech-meta-item"><span>Edge Functions</span></span>
-                                    <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>Git / GitHub</span></span>
+                                    <span class="tech-meta-item" title="Used in MAXIN">REST APIs</span>
+                                    <span class="tech-meta-item" title="Used in MAXIN">Edge Functions</span>
+                                    <span class="tech-meta-item">Git / GitHub</span>
                                 </dd>
                             </div>
                         </dl>
@@ -473,11 +527,11 @@
                                 <span class="sheet-chrome-label">Also used</span>
                             </header>
                             <p class="tech-meta-line skill-sheet-body">
-                                <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>React</span></span>
-                                <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>React Native</span></span>
-                                <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg" alt="" class="tech-meta-icon" width="14" height="14" onerror="this.remove()"><span>Angular</span></span>
-                                <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="" class="tech-meta-icon" width="14" height="14" onerror="this.remove()"><span>Flutter</span></span>
-                                <span class="tech-meta-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="" class="tech-meta-icon" width="14" height="14"><span>Kotlin</span></span>
+                                <span class="tech-meta-item">React</span>
+                                <span class="tech-meta-item">React Native</span>
+                                <span class="tech-meta-item">Angular</span>
+                                <span class="tech-meta-item">Flutter</span>
+                                <span class="tech-meta-item">Kotlin</span>
                             </p>
                         </article>
                     </div>
@@ -486,10 +540,11 @@
         </div>
     </section>
 
-    <section class="certifications" id="certificates">
+    <section class="certifications has-life" id="certificates">
+        <span class="section-watermark" aria-hidden="true">Certs</span>
         <span id="leadership" hidden></span>
         <div class="section-container">
-            <div class="certifications-header">
+            <div class="certifications-header js-reveal">
                 <div class="certifications-header-left">
                     <div class="page-number">05 / Certificates</div>
                     <h2 class="section-title">Certificates</h2>
@@ -498,7 +553,7 @@
             <div class="certifications-content">
                 <div class="certs-lead">
                     <div class="certs-grid js-stagger">
-                        <article class="cert-sheet">
+                        <article class="cert-sheet js-open-certs" role="button" tabindex="0">
                             <header class="sheet-chrome">
                                 <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                                 <span class="sheet-chrome-label">TESDA · NC II</span>
@@ -509,7 +564,7 @@
                                 <p class="cert-sheet-meta">National Certificate II</p>
                             </div>
                         </article>
-                        <article class="cert-sheet cert-sheet--accent">
+                        <article class="cert-sheet cert-sheet--accent js-open-certs" role="button" tabindex="0">
                             <header class="sheet-chrome">
                                 <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                                 <span class="sheet-chrome-label">Machica Firm, Inc.</span>
@@ -520,7 +575,7 @@
                                 <p class="cert-sheet-meta">486 hours</p>
                             </div>
                         </article>
-                        <article class="cert-sheet">
+                        <article class="cert-sheet js-open-certs" role="button" tabindex="0">
                             <header class="sheet-chrome">
                                 <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                                 <span class="sheet-chrome-label">Leyte Normal University</span>
@@ -571,7 +626,8 @@
         </aside>
     </div>
 
-    <section class="contact contact-cta-band" id="contact">
+    <section class="contact contact-cta-band has-life" id="contact">
+        <span class="section-watermark" aria-hidden="true">Contact</span>
         <div class="contact-cta-inner js-reveal">
             <p class="contact-cta-eyebrow">06 · Contact</p>
             <h2 class="contact-cta-title">Open to<br>junior software roles<span class="name-accent">.</span></h2>
@@ -592,7 +648,7 @@
     </section>
 
     <footer class="footer footer-editorial">
-        <div class="footer-inner">
+        <div class="footer-inner js-reveal">
             <div class="footer-grid">
                 <div class="footer-col footer-col--brand">
                     <div class="footer-brand-row">
@@ -652,6 +708,7 @@
     }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mouse-follower@1.1.2/dist/mouse-follower.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
     <script src="script.js"></script>

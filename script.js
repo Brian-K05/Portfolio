@@ -472,13 +472,12 @@ document.querySelectorAll('.section-title').forEach((title) => {
 });
 
 document.querySelectorAll('.project-row').forEach((card) => {
-    const openBtn = card.querySelector('.js-open-case');
-    if (openBtn) {
+    card.querySelectorAll('.js-open-case').forEach((openBtn) => {
         openBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             openProjectModal(card);
         });
-    }
+    });
     const foot = card.querySelector('.project-win-foot');
     if (foot) {
         foot.addEventListener('click', function (e) {
@@ -947,6 +946,16 @@ function setupCertificatesGallery() {
     }
 
     seeAllBtn.addEventListener('click', openGallery);
+
+    document.querySelectorAll('.js-open-certs').forEach((sheet) => {
+        const activate = function (e) {
+            if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+            if (e.type === 'keydown') e.preventDefault();
+            openGallery();
+        };
+        sheet.addEventListener('click', activate);
+        sheet.addEventListener('keydown', activate);
+    });
 
     if (certModalClose) {
         certModalClose.addEventListener('click', closeGallery);
