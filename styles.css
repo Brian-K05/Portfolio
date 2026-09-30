@@ -85,8 +85,9 @@ html {
     --glass-bg: rgba(255, 255, 255, 0.92);
     --glass-border: rgba(0, 0, 0, 0.08);
     --glass-highlight: rgba(255, 255, 255, 1);
-    --font-display: 'Syne', sans-serif;
-    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: "Instrument Sans", "Segoe UI", sans-serif;
+    --font-body: "Instrument Sans", "Segoe UI", sans-serif;
+    --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
     --radius-sm: 10px;
     --radius-md: 16px;
     --radius-lg: 22px;
@@ -158,6 +159,8 @@ body {
     min-width: 100%;
     position: relative;
     font-weight: 400;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

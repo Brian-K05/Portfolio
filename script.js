@@ -610,7 +610,7 @@ function openProjectModal(card) {
     const description = details.querySelector('.project-description')?.textContent || '';
     const tags = details.querySelectorAll('.project-tags .tag');
     const links = details.querySelector('.project-links');
-    const image = card.querySelector('.win-body img');
+    const image = card.querySelector('.work-case-stage-img, .win-body img');
 
     caseKicker.textContent = category;
     caseTitle.textContent = title;
@@ -719,11 +719,235 @@ if (typeof pdfjsLib !== 'undefined') {
 
 // Certificates data - list of PDF and image certificate files
 const certificatesList = [
-    { filename: 'Brian Kyle L. Salor E-Certificate.pdf', title: 'DIGITS General Assembly 2022 — Emerging Digital Technologies', type: 'pdf' },
-    { filename: 'Certificate_of_Participation_DigitalSafety.pdf', title: 'Digital Safety with Deepfake and Scam Recognition', type: 'pdf' },
-    { filename: 'IP Orientation_COP_Oct302024.pdf', title: 'Intellectual Property Orientation', type: 'pdf' },
-    { filename: 'Certificate - Brian Kyle L. Salor.pdf', title: 'Digital Defense and No-Code Dev', type: 'pdf' }
+    {
+        filename: 'my cert.png',
+        type: 'image',
+        kicker: '01 · LNU · Nov 2025',
+        title: 'Organizer — Hexagonal Architecture webinar',
+        meta: 'Certificate of Recognition',
+        alt: 'Certificate of Recognition: organizer, Hexagonal Architecture webinar, Leyte Normal University, 19 November 2025'
+    },
+    {
+        filename: 'Salor.png',
+        type: 'image',
+        kicker: '02 · LNU · Nov 2025',
+        title: 'AI and Machine Learning in Weather Forecasting',
+        meta: 'Certificate of Participation',
+        alt: 'Certificate of Participation: AI and Machine Learning in Weather Forecasting, Leyte Normal University, 16 November 2025'
+    },
+    {
+        filename: 'Brian Kyle L. Salor E-Certificate.pdf',
+        type: 'pdf',
+        kicker: '03 · DIGITS · 2022',
+        title: 'Emerging Digital Technologies',
+        meta: 'PDF · General Assembly',
+        alt: 'DIGITS General Assembly 2022 certificate'
+    },
+    {
+        filename: 'Certificate_of_Participation_DigitalSafety.pdf',
+        type: 'pdf',
+        kicker: '04 · Digital Safety',
+        title: 'Deepfake and scam recognition',
+        meta: 'PDF · Participation',
+        alt: 'Digital Safety certificate'
+    },
+    {
+        filename: 'IP Orientation_COP_Oct302024.pdf',
+        type: 'pdf',
+        kicker: '05 · Oct 2024',
+        title: 'Intellectual Property Orientation',
+        meta: 'PDF · Participation',
+        alt: 'Intellectual Property Orientation certificate'
+    },
+    {
+        filename: 'Certificate - Brian Kyle L. Salor.pdf',
+        type: 'pdf',
+        kicker: '06 · Digital Defense',
+        title: 'Digital Defense and No-Code Dev',
+        meta: 'PDF · Participation',
+        alt: 'Digital Defense and No-Code Dev certificate'
+    }
 ];
+
+function encodeCertPath(filename) {
+    return encodeURI(filename);
+}
+
+function certPreviewSrc(cert) {
+    if (cert.preview) return cert.preview;
+    if (cert.type === 'image') return encodeCertPath(cert.filename);
+    return '';
+}
+
+async function cacheCertPreview(cert) {
+    if (cert.preview) return cert.preview;
+    if (cert.type === 'image') {
+        cert.preview = encodeCertPath(cert.filename);
+        return cert.preview;
+    }
+    await loadPdfJs();
+    if (typeof pdfjsLib === 'undefined') return '';
+    const pdf = await pdfjsLib.getDocument(encodeCertPath(cert.filename)).promise;
+    const page = await pdf.getPage(1);
+    const viewport = page.getViewport({ scale: 1.55 });
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d', { alpha: false });
+    canvas.width = Math.floor(viewport.width);
+    canvas.height = Math.floor(viewport.height);
+    await page.render({ canvasContext: context, viewport: viewport }).promise;
+    cert.preview = canvas.toDataURL('image/jpeg', 0.84);
+    return cert.preview;
+}
+
+function setupEnquiryForm() {
+    const form = document.getElementById('enquiry-form');
+    if (!form) return;
+    const status = form.querySelector('[data-enquiry-status]');
+    const submitBtn = form.querySelector('.enquiry-submit');
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const payload = new FormData(form);
+        const need = (payload.get('need') || '').toString().trim();
+        const message = (payload.get('message') || '').toString().trim();
+        const email = (payload.get('email') || '').toString().trim();
+        if (!need || !message || !email) return;
+
+        if (window.location.protocol === 'file:') {
+            const body = 'Need: ' + need + '\n\n' + message;
+            window.location.href = 'mailto:briankylesalor02@gmail.com?subject=' +
+                encodeURIComponent('Client work inquiry — ' + need) +
+                '&body=' + encodeURIComponent(body);
+            return;
+        }
+
+        if (submitBtn) submitBtn.disabled = true;
+        fetch('https://formsubmit.co/ajax/briankylesalor02@gmail.com', {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: payload
+        })
+            .then(function (res) {
+                if (!res.ok) throw new Error('send failed');
+            })
+            .then(function () {
+                form.reset();
+                form.classList.add('is-sent');
+                if (status) status.hidden = false;
+            })
+            .catch(function () {
+                form.submit();
+            })
+            .finally(function () {
+                if (submitBtn) submitBtn.disabled = false;
+            });
+    });
+}
+
+function setupCertBoard() {
+    const root = document.querySelector('[data-cert-board]');
+    const stage = root?.querySelector('[data-cert-stage]');
+    const tray = root?.querySelector('[data-cert-tray]');
+    if (!root || !stage || !tray) return;
+
+    const featured = [0, 1];
+    const rest = [2, 3, 4, 5];
+    let lastSwappedSlot = -1;
+
+    function sideForCard(el) {
+        const trayRect = tray.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+        const mid = trayRect.left + trayRect.width / 2;
+        const elMid = elRect.left + elRect.width / 2;
+        if (Math.abs(elMid - mid) < 12) {
+            return Number(el.dataset.tray) % 2 === 0 ? 0 : 1;
+        }
+        return elMid < mid ? 0 : 1;
+    }
+
+    function fillStageImage(article, cert) {
+        const src = certPreviewSrc(cert);
+        if (!src) return;
+        const current = article.querySelector('.cert-card-img');
+        if (current && current.tagName === 'IMG') {
+            current.src = src;
+            current.alt = cert.alt || cert.title;
+            return;
+        }
+        const img = document.createElement('img');
+        img.className = 'cert-card-img';
+        img.src = src;
+        img.alt = cert.alt || cert.title;
+        if (current) current.replaceWith(img);
+        else article.prepend(img);
+    }
+
+    function paintStageCard(cert, slot) {
+        const article = document.createElement('article');
+        article.className = 'cert-card cert-card--scan';
+        article.dataset.slot = String(slot);
+        const src = certPreviewSrc(cert);
+        const img = src
+            ? '<img class="cert-card-img" src="' + src + '" alt="' + escapeHtml(cert.alt || cert.title) + '">'
+            : '<div class="cert-card-img cert-card-img--pending" aria-hidden="true"></div>';
+        article.innerHTML = img +
+            '<span class="cert-card-copy">' +
+            '<span class="cert-card-index">' + escapeHtml(cert.kicker) + '</span>' +
+            '<span class="cert-card-title">' + escapeHtml(cert.title) + '</span>' +
+            '<span class="cert-card-meta">' + escapeHtml(cert.meta) + '</span>' +
+            '</span>';
+        return article;
+    }
+
+    function paint() {
+        stage.innerHTML = '';
+        featured.forEach(function (ci, slot) {
+            const cert = certificatesList[ci];
+            const article = paintStageCard(cert, slot);
+            if (slot === lastSwappedSlot) article.classList.add('is-swapping');
+            stage.appendChild(article);
+            if (!certPreviewSrc(cert)) {
+                cacheCertPreview(cert)
+                    .then(function () { fillStageImage(article, cert); })
+                    .catch(function () { /* keep pending plate */ });
+            }
+        });
+        lastSwappedSlot = -1;
+
+        tray.innerHTML = '';
+        rest.forEach(function (ci, trayIdx) {
+            const cert = certificatesList[ci];
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'cert-card cert-card--file';
+            btn.dataset.tray = String(trayIdx);
+            btn.setAttribute('aria-label', 'Show ' + cert.title + ' on the top cards');
+            btn.innerHTML =
+                '<span class="cert-card-index">' + escapeHtml(cert.kicker) + '</span>' +
+                '<span class="cert-card-title">' + escapeHtml(cert.title) + '</span>' +
+                '<span class="cert-card-meta">' + escapeHtml(cert.meta) + '</span>';
+            btn.addEventListener('click', function () {
+                const side = sideForCard(btn);
+                const outgoing = featured[side];
+                featured[side] = rest[trayIdx];
+                rest[trayIdx] = outgoing;
+                lastSwappedSlot = side;
+                paint();
+            });
+            tray.appendChild(btn);
+        });
+    }
+
+    paint();
+    loadPdfJs()
+        .then(function () {
+            return Promise.all(certificatesList.map(function (cert) {
+                return cacheCertPreview(cert).catch(function () { return null; });
+            }));
+        })
+        .then(paint)
+        .catch(function () { /* scans still work without PDF.js */ });
+}
 
 function loadPdfJs() {
     return new Promise((resolve, reject) => {
@@ -801,27 +1025,14 @@ async function renderPDFAsImage(pdfUrl, container) {
         // Replace loading with image
         container.innerHTML = '';
         container.appendChild(img);
-        
-        // Make clickable to open PDF
-        container.style.cursor = 'pointer';
-        container.addEventListener('click', function() {
-            window.open(pdfUrl, '_blank');
-        });
-        
     } catch (error) {
         console.error('Error rendering PDF:', error);
-        // Show error state
         container.innerHTML = `
             <div class="certificate-error">
                 <div class="certificate-icon">📜</div>
                 <p class="certificate-placeholder-text">${container.getAttribute('data-title') || 'Certificate'}</p>
-                <p class="certificate-error-text">Click to view PDF</p>
             </div>
         `;
-        container.style.cursor = 'pointer';
-        container.addEventListener('click', function() {
-            window.open(pdfUrl, '_blank');
-        });
     }
 }
 
@@ -842,10 +1053,6 @@ function loadImageCertificate(imageUrl, container) {
     img.onload = function() {
         container.innerHTML = '';
         container.appendChild(img);
-        container.style.cursor = 'pointer';
-        container.addEventListener('click', function() {
-            window.open(imageUrl, '_blank');
-        });
     };
     
     img.onerror = function() {
@@ -853,13 +1060,8 @@ function loadImageCertificate(imageUrl, container) {
             <div class="certificate-error">
                 <div class="certificate-icon">📜</div>
                 <p class="certificate-placeholder-text">${container.getAttribute('data-title') || 'Certificate'}</p>
-                <p class="certificate-error-text">Click to view</p>
             </div>
         `;
-        container.style.cursor = 'pointer';
-        container.addEventListener('click', function() {
-            window.open(imageUrl, '_blank');
-        });
     };
 }
 
@@ -1242,7 +1444,8 @@ window.addEventListener('portfolioUpdated', function() {
 // Initialize on load
 document.addEventListener('DOMContentLoaded', function() {
     highlightNavLink();
-    setupCertificatesGallery();
+    setupCertBoard();
+    setupEnquiryForm();
     setupTechStackTabs();
     setupProjectsSlider();
     setupFeedbackSlider();

@@ -52,7 +52,7 @@
             hideOnLeave: true,
             stateDetection: {
                 '-pointer':
-                    'a,button,[role="button"],.js-magnetic,.tag,.tech-pill,.win-icon,.feedback-choice,.certificate-image-wrapper,.skill-sheet,.cert-sheet,.tech-meta-item,.win,.skill-filter,.work-archive-row,.footer-social-pill',
+                    'a,button,[role="button"],.js-magnetic,.tag,.tech-pill,.win-icon,.feedback-choice,.certificate-image-wrapper,.cert-sheet,.tech-meta-item,.win,.work-archive-row,.footer-social-pill',
                 '-text': '.name,.section-title,.project-win-title,.about-headline,.contact-cta-title,.cert-sheet-title,.section-watermark',
                 '-hidden': 'iframe,input,textarea,select'
             }
@@ -296,31 +296,20 @@
         items.forEach((el) => io.observe(el));
     }
 
-    function setupSkillFilter() {
-        const filters = document.querySelectorAll('.skill-filter');
-        const sheets = document.querySelectorAll('.skill-sheet[data-skill]');
-        const rows = document.querySelectorAll('.tech-meta-row[data-group]');
-        if (!filters.length || !sheets.length) return;
-        filters.forEach((btn) => {
+    function setupSkillAccord() {
+        const root = document.querySelector('[data-skill-accord]');
+        if (!root) return;
+        const panels = Array.from(root.querySelectorAll('.skill-panel'));
+        panels.forEach((panel) => {
+            const btn = panel.querySelector('.skill-panel-head');
+            if (!btn) return;
             btn.addEventListener('click', () => {
-                const next = btn.getAttribute('data-filter');
-                filters.forEach((other) => {
-                    const on = other === btn;
-                    other.classList.toggle('is-on', on);
-                    other.setAttribute('aria-pressed', on ? 'true' : 'false');
-                });
-                sheets.forEach((sheet) => {
-                    const key = sheet.getAttribute('data-skill');
-                    const match =
-                        next === 'all' ||
-                        key === next ||
-                        ((next === 'backend' || next === 'database') && key === 'shipped');
-                    sheet.classList.toggle('is-dim', !match);
-                });
-                rows.forEach((row) => {
-                    const group = row.getAttribute('data-group');
-                    const match = next !== 'backend' && next !== 'database' || group === next;
-                    row.classList.toggle('is-dim', !match);
+                if (panel.classList.contains('is-open')) return;
+                panels.forEach((other) => {
+                    const on = other === panel;
+                    other.classList.toggle('is-open', on);
+                    const head = other.querySelector('.skill-panel-head');
+                    if (head) head.setAttribute('aria-expanded', on ? 'true' : 'false');
                 });
             });
         });
@@ -408,7 +397,7 @@
         setupWorkIndex();
         setupWorkRail();
     setupExperienceRail();
-    setupSkillFilter();
+    setupSkillAccord();
     setupMarqueePause();
     setupSectionGlow();
     setupScrollLife();
