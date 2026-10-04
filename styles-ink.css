@@ -889,6 +889,7 @@ html.has-cursor [contenteditable="true"] {
 .mf-cursor {
     color: #5b8cff;
     z-index: 10060 !important;
+    pointer-events: none !important;
 }
 .mf-cursor:before {
     top: -20px;
@@ -3482,6 +3483,17 @@ html.case-open body {
     overflow: hidden;
 }
 
+html.case-open.has-cursor,
+html.case-open.has-cursor * {
+    cursor: auto !important;
+}
+
+html.case-open.has-cursor a,
+html.case-open.has-cursor button,
+html.case-open.has-cursor [role="button"] {
+    cursor: pointer !important;
+}
+
 html.case-open .mf-cursor {
     display: none !important;
 }
@@ -3489,7 +3501,7 @@ html.case-open .mf-cursor {
 .case-drawer {
     position: fixed;
     inset: 0;
-    z-index: 10100;
+    z-index: 20100;
     pointer-events: none;
     visibility: hidden;
     transition: visibility 0s 0.38s;
@@ -6070,8 +6082,12 @@ html.js-ok .js-stagger.is-in > *:nth-child(4) { transition-delay: 0.28s; }
         margin: 0.35rem 0 0.55rem;
     }
 
+    .theme-ink .work-index-stage {
+        cursor: pointer;
+    }
+
     .theme-ink .work-index-frame {
-        pointer-events: none;
+        pointer-events: auto;
         box-shadow: 0 28px 64px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(244, 244, 241, 0.08);
     }
 
@@ -8394,6 +8410,36 @@ html.js-ok .js-stagger.is-in > *:nth-child(4) { transition-delay: 0.28s; }
     border-left-color: rgba(23, 20, 17, 0.08);
     box-shadow: -24px 0 60px rgba(23, 20, 17, 0.12);
     color: #171411;
+}
+
+.theme-ink.theme-studio .case-drawer-kicker,
+.theme-ink.theme-studio .case-drawer-copy {
+    color: #6e6a64;
+}
+
+.theme-ink.theme-studio .case-drawer-title {
+    color: #171411;
+}
+
+.theme-ink.theme-studio .case-drawer-close {
+    color: #171411;
+    border-color: rgba(23, 20, 17, 0.16);
+}
+
+.theme-ink.theme-studio .case-drawer-tags .tag {
+    color: #171411;
+    border-color: rgba(23, 20, 17, 0.14);
+}
+
+.theme-ink.theme-studio .case-drawer-links .btn-live-demo {
+    background: #171411;
+    color: #f5f2ec;
+    border-color: #171411;
+}
+
+.theme-ink.theme-studio .case-drawer-links .btn-github {
+    color: #171411;
+    border-color: rgba(23, 20, 17, 0.22);
 }
 
 .theme-ink.theme-studio .case-drawer-scrim {

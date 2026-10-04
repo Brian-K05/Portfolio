@@ -471,21 +471,37 @@ document.querySelectorAll('.section-title').forEach((title) => {
     }
 });
 
+function openCaseFromRow(card, e) {
+    if (e && e.target.closest('a')) return;
+    if (e) e.preventDefault();
+    openProjectModal(card);
+}
+
 document.querySelectorAll('.project-row').forEach((card) => {
+    card.addEventListener('click', function (e) {
+        openCaseFromRow(card, e);
+    });
     card.querySelectorAll('.js-open-case').forEach((openBtn) => {
         openBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             openProjectModal(card);
         });
     });
-    const foot = card.querySelector('.project-win-foot');
-    if (foot) {
-        foot.addEventListener('click', function (e) {
-            if (e.target.closest('a')) return;
-            openProjectModal(card);
-        });
-    }
 });
+
+const workIndexStage = document.querySelector('.work-index-stage');
+if (workIndexStage) {
+    const openActiveWork = function () {
+        const active = document.querySelector('.work-index-list .project-row.is-on');
+        if (active) openProjectModal(active);
+    };
+    workIndexStage.addEventListener('click', openActiveWork);
+    workIndexStage.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
+        openActiveWork();
+    });
+}
 
 // Add interactive ripple effect on buttons
 function createRipple(event) {

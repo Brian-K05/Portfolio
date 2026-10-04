@@ -52,7 +52,7 @@
             hideOnLeave: true,
             stateDetection: {
                 '-pointer':
-                    'a,button,[role="button"],.js-magnetic,.tag,.tech-pill,.win-icon,.feedback-choice,.certificate-image-wrapper,.cert-sheet,.tech-meta-item,.win,.work-archive-row,.footer-social-pill',
+                    'a,button,[role="button"],.js-magnetic,.tag,.tech-pill,.win-icon,.feedback-choice,.certificate-image-wrapper,.cert-sheet,.tech-meta-item,.win,.project-row,.work-index-stage,.work-archive-row,.footer-social-pill',
                 '-text': '.name,.section-title,.project-win-title,.about-headline,.contact-cta-title,.cert-sheet-title,.section-watermark',
                 '-hidden': 'iframe,input,textarea,select'
             }
