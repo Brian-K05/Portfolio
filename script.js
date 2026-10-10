@@ -815,6 +815,140 @@ async function cacheCertPreview(cert) {
     return cert.preview;
 }
 
+function setupShopOrder() {
+    const drawer = document.getElementById('shopDrawer');
+    const form = document.getElementById('shop-order-form');
+    if (!drawer || !form) return;
+
+    const openers = document.querySelectorAll('[data-shop-open]');
+    const chosen = drawer.querySelector('[data-shop-chosen]');
+    const empty = drawer.querySelector('[data-shop-empty]');
+    const clearBtn = drawer.querySelector('[data-shop-clear]');
+    const conceptField = document.getElementById('shop-concept-field');
+    const submitBtn = form.querySelector('[data-shop-submit]');
+    const status = form.querySelector('[data-shop-status]');
+    const counts = document.querySelectorAll('[data-cart-count]');
+    const KEY = 'bloom-shop-look';
+
+    function current() {
+        try {
+            return JSON.parse(localStorage.getItem(KEY) || 'null');
+        } catch (err) {
+            return null;
+        }
+    }
+
+    function save(item) {
+        if (item) localStorage.setItem(KEY, JSON.stringify(item));
+        else localStorage.removeItem(KEY);
+        render();
+    }
+
+    function render() {
+        const item = current();
+        const has = !!(item && item.id && item.label);
+        document.querySelectorAll('.shop-concept').forEach((card) => {
+            card.classList.toggle('is-in-cart', has && card.getAttribute('data-concept-id') === item.id);
+        });
+        document.querySelectorAll('[data-add-concept]').forEach((btn) => {
+            const on = has && btn.getAttribute('data-add-concept') === item.id;
+            btn.textContent = on ? 'In cart' : 'Add to cart';
+        });
+        openers.forEach((btn) => {
+            btn.hidden = !has;
+        });
+        counts.forEach((el) => {
+            el.textContent = has ? '1' : '0';
+        });
+        if (empty) empty.hidden = has;
+        if (chosen) {
+            chosen.hidden = !has;
+            chosen.textContent = has ? item.label : '';
+        }
+        if (clearBtn) clearBtn.hidden = !has;
+        if (conceptField) conceptField.value = has ? item.label : '';
+        if (submitBtn) submitBtn.disabled = !has;
+    }
+
+    function openShop() {
+        drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('shop-open');
+        lockPageScroll();
+    }
+
+    function closeShop() {
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.documentElement.classList.remove('shop-open');
+        unlockPageScroll();
+    }
+
+    document.querySelectorAll('[data-add-concept]').forEach((btn) => {
+        btn.addEventListener('click', function () {
+            save({
+                id: btn.getAttribute('data-add-concept'),
+                label: btn.getAttribute('data-concept-label') || btn.getAttribute('data-add-concept')
+            });
+            openShop();
+        });
+    });
+
+    openers.forEach((btn) => btn.addEventListener('click', openShop));
+    drawer.querySelectorAll('[data-shop-close]').forEach((btn) => {
+        btn.addEventListener('click', closeShop);
+    });
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+            save(null);
+        });
+    }
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const item = current();
+        if (!item) return;
+        const payload = new FormData(form);
+        payload.set('concept', item.label);
+        payload.set('_subject', 'Flower shop order — ' + item.label);
+
+        if (window.location.protocol === 'file:') {
+            const body = 'Concept: ' + item.label + '\nPhone: ' + (payload.get('phone') || '') + '\n\n' + (payload.get('changes') || '');
+            window.location.href = 'mailto:briankylesalor02@gmail.com?subject=' +
+                encodeURIComponent('Flower shop order — ' + item.label) +
+                '&body=' + encodeURIComponent(body);
+            return;
+        }
+
+        if (submitBtn) submitBtn.disabled = true;
+        fetch('https://formsubmit.co/ajax/briankylesalor02@gmail.com', {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: payload
+        })
+            .then(function (res) {
+                if (!res.ok) throw new Error('send failed');
+            })
+            .then(function () {
+                form.reset();
+                save(null);
+                if (status) status.hidden = false;
+            })
+            .catch(function () {
+                form.submit();
+            })
+            .finally(function () {
+                render();
+            });
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeShop();
+    });
+
+    render();
+}
+
 function setupEnquiryForm() {
     const form = document.getElementById('enquiry-form');
     if (!form) return;
@@ -1462,6 +1596,7 @@ document.addEventListener('DOMContentLoaded', function() {
     highlightNavLink();
     setupCertBoard();
     setupEnquiryForm();
+    setupShopOrder();
     setupTechStackTabs();
     setupProjectsSlider();
     setupFeedbackSlider();
