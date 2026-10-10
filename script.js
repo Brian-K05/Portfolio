@@ -1599,6 +1599,55 @@ function setupSnapSlider(viewportId, options) {
     requestAnimationFrame(updateUi);
 }
 
+function setupFeatureSlider() {
+    const root = document.querySelector('[data-feature-slider]');
+    if (!root) return;
+    const track = root.querySelector('[data-feature-track]');
+    if (!track) return;
+    const slides = Array.prototype.slice.call(track.children);
+    const tabs = root.querySelectorAll('[data-feature-go]');
+    const prev = root.querySelector('[data-feature-prev]');
+    const next = root.querySelector('[data-feature-next]');
+    const now = root.querySelector('[data-feature-now]');
+    if (!slides.length) return;
+    let current = 0;
+    let startX = 0;
+
+    function update() {
+        tabs.forEach(function (tab) {
+            const on = Number(tab.getAttribute('data-feature-go')) === current;
+            tab.classList.toggle('is-on', on);
+            tab.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        if (now) now.textContent = String(current + 1).padStart(2, '0');
+        if (prev) prev.disabled = current <= 0;
+        if (next) next.disabled = current >= slides.length - 1;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    }
+
+    function goTo(i) {
+        current = Math.min(slides.length - 1, Math.max(0, i));
+        update();
+    }
+
+    tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            goTo(Number(tab.getAttribute('data-feature-go')));
+        });
+    });
+    if (prev) prev.addEventListener('click', function () { goTo(current - 1); });
+    if (next) next.addEventListener('click', function () { goTo(current + 1); });
+    track.addEventListener('pointerdown', function (e) {
+        startX = e.clientX;
+    });
+    track.addEventListener('pointerup', function (e) {
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) < 48) return;
+        goTo(current + (dx < 0 ? 1 : -1));
+    });
+    update();
+}
+
 function setupProjectsSlider() {
     setupSnapSlider('projects-slider', {
         titleSelector: '.project-win-title',
@@ -1645,6 +1694,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupEnquiryForm();
     setupShopOrder();
     setupTechStackTabs();
+    setupFeatureSlider();
     setupProjectsSlider();
     setupFeedbackSlider();
 

@@ -268,55 +268,68 @@
                 </div>
                 </div>
 
-                <div class="shop-hook" id="available">
-                    <p class="work-band-kicker">Available</p>
-                    <a class="work-case-stage shop-hook-card work-case--available" href="shop.html" data-cursor="SHOP →">
-                        <img src="bloom-concepts-pro.jpg" alt="Bloom &amp; Co. flower shop — ten concept looks" class="work-case-stage-img" width="1920" height="1080" loading="lazy">
-                        <span class="work-case-stage-copy">
-                            <span class="project-win-num">04 / Available</span>
-                            <span class="shop-hook-title">Bloom &amp; Co. Flowers</span>
-                            <span class="work-case-stage-note">Flower shop website · ten looks</span>
-                            <span class="work-case-stage-cta">Open shop →</span>
-                        </span>
-                    </a>
-                </div>
-
-                <p class="work-band-kicker">In production</p>
-                <article class="project-row project-card work-case work-case--feature js-stagger" data-project="insurance-automation" data-deploy-url="#" data-github-url="#">
-                    <button type="button" class="work-case-stage js-open-case" data-cursor="VIEW →" aria-label="Open case study: MAXIN Insurance Data Management System">
-                        <img src="maxin-feature.jpg" alt="MAXIN Insurance Data Management System" class="work-case-stage-img" width="1920" height="1080" loading="lazy">
-                        <span class="work-case-stage-copy">
-                            <span class="project-win-num">05 / Production</span>
-                            <span class="work-case-stage-note">Intern lead · Machica Firm · no public URL</span>
-                            <span class="work-case-stage-cta">Explore case study →</span>
-                        </span>
-                    </button>
-                    <dl class="case-facts case-facts--strip">
-                        <div>
-                            <dt>Role</dt>
-                            <dd>Intern lead</dd>
+                <div class="feature-slider" id="available" data-feature-slider>
+                    <div class="feature-slider-nav" role="tablist" aria-label="Available and production">
+                        <button type="button" class="feature-slider-tab is-on" role="tab" aria-selected="true" data-feature-go="0">Available</button>
+                        <button type="button" class="feature-slider-tab" role="tab" aria-selected="false" data-feature-go="1">In production</button>
+                        <p class="feature-slider-count" aria-live="polite"><span data-feature-now>01</span> / 02</p>
+                        <div class="feature-slider-arrows">
+                            <button type="button" class="work-rail-btn" data-feature-prev>Prev</button>
+                            <button type="button" class="work-rail-btn" data-feature-next>Next</button>
                         </div>
-                        <div>
-                            <dt>Status</dt>
-                            <dd>Production</dd>
-                        </div>
-                        <div>
-                            <dt>When I left</dt>
-                            <dd>3 staff</dd>
-                        </div>
-                        <div>
-                            <dt>Internship</dt>
-                            <dd>486 hours</dd>
-                        </div>
-                    </dl>
-                    <div class="project-details" hidden>
-                        <div class="project-category">Production system · Machica Firm, Inc. · 486-hour internship</div>
-                        <h3 class="project-title">MAXIN Insurance Data Management System</h3>
-                        <p class="project-description">The office ran insurance work on slow, manual steps. I led feature design and development with one co-intern. I built most of the backend: Node.js APIs, Supabase data model, a data-management module with CRUD for insurance records, Edge Functions, Gmail SMTP, Semaphore SMS, Excel reporting, and document generation. I also did part of the frontend, including a client portal. Leadership approved the deploy. Three staff were using it when I left. I do not own the live URL or the repository — ask about it in an interview; I cannot open it here.</p>
-                        <div class="project-tags"><span class="tag">Node.js</span><span class="tag">REST APIs</span><span class="tag">Supabase</span><span class="tag">Edge Functions</span><span class="tag">Automation</span></div>
-                        <div class="project-links"><span class="project-link-disabled">No public URL — company owns the live system</span></div>
                     </div>
-                </article>
+                    <div class="feature-slider-viewport">
+                    <div class="feature-slider-track" data-feature-track>
+                        <article class="feature-slide shop-hook">
+                            <a class="work-case-stage shop-hook-card work-case--available" href="shop.html" data-cursor="SHOP →">
+                                <img src="bloom-concepts-pro.jpg" alt="Bloom &amp; Co. flower shop — ten concept looks" class="work-case-stage-img" width="1920" height="1080" loading="lazy">
+                                <span class="work-case-stage-copy">
+                                    <span class="project-win-num">04 / Available</span>
+                                    <span class="shop-hook-title">Bloom &amp; Co. Flowers</span>
+                                    <span class="work-case-stage-note">Flower shop website · ten looks</span>
+                                    <span class="work-case-stage-cta">Open shop →</span>
+                                </span>
+                            </a>
+                        </article>
+                        <article class="feature-slide project-row project-card work-case work-case--feature" data-project="insurance-automation" data-deploy-url="#" data-github-url="#">
+                            <button type="button" class="work-case-stage js-open-case" data-cursor="VIEW →" aria-label="Open case study: MAXIN Insurance Data Management System">
+                                <img src="maxin-feature.jpg" alt="MAXIN Insurance Data Management System" class="work-case-stage-img" width="1920" height="1080" loading="lazy">
+                                <span class="work-case-stage-copy">
+                                    <span class="project-win-num">05 / Production</span>
+                                    <span class="shop-hook-title">MAXIN</span>
+                                    <span class="work-case-stage-note">Intern lead · Machica Firm · no public URL</span>
+                                    <span class="work-case-stage-cta">Explore case study →</span>
+                                </span>
+                            </button>
+                            <dl class="case-facts case-facts--strip">
+                                <div>
+                                    <dt>Role</dt>
+                                    <dd>Intern lead</dd>
+                                </div>
+                                <div>
+                                    <dt>Status</dt>
+                                    <dd>Production</dd>
+                                </div>
+                                <div>
+                                    <dt>When I left</dt>
+                                    <dd>3 staff</dd>
+                                </div>
+                                <div>
+                                    <dt>Internship</dt>
+                                    <dd>486 hours</dd>
+                                </div>
+                            </dl>
+                            <div class="project-details" hidden>
+                                <div class="project-category">Production system · Machica Firm, Inc. · 486-hour internship</div>
+                                <h3 class="project-title">MAXIN Insurance Data Management System</h3>
+                                <p class="project-description">The office ran insurance work on slow, manual steps. I led feature design and development with one co-intern. I built most of the backend: Node.js APIs, Supabase data model, a data-management module with CRUD for insurance records, Edge Functions, Gmail SMTP, Semaphore SMS, Excel reporting, and document generation. I also did part of the frontend, including a client portal. Leadership approved the deploy. Three staff were using it when I left. I do not own the live URL or the repository — ask about it in an interview; I cannot open it here.</p>
+                                <div class="project-tags"><span class="tag">Node.js</span><span class="tag">REST APIs</span><span class="tag">Supabase</span><span class="tag">Edge Functions</span><span class="tag">Automation</span></div>
+                                <div class="project-links"><span class="project-link-disabled">No public URL — company owns the live system</span></div>
+                            </div>
+                        </article>
+                    </div>
+                    </div>
+                </div>
 
                 <div class="work-archive">
                     <p class="work-band-kicker">Also on GitHub</p>
