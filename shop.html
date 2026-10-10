@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#F5F2EC">
+    <title>Bloom &amp; Co. shop — Brian Kyle Salor</title>
+    <meta name="description" content="Bloom &amp; Co. flower shop website. Ten looks. Pick one, pay by GCash, and I’ll set up handover.">
+    <meta name="author" content="Brian Kyle Salor">
+    <link rel="canonical" href="https://brian-k05.github.io/Portfolio/shop.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brian-k05.github.io/Portfolio/shop.html">
+    <meta property="og:title" content="Bloom &amp; Co. shop — Brian Kyle Salor">
+    <meta property="og:description" content="A compact flower-shop site. Ten looks. Pick one and order.">
+    <meta property="og:image" content="https://brian-k05.github.io/Portfolio/bloom-concepts-pro.jpg">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-ink.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mouse-follower@1.1.2/dist/mouse-follower.min.css" media="(hover: hover) and (pointer: fine)">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Instrument+Serif:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="portfolio-body theme-ink theme-studio shop-page">
+    <a class="skip-link" href="#looks">Skip to looks</a>
+    <div class="site-life" aria-hidden="true">
+        <i class="life-orb life-orb--a"></i>
+        <i class="life-orb life-orb--b"></i>
+        <i class="life-orb life-orb--c"></i>
+        <span class="life-grid"></span>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="logo" aria-label="Back to portfolio">
+                    <span class="wordmark" aria-hidden="true">Brian<span class="wordmark-dot">.</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects">Work</a></li>
+                <li><a href="shop.html" aria-current="page">Shop</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <button type="button" class="nav-cart" data-shop-open>
+                Cart <span data-cart-count>0</span>
+            </button>
+            <a href="index.html#contact" class="btn-download-cv js-magnetic" data-cursor="HIRE →"><span>Start a project</span></a>
+            <button type="button" class="mobile-menu-toggle" aria-label="Open index" aria-expanded="false" aria-controls="site-mobile-menu">
+                <span class="mobile-menu-toggle-text">Index</span>
+                <span class="mobile-menu-bars" aria-hidden="true"><i></i><i></i></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="site-mobile-menu" role="dialog" aria-modal="true" aria-label="Site index">
+        <div class="mobile-menu-top">
+            <a href="index.html" class="logo logo--menu" aria-label="Back to portfolio">
+                <span class="wordmark" aria-hidden="true">Brian<span class="wordmark-dot">.</span></span>
+            </a>
+            <button type="button" class="mobile-menu-close">Close</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html#projects"><span>01</span><b>Work</b></a></li>
+            <li><a href="shop.html"><span>02</span><b>Shop</b></a></li>
+            <li><a href="index.html#contact"><span>03</span><b>Contact</b></a></li>
+        </ul>
+        <div class="mobile-menu-foot">
+            <p class="mobile-menu-loc">Taguig City</p>
+            <p class="mobile-menu-note">Open for projects</p>
+        </div>
+    </div>
+
+    <main class="shop-page-main">
+        <div class="shop-page-shell shop-available">
+            <p class="shop-page-back"><a href="index.html#available">← Work</a></p>
+            <div class="shop-available-intro">
+                <p class="project-win-num">Available · Flower shop website</p>
+                <h1 class="shop-available-title">Bloom &amp; Co. Flowers</h1>
+                <p class="shop-available-lead">A compact flower-shop site. The live page shows ten concept designs. Same catalog and cart underneath. Pick the look you want, add it to the cart, pay by GCash, and attach the receipt. After I approve, I set up access and walk you through handover. Asset changes at handover are free. I stay with you until you own and run the site.</p>
+            </div>
+            <figure class="shop-page-hero">
+                <img src="bloom-concepts-pro.jpg" alt="Ten Bloom &amp; Co. flower shop looks" width="1920" height="1080">
+            </figure>
+            <ol class="shop-steps">
+                <li><span>01</span> Pick a look</li>
+                <li><span>02</span> Pay by GCash QR</li>
+                <li><span>03</span> Attach the receipt</li>
+                <li><span>04</span> I approve</li>
+                <li><span>05</span> Handover until you own it</li>
+            </ol>
+            <div class="shop-concepts" id="looks" data-shop-concepts>
+                <article class="shop-concept" data-concept-id="01-elegant-minimal">
+                    <img src="https://bloom-co-flowers.vercel.app/concepts/heroes/hero-elegant-minimal.jpg" alt="" width="800" height="500">
+                    <p class="shop-concept-num">01</p>
+                    <h2>Petal &amp; Bloom</h2>
+                    <p>Elegant Minimal</p>
+                    <div class="shop-concept-actions">
+                        <a href="https://bloom-co-flowers.vercel.app/concepts/01-elegant-minimal" target="_blank" rel="noopener noreferrer">View look</a>
+                        <button type="button" data-add-concept="01-elegant-minimal" data-concept-label="01 · Petal &amp; Bloom — Elegant Minimal">Add to cart</button>
+                    </div>
+                </article>
+                <article class="shop-concept" data-concept-id="02-dark-luxury">
+                    <img src="https://bloom-co-flowers.vercel.app/concepts/heroes/hero-dark-luxury.jpg" alt="" width="800" height="500">
+                    <p class="shop-concept-num">02</p>
+                    <h2>Fleur Noir</h2>
+                    <p>Dark Luxury</p>
+                    <div class="shop-concept-actions">
+                        <a href="https://bloom-co-flowers.vercel.app/concepts/02-dark-luxury" target="_blank" rel="noopener noreferrer">View look</a>
+                        <button type="button" data-add-concept="02-dark-luxury" data-concept-label="02 · Fleur Noir — Dark Luxury">Add to cart</button>
+                    </div>
+                </article>
+                <article class="shop-concept" data-concept-id="03-bright-playful">
+                    <img src="https://bloom-co-flowers.vercel.app/concepts/heroes/hero-bright-playful.jpg" alt="" width="800" height="500">
+                    <p class="shop-concept-num">03</p>
+                    <h2>Bloomy</h2>
+                    <p>Bright &amp; Playful</p>
+                    <div class="shop-concept-actions">
+                        <a href="https://bloom-co-flowers.vercel.app/concepts/03-bright-playful" target="_blank" rel="noopener noreferrer">View look</a>
+                        <button type="button" data-add-concept="03-bright-playful" data-concept-label="03 · Bloomy — Bright &amp; Playful">Add to cart</button>
+                    </div>
+                </article>
+                <article class="shop-concept" data-concept-id="04-rustic-warm">
+                    <img src="https://bloom-co-flowers.vercel.app/concepts/heroes/hero-rustic-warm.jpg" alt="" width="800" height="500">
+                    <p class="shop-concept-num">04</p>
+                    <h2>Willow &amp; Fern</h2>
+                    <p>Rustic &amp; Warm</p>
+                    <div class="shop-concept-actions">
+                        <a href="https://bloom-co-flowers.vercel.app/concepts/04-rustic-warm" target="_blank" rel="noopener noreferrer">View look</a>
+                        <button type="button" data-add-concept="04-rustic-warm" data-concept-label="04 · Willow &amp; Fern — Rustic &amp; Warm">Add to cart</button>
+                    </div>
+                </article>
+                <article class="shop-concept" data-concept-id="05-modern-bold">
+                    <img src="https://bloom-co-flowers.vercel.app/concepts/heroes/hero-modern-bold.jpg" alt="" width="800" height="500">
+                    <p class="shop-concept-num">05</p>
+                    <h2>PETAL</h2>
+                    <p>Modern Bold</p>
+                    <div class="shop-concept-actions">
+                        <a href="https://bloom-co-flowers.vercel.app/concepts/05-modern-bold" target="_blank" rel="noopener noreferrer">View look</a>
+                        <button type="button" data-add-concept="05-modern-bold" data-concept-label="05 · PETAL — Modern Bold">Add to cart</button>
+                    </div>
+                </article>
+                <article class="shop-concept" data-concept-id="06-romantic-editorial">
+                    <img src="https://bloom-co-flowers.vercel.app/concepts/heroes/hero-romantic-editorial.jpg" alt="" width="800" height="500">
+                    <p class="shop-concept-num">06</p>
+                    <h2>Le Fleur</h2>
+                    <p>Romantic Editorial</p>
+                    <div class="shop-concept-actions">
+                        <a href="https://bloom-co-flowers.vercel.app/concepts/06-romantic-editorial" target="_blank" rel="noopener noreferrer">View look</a>
+                        <button type="button" data-add-concept="06-romantic-editorial" data-concept-label="06 · Le Fleur — Romantic Editorial">Add to cart</button>
+                    </div>
+                </article>
+                <article class="shop-concept" data-concept-id="07-artistic-photographic">
+                    <img src="https://bloom-co-flowers.vercel.app/concepts/heroes/hero-artistic-macro.jpg" alt="" width="800" height="500">
+                    <p class="shop-concept-num">07</p>
+                    <h2>FLORA</h2>
+                    <p>Artistic &amp; Photographic</p>
+                    <div class="shop-concept-actions">
+                        <a href="https://bloom-co-flowers.vercel.app/concepts/07-artistic-photographic" target="_blank" rel="noopener noreferrer">View look</a>
+                        <button type="button" data-add-concept="07-artistic-photographic" data-concept-label="07 · FLORA — Artistic &amp; Photographic">Add to cart</button>
+                    </div>
+                </article>
+                <article class="shop-concept" data-concept-id="08-scandinavian-nature">
+                    <img src="https://bloom-co-flowers.vercel.app/concepts/heroes/hero-scandinavian.jpg" alt="" width="800" height="500">
+                    <p class="shop-concept-num">08</p>
+                    <h2>VERDANT</h2>
+                    <p>Scandinavian Nature</p>
+                    <div class="shop-concept-actions">
+                        <a href="https://bloom-co-flowers.vercel.app/concepts/08-scandinavian-nature" target="_blank" rel="noopener noreferrer">View look</a>
+                        <button type="button" data-add-concept="08-scandinavian-nature" data-concept-label="08 · VERDANT — Scandinavian Nature">Add to cart</button>
+                    </div>
+                </article>
+                <article class="shop-concept" data-concept-id="09-interactive-immersive">
+                    <img src="https://bloom-co-flowers.vercel.app/concepts/heroes/hero-immersive-nova.jpg" alt="" width="800" height="500">
+                    <p class="shop-concept-num">09</p>
+                    <h2>NOVA BLOOMS</h2>
+                    <p>Interactive &amp; Immersive</p>
+                    <div class="shop-concept-actions">
+                        <a href="https://bloom-co-flowers.vercel.app/concepts/09-interactive-immersive" target="_blank" rel="noopener noreferrer">View look</a>
+                        <button type="button" data-add-concept="09-interactive-immersive" data-concept-label="09 · NOVA BLOOMS — Interactive &amp; Immersive">Add to cart</button>
+                    </div>
+                </article>
+                <article class="shop-concept" data-concept-id="10-local-boutique">
+                    <img src="https://bloom-co-flowers.vercel.app/concepts/heroes/hero-local-boutique.jpg" alt="" width="800" height="500">
+                    <p class="shop-concept-num">10</p>
+                    <h2>Sariwa Blooms</h2>
+                    <p>Filipino Local Boutique</p>
+                    <div class="shop-concept-actions">
+                        <a href="https://bloom-co-flowers.vercel.app/concepts/10-local-boutique" target="_blank" rel="noopener noreferrer">View look</a>
+                        <button type="button" data-add-concept="10-local-boutique" data-concept-label="10 · Sariwa Blooms — Filipino Local Boutique">Add to cart</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <div class="shop-drawer" id="shopDrawer" role="dialog" aria-modal="true" aria-labelledby="shop-drawer-title" aria-hidden="true">
+        <button type="button" class="shop-drawer-scrim" data-shop-close aria-label="Close cart"></button>
+        <aside class="shop-drawer-panel" tabindex="-1">
+            <header class="shop-drawer-head">
+                <p class="shop-drawer-kicker">Order</p>
+                <button type="button" class="shop-drawer-close" data-shop-close aria-label="Close cart">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                </button>
+            </header>
+            <h2 class="shop-drawer-title" id="shop-drawer-title">Cart</h2>
+            <p class="shop-drawer-lead">One compact flower-shop site, one look. Payment is a manual GCash transfer. After I see the receipt and approve, I set up access and handover. Asset changes at handover are free. I stay with you until you own and run the site.</p>
+            <div class="shop-cart-item" data-shop-item>
+                <p data-shop-empty>Cart is empty. Add a look from the shop.</p>
+                <p data-shop-chosen hidden></p>
+                <button type="button" class="shop-cart-remove" data-shop-clear hidden>Remove</button>
+            </div>
+            <form class="shop-order-form" id="shop-order-form" action="https://formsubmit.co/briankylesalor02@gmail.com" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="_subject" value="Flower shop order">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://brian-k05.github.io/Portfolio/shop.html">
+                <input type="hidden" name="_replyto" id="shop-replyto" value="">
+                <input type="hidden" name="need" value="Flower shop website">
+                <input type="hidden" name="concept" id="shop-concept-field" value="">
+                <input type="hidden" name="message" id="shop-message-field" value="">
+                <input type="text" name="_honey" class="enquiry-honey" tabindex="-1" autocomplete="off">
+                <label class="enquiry-field">
+                    <span>Name</span>
+                    <input type="text" name="name" autocomplete="name" required placeholder="Your name">
+                </label>
+                <label class="enquiry-field">
+                    <span>Email</span>
+                    <input type="email" name="email" autocomplete="email" required placeholder="you@shop.com">
+                </label>
+                <label class="enquiry-field">
+                    <span>Phone</span>
+                    <input type="tel" name="phone" autocomplete="tel" required placeholder="09xx xxx xxxx">
+                </label>
+                <label class="enquiry-field">
+                    <span>Asset or copy changes at handover</span>
+                    <textarea name="changes" rows="3" placeholder="Logo, colors, photos, shop name — asset swaps at handover are free."></textarea>
+                </label>
+                <figure class="shop-qr">
+                    <img src="gcash.jpg" alt="GCash QR for manual payment" width="720" height="1280">
+                    <figcaption>Scan the GCash QR, send the transfer, then attach the receipt. I’ll confirm the amount by email before I approve.</figcaption>
+                </figure>
+                <label class="enquiry-field">
+                    <span>Payment receipt</span>
+                    <input type="file" name="attachment" accept="image/*" required>
+                </label>
+                <button type="submit" class="enquiry-submit" data-shop-submit disabled>Send order <span aria-hidden="true">↗</span></button>
+                <p class="shop-order-note">Each order emails <a href="mailto:briankylesalor02@gmail.com">briankylesalor02@gmail.com</a>. The first send needs a one-time Formsubmit confirm in that inbox.</p>
+                <p class="enquiry-status" data-shop-status hidden>Received. I’ll review the receipt and reply with access and handover.</p>
+            </form>
+        </aside>
+    </div>
+
+    <footer class="footer footer-editorial">
+        <div class="footer-inner">
+            <div class="footer-legal">
+                <p>&copy; 2026 Brian Kyle Salor. All rights reserved.</p>
+                <p class="footer-tagline"><a href="index.html">Back to work</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mouse-follower@1.1.2/dist/mouse-follower.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+    <script src="motion.js"></script>
+</body>
+</html>

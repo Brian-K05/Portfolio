@@ -134,6 +134,8 @@ function scrollToElement(el, duration) {
 const logo = document.querySelector('.logo');
 if (logo) {
     logo.addEventListener('click', function (e) {
+        const href = this.getAttribute('href') || '';
+        if (href && !href.startsWith('#')) return;
         e.preventDefault();
         scrollToY(0);
     });
@@ -854,8 +856,9 @@ function setupShopOrder() {
             const on = has && btn.getAttribute('data-add-concept') === item.id;
             btn.textContent = on ? 'In cart' : 'Add to cart';
         });
+        const onShop = document.body.classList.contains('shop-page');
         openers.forEach((btn) => {
-            btn.hidden = !has;
+            btn.hidden = onShop ? false : !has;
         });
         counts.forEach((el) => {
             el.textContent = has ? '1' : '0';
@@ -908,15 +911,41 @@ function setupShopOrder() {
         event.preventDefault();
         const item = current();
         if (!item) return;
+        const name = (form.elements.namedItem('name') && form.elements.namedItem('name').value) || '';
+        const email = (form.elements.namedItem('email') && form.elements.namedItem('email').value) || '';
+        const phone = (form.elements.namedItem('phone') && form.elements.namedItem('phone').value) || '';
+        const changes = (form.elements.namedItem('changes') && form.elements.namedItem('changes').value) || '';
+        const summary = [
+            'Flower shop order',
+            'Concept: ' + item.label,
+            'Name: ' + name,
+            'Email: ' + email,
+            'Phone: ' + phone,
+            'Handover changes: ' + (changes || '(none)'),
+            'Receipt: attached if the file field was filled.'
+        ].join('\n');
+
+        const replyto = document.getElementById('shop-replyto');
+        const messageField = document.getElementById('shop-message-field');
+        if (replyto) replyto.value = email;
+        if (conceptField) conceptField.value = item.label;
+        if (messageField) messageField.value = summary;
+
         const payload = new FormData(form);
         payload.set('concept', item.label);
+        payload.set('message', summary);
+        payload.set('_replyto', email);
         payload.set('_subject', 'Flower shop order — ' + item.label);
 
+        if (status) {
+            status.hidden = true;
+            status.textContent = 'Received. I’ll review the receipt and reply with access and handover.';
+        }
+
         if (window.location.protocol === 'file:') {
-            const body = 'Concept: ' + item.label + '\nPhone: ' + (payload.get('phone') || '') + '\n\n' + (payload.get('changes') || '');
             window.location.href = 'mailto:briankylesalor02@gmail.com?subject=' +
                 encodeURIComponent('Flower shop order — ' + item.label) +
-                '&body=' + encodeURIComponent(body);
+                '&body=' + encodeURIComponent(summary);
             return;
         }
 
@@ -927,14 +956,32 @@ function setupShopOrder() {
             body: payload
         })
             .then(function (res) {
-                if (!res.ok) throw new Error('send failed');
+                return res.text().then(function (text) {
+                    let data = {};
+                    try {
+                        data = JSON.parse(text);
+                    } catch (err) {
+                        data = {};
+                    }
+                    const ok = res.ok && (data.success === true || data.success === 'true');
+                    if (!ok) {
+                        throw new Error(data.message || 'Order did not send.');
+                    }
+                });
             })
             .then(function () {
                 form.reset();
                 save(null);
-                if (status) status.hidden = false;
+                if (status) {
+                    status.hidden = false;
+                    status.textContent = 'Received at briankylesalor02@gmail.com. I’ll review the receipt and reply.';
+                }
             })
-            .catch(function () {
+            .catch(function (err) {
+                if (status) {
+                    status.hidden = false;
+                    status.textContent = (err && err.message) || 'Order did not send. Sending the long way…';
+                }
                 form.submit();
             })
             .finally(function () {
