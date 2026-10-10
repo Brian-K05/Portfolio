@@ -8642,6 +8642,12 @@ body.theme-studio ~ .mf-cursor-inner::after {
     box-shadow: none !important;
 }
 
+.theme-ink.theme-studio .work-case--available .work-case-stage-img {
+    object-fit: cover;
+    object-position: center;
+    background: #f5f2ec;
+}
+
 .theme-ink.theme-studio .work-case-stage {
     position: relative;
     display: block;
