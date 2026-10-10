@@ -1603,6 +1603,7 @@ function setupFeatureSlider() {
     const root = document.querySelector('[data-feature-slider]');
     if (!root) return;
     const track = root.querySelector('[data-feature-track]');
+    const viewport = root.querySelector('.feature-slider-viewport');
     if (!track) return;
     const slides = Array.prototype.slice.call(track.children);
     const tabs = root.querySelectorAll('[data-feature-go]');
@@ -1623,6 +1624,9 @@ function setupFeatureSlider() {
         if (prev) prev.disabled = current <= 0;
         if (next) next.disabled = current >= slides.length - 1;
         track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        if (viewport && slides[current]) {
+            viewport.style.height = slides[current].offsetHeight + 'px';
+        }
     }
 
     function goTo(i) {
@@ -1645,6 +1649,8 @@ function setupFeatureSlider() {
         if (Math.abs(dx) < 48) return;
         goTo(current + (dx < 0 ? 1 : -1));
     });
+    window.addEventListener('resize', update, { passive: true });
+    window.addEventListener('load', update);
     update();
 }
 
