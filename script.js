@@ -950,7 +950,7 @@ function setupShopOrder() {
         }
 
         if (submitBtn) submitBtn.disabled = true;
-        fetch('https://formsubmit.co/ajax/briankylesalor02@gmail.com', {
+        fetch('https://formsubmit.co/ajax/f8449c711869699f8781e5337dc66716', {
             method: 'POST',
             headers: { Accept: 'application/json' },
             body: payload
@@ -1001,38 +1001,77 @@ function setupEnquiryForm() {
     if (!form) return;
     const status = form.querySelector('[data-enquiry-status]');
     const submitBtn = form.querySelector('.enquiry-submit');
+    const replyto = document.getElementById('enquiry-replyto');
 
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-        const payload = new FormData(form);
-        const need = (payload.get('need') || '').toString().trim();
-        const message = (payload.get('message') || '').toString().trim();
-        const email = (payload.get('email') || '').toString().trim();
+        const name = ((form.elements.namedItem('name') && form.elements.namedItem('name').value) || '').trim();
+        const email = ((form.elements.namedItem('email') && form.elements.namedItem('email').value) || '').trim();
+        const need = ((form.elements.namedItem('need') && form.elements.namedItem('need').value) || '').trim();
+        const message = ((form.elements.namedItem('message') && form.elements.namedItem('message').value) || '').trim();
         if (!need || !message || !email) return;
 
+        if (replyto) replyto.value = email;
+
+        const summary = [
+            'Client work inquiry',
+            'Need: ' + need,
+            'Name: ' + name,
+            'Email: ' + email,
+            '',
+            message
+        ].join('\n');
+
         if (window.location.protocol === 'file:') {
-            const body = 'Need: ' + need + '\n\n' + message;
             window.location.href = 'mailto:briankylesalor02@gmail.com?subject=' +
                 encodeURIComponent('Client work inquiry — ' + need) +
-                '&body=' + encodeURIComponent(body);
+                '&body=' + encodeURIComponent(summary);
             return;
         }
 
+        const payload = new FormData(form);
+        payload.set('_replyto', email);
+        payload.set('_subject', 'Client work inquiry — ' + need);
+        payload.set('message', summary);
+
+        if (status) {
+            status.hidden = true;
+            status.textContent = 'Thanks — I’ll reply to that email.';
+        }
         if (submitBtn) submitBtn.disabled = true;
-        fetch('https://formsubmit.co/ajax/briankylesalor02@gmail.com', {
+
+        fetch('https://formsubmit.co/ajax/f8449c711869699f8781e5337dc66716', {
             method: 'POST',
             headers: { Accept: 'application/json' },
             body: payload
         })
             .then(function (res) {
-                if (!res.ok) throw new Error('send failed');
+                return res.text().then(function (text) {
+                    let data = {};
+                    try {
+                        data = JSON.parse(text);
+                    } catch (err) {
+                        data = {};
+                    }
+                    const ok = res.ok && (data.success === true || data.success === 'true');
+                    if (!ok) {
+                        throw new Error(data.message || 'Enquiry did not send.');
+                    }
+                });
             })
             .then(function () {
                 form.reset();
                 form.classList.add('is-sent');
-                if (status) status.hidden = false;
+                if (status) {
+                    status.hidden = false;
+                    status.textContent = 'Sent to briankylesalor02@gmail.com. I’ll reply soon.';
+                }
             })
-            .catch(function () {
+            .catch(function (err) {
+                if (status) {
+                    status.hidden = false;
+                    status.textContent = (err && err.message) || 'Sending the long way… Check Gmail for a Formsubmit confirm if this is the first send.';
+                }
                 form.submit();
             })
             .finally(function () {
@@ -1984,7 +2023,7 @@ if (certificateFullViewModal) {
         const submitBtn = document.getElementById('feedback-submit');
         if (submitBtn) submitBtn.disabled = true;
 
-        fetch('https://formsubmit.co/ajax/briankylesalor02@gmail.com', {
+        fetch('https://formsubmit.co/ajax/f8449c711869699f8781e5337dc66716', {
             method: 'POST',
             headers: { Accept: 'application/json' },
             body: new FormData(form)

@@ -9809,6 +9809,17 @@ body.theme-studio ~ .mf-cursor-inner::after {
     cursor: wait;
 }
 
+.theme-ink.theme-studio .enquiry-note {
+    margin: 0.35rem 0 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgba(245, 242, 236, 0.62);
+}
+
+.theme-ink.theme-studio .enquiry-note a {
+    color: #f5f2ec;
+}
+
 .theme-ink.theme-studio .enquiry-status {
     margin: 0.15rem 0 0;
     font-size: 0.95rem;
@@ -9818,7 +9829,8 @@ body.theme-studio ~ .mf-cursor-inner::after {
 
 .theme-ink.theme-studio .contact-enquiry-form.is-sent .enquiry-row,
 .theme-ink.theme-studio .contact-enquiry-form.is-sent .enquiry-field,
-.theme-ink.theme-studio .contact-enquiry-form.is-sent .enquiry-submit {
+.theme-ink.theme-studio .contact-enquiry-form.is-sent .enquiry-submit,
+.theme-ink.theme-studio .contact-enquiry-form.is-sent .enquiry-note {
     display: none;
 }
 
