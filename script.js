@@ -1638,6 +1638,104 @@ function setupSnapSlider(viewportId, options) {
     requestAnimationFrame(updateUi);
 }
 
+function setupHeroProofSlider() {
+    const root = document.querySelector('[data-hero-slider]');
+    if (!root) return;
+
+    const slides = Array.from(root.querySelectorAll('[data-hero-slide]'));
+    const dots = Array.from(root.querySelectorAll('[data-hero-go]'));
+    const prev = root.querySelector('[data-hero-prev]');
+    const next = root.querySelector('[data-hero-next]');
+    const stage = root.querySelector('.hero-proof-stage');
+    if (slides.length < 2) return;
+
+    let current = Math.max(0, slides.findIndex(function (slide) {
+        return slide.classList.contains('is-on');
+    }));
+    if (current < 0) current = 0;
+    let timer = null;
+    let startX = 0;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const INTERVAL = 4500;
+
+    function goTo(index) {
+        current = (index + slides.length) % slides.length;
+        slides.forEach(function (slide, i) {
+            const on = i === current;
+            slide.classList.toggle('is-on', on);
+            slide.setAttribute('aria-hidden', on ? 'false' : 'true');
+            if (on) slide.removeAttribute('tabindex');
+            else slide.setAttribute('tabindex', '-1');
+        });
+        dots.forEach(function (dot, i) {
+            const on = i === current;
+            dot.classList.toggle('is-on', on);
+            dot.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+    }
+
+    function stop() {
+        if (timer) {
+            window.clearInterval(timer);
+            timer = null;
+        }
+    }
+
+    function start() {
+        if (reduceMotion || slides.length < 2) return;
+        stop();
+        timer = window.setInterval(function () {
+            goTo(current + 1);
+        }, INTERVAL);
+    }
+
+    if (prev) {
+        prev.addEventListener('click', function () {
+            goTo(current - 1);
+            start();
+        });
+    }
+    if (next) {
+        next.addEventListener('click', function () {
+            goTo(current + 1);
+            start();
+        });
+    }
+    dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+            goTo(Number(dot.getAttribute('data-hero-go')));
+            start();
+        });
+    });
+
+    if (stage) {
+        stage.addEventListener('pointerdown', function (e) {
+            startX = e.clientX;
+        });
+        stage.addEventListener('pointerup', function (e) {
+            const dx = e.clientX - startX;
+            if (Math.abs(dx) < 40) return;
+            goTo(current + (dx < 0 ? 1 : -1));
+            start();
+        });
+    }
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', function (e) {
+        if (!root.contains(e.relatedTarget)) start();
+    });
+
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) stop();
+        else start();
+    });
+
+    goTo(current);
+    start();
+}
+
 function setupFeatureSlider() {
     const root = document.querySelector('[data-feature-slider]');
     if (!root) return;
@@ -1739,6 +1837,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupEnquiryForm();
     setupShopOrder();
     setupTechStackTabs();
+    setupHeroProofSlider();
     setupFeatureSlider();
     setupProjectsSlider();
     setupFeedbackSlider();

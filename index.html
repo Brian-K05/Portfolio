@@ -113,10 +113,31 @@
                     <a href="#contact" class="hero-text-link js-magnetic" data-cursor="HIRE →">Get in touch</a>
                 </div>
             </div>
-            <a class="hero-proof-card" href="#projects" data-cursor="VIEW →">
-                <img src="slotbook-pro.jpg" alt="SlotBook calendar booking demo" width="1600" height="900">
-                <span class="hero-proof-meta">SlotBook · Live demo</span>
-            </a>
+            <div class="hero-proof-slider" data-hero-slider>
+                <div class="hero-proof-stage" aria-live="polite">
+                    <a class="hero-proof-card is-on" href="https://slotbook-production.up.railway.app/" target="_blank" rel="noopener noreferrer" data-cursor="VIEW →" data-hero-slide="0">
+                        <img src="slotbook-pro.jpg" alt="SlotBook calendar booking demo" width="1600" height="900">
+                        <span class="hero-proof-meta">SlotBook · Live demo</span>
+                    </a>
+                    <a class="hero-proof-card" href="https://web-production-97c62.up.railway.app/" target="_blank" rel="noopener noreferrer" data-cursor="VIEW →" data-hero-slide="1" aria-hidden="true" tabindex="-1">
+                        <img src="paperout-pro.jpg" alt="PaperOut certificate press demo" width="1600" height="900" loading="lazy">
+                        <span class="hero-proof-meta">PaperOut · Live demo</span>
+                    </a>
+                    <a class="hero-proof-card" href="https://deskflow-w1n5.onrender.com" target="_blank" rel="noopener noreferrer" data-cursor="VIEW →" data-hero-slide="2" aria-hidden="true" tabindex="-1">
+                        <img src="deskflow-pro.jpg" alt="DeskFlow request desk demo" width="1600" height="900" loading="lazy">
+                        <span class="hero-proof-meta">DeskFlow · Live demo</span>
+                    </a>
+                </div>
+                <div class="hero-proof-nav">
+                    <button type="button" class="hero-proof-nav-btn" data-hero-prev aria-label="Previous project">‹</button>
+                    <div class="hero-proof-dots" role="tablist" aria-label="Hero projects">
+                        <button type="button" class="hero-proof-dot is-on" role="tab" aria-selected="true" aria-label="SlotBook" data-hero-go="0"></button>
+                        <button type="button" class="hero-proof-dot" role="tab" aria-selected="false" aria-label="PaperOut" data-hero-go="1"></button>
+                        <button type="button" class="hero-proof-dot" role="tab" aria-selected="false" aria-label="DeskFlow" data-hero-go="2"></button>
+                    </div>
+                    <button type="button" class="hero-proof-nav-btn" data-hero-next aria-label="Next project">›</button>
+                </div>
+            </div>
         </div>
     </section>
 
